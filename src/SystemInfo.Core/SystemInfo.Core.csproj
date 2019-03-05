@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\CPUController.cs" />
+    <Compile Include="Controllers\DriveSpaceController.cs" />
+    <Compile Include="Controllers\DriveSpaceData.cs" />
     <Compile Include="Controllers\MemoryController.cs" />
     <Compile Include="Controllers\UsageData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
