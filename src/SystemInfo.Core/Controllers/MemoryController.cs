@@ -33,7 +33,7 @@ namespace SystemInfo.Core.Controllers
             var availibleMemoryPerformanceCounter = new PerformanceCounter()
             {
                 CategoryName = "Memory",
-                CounterName = "Available kBytes",
+                CounterName = "Available bytes",
                 ReadOnly = true,
             };
 
@@ -41,7 +41,7 @@ namespace SystemInfo.Core.Controllers
             var updateTimer = Observable.Timer(TimeSpan.Zero, TimeSpan.FromSeconds(1))
                 .Select(_ => availibleMemoryPerformanceCounter.NextValue())
                 .Select(x => Convert.ToUInt64(x))
-                .Select(x => new UsageData(totalVisibleMemorySize, x))
+                .Select(x => new UsageData(totalVisibleMemorySize * 1024, x))
                 .Subscribe(observer);
             disposables.Add(updateTimer);
 
