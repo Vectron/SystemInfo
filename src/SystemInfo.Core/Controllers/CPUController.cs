@@ -9,19 +9,19 @@ namespace SystemInfo.Core.Controllers
 {
     public class CPUController
     {
-        public IObservable<IEnumerable<int>> CoreUse
+        public IObservable<IEnumerable<float>> CoreUse
             => Observable
-            .Create<IEnumerable<int>>(x => GetCoreUseStream(x))
+            .Create<IEnumerable<float>>(x => GetCoreUseStream(x))
             .Publish()
             .RefCount();
 
-        public IObservable<int> TotalCpuUse
+        public IObservable<float> TotalCpuUse
             => Observable
-            .Create<int>(x => GetTotalUseStream(x))
+            .Create<float>(x => GetTotalUseStream(x))
             .Publish()
             .RefCount();
 
-        private IDisposable GetCoreUseStream(IObserver<IEnumerable<int>> observer)
+        private IDisposable GetCoreUseStream(IObserver<IEnumerable<float>> observer)
         {
             var disposables = new CompositeDisposable();
             var NumberOfCores = Environment.ProcessorCount;
@@ -42,13 +42,13 @@ namespace SystemInfo.Core.Controllers
             }
 
             var updateTimer = Observable.Timer(TimeSpan.Zero, TimeSpan.FromSeconds(1))
-            .Select(_ => coreCounters.Select(counter => counter.NextValue()).Select(use => Utils.FloatToPercent(use)))
+            .Select(_ => coreCounters.Select(counter => counter.NextValue()))
             .Subscribe(observer);
             disposables.Add(updateTimer);
             return disposables;
         }
 
-        private IDisposable GetTotalUseStream(IObserver<int> observer)
+        private IDisposable GetTotalUseStream(IObserver<float> observer)
         {
             var disposables = new CompositeDisposable();
             var CpuTotalUse = new PerformanceCounter()
@@ -62,7 +62,6 @@ namespace SystemInfo.Core.Controllers
             disposables.Add(CpuTotalUse);
             var updateTimer = Observable.Timer(TimeSpan.Zero, TimeSpan.FromSeconds(1))
                 .Select(_ => CpuTotalUse.NextValue())
-                .Select(use => Utils.FloatToPercent(use))
                 .Subscribe(observer);
             disposables.Add(updateTimer);
 

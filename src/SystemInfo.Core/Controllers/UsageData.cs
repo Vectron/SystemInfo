@@ -13,8 +13,8 @@
             get;
         }
 
-        public int Percantage
-            => Utils.FloatToPercent((Size - Available) / Size);
+        public float Percantage
+            => ((Size - Available) / (float)Size) * 100;
 
         public ulong Size
         {
