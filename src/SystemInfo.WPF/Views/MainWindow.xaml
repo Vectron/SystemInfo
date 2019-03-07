@@ -1,0 +1,57 @@
+﻿<Window
+    x:Class="SystemInfo.WPF.Views.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title=""
+    Width="160"
+    Height="450"
+    MinWidth="100"
+    MinHeight="200"
+    WindowStartupLocation="Manual"
+    Left="{Binding WindowSettings.LeftPosition, Mode=TwoWay}"
+    Top="{Binding WindowSettings.TopPosition, Mode=TwoWay}"
+    AllowsTransparency="True"
+    Background="Transparent"
+    Focusable="False"
+    IsTabStop="False"
+    MouseDown="Window_MouseDown"
+    IsHitTestVisible="{Binding WindowSettings.LockPlacement, Converter={StaticResource inverseBooleanConverter}}"
+    ResizeMode="NoResize"
+    ScrollViewer.VerticalScrollBarVisibility="Disabled"
+    ShowInTaskbar="False"
+    SizeToContent="WidthAndHeight"
+    UseLayoutRounding="True"
+    WindowStyle="None"
+    FontFamily="Microsoft Sans Serif"
+    FontSize="8"
+    Foreground="White">
+    <Window.Resources>
+        <ResourceDictionary>
+            <Style
+                TargetType="FrameworkElement">
+                <Setter
+                    Property="IsHitTestVisible"
+                    Value="False" />
+                <Setter
+                    Property="IsEnabled"
+                    Value="False" />
+                <Setter
+                    Property="Focusable"
+                    Value="False" />
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Border
+        Padding="0,15,0,15"
+        Background="{Binding WindowSettings.BackgroundColor}"
+        BorderBrush="{Binding WindowSettings.BorderColor}"
+        BorderThickness="1"
+        CornerRadius="20"
+        Width="112">
+        <ItemsControl
+            ItemsSource="{Binding Items}" />
+    </Border>
+</Window>
