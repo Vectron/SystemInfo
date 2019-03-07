@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
 
 namespace SystemInfo.WPF.Views
@@ -16,7 +15,10 @@ namespace SystemInfo.WPF.Views
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            throw new NotImplementedException();
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                DragMove();
+            }
         }
     }
 }
