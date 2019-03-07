@@ -6,7 +6,7 @@ using System.Reactive.Linq;
 
 namespace SystemInfo.Core.Controllers
 {
-    public class NetworkController
+    public class NetworkController : INetworkController
     {
         private readonly Dictionary<string, (long send, long received)> previous = new Dictionary<string, (long, long)>();
 

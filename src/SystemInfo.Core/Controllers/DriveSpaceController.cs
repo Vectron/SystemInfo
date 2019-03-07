@@ -6,7 +6,7 @@ using System.Reactive.Linq;
 
 namespace SystemInfo.Core.Controllers
 {
-    public class DriveSpaceController
+    public class DriveSpaceController : IDriveSpaceController
     {
         public IObservable<IEnumerable<DriveSpaceData>> HDDUse
             => Observable.Timer(TimeSpan.Zero, TimeSpan.FromSeconds(10))

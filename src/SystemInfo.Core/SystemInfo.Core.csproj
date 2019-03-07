@@ -44,6 +44,10 @@
     <Compile Include="Controllers\CPUController.cs" />
     <Compile Include="Controllers\DriveSpaceController.cs" />
     <Compile Include="Controllers\DriveSpaceData.cs" />
+    <Compile Include="Controllers\ICPUController.cs" />
+    <Compile Include="Controllers\IDriveSpaceController.cs" />
+    <Compile Include="Controllers\IMemoryController.cs" />
+    <Compile Include="Controllers\INetworkController.cs" />
     <Compile Include="Controllers\MemoryController.cs" />
     <Compile Include="Controllers\NetworkController.cs" />
     <Compile Include="Controllers\NetworkData.cs" />

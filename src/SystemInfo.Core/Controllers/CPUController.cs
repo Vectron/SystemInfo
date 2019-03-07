@@ -7,7 +7,7 @@ using System.Reactive.Linq;
 
 namespace SystemInfo.Core.Controllers
 {
-    public class CPUController
+    public class CPUController : ICPUController
     {
         public IObservable<IEnumerable<float>> CoreUse
             => Observable

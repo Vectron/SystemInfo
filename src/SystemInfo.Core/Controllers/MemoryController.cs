@@ -7,7 +7,7 @@ using System.Reactive.Linq;
 
 namespace SystemInfo.Core.Controllers
 {
-    public class MemoryController
+    public class MemoryController : IMemoryController
     {
         public IObservable<UsageData> MemoryUse
             => Observable
