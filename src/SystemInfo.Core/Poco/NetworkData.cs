@@ -1,4 +1,4 @@
-﻿namespace SystemInfo.Core.Controllers
+﻿namespace SystemInfo.Core.Poco
 {
     public class NetworkData
     {

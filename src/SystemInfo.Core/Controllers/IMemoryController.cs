@@ -1,4 +1,5 @@
 ﻿using System;
+using SystemInfo.Core.Poco;
 
 namespace SystemInfo.Core.Controllers
 {

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Management;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
+using SystemInfo.Core.Poco;
 
 namespace SystemInfo.Core.Controllers
 {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Reactive.Linq;
+using SystemInfo.Core.Poco;
 
 namespace SystemInfo.Core.Controllers
 {
