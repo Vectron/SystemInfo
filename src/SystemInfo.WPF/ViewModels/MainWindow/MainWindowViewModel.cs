@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Extensions.Options;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using SystemInfo.Core.ViewModels;
 using SystemInfo.WPF.Settings;
@@ -8,14 +9,14 @@ namespace SystemInfo.WPF.ViewModels.MainWindow
 {
     public class MainWindowViewModel : IMainWindowViewModel
     {
+        private readonly IOptions<WindowSettings> options;
         private readonly IFactory<IViewModel> viewModelFactory;
 
-        public MainWindowViewModel(IFactory<IViewModel> viewModelFactory)
+        public MainWindowViewModel(IFactory<IViewModel> viewModelFactory, IOptions<WindowSettings> options)
         {
-            WindowSettings = new WindowSettings();
             Items = new ObservableCollection<object>();
             this.viewModelFactory = viewModelFactory;
-
+            this.options = options;
             Items.Add(viewModelFactory.GetValue("CPUViewModel"));
             Items.Add(viewModelFactory.GetValue("MemoryViewModel"));
             Items.Add(viewModelFactory.GetValue("NetworkViewModel"));
@@ -28,9 +29,6 @@ namespace SystemInfo.WPF.ViewModels.MainWindow
         }
 
         public WindowSettings WindowSettings
-        {
-            get;
-            set;
-        }
+            => options.Value;
     }
 }

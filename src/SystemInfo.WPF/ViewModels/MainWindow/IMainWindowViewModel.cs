@@ -13,7 +13,6 @@ namespace SystemInfo.WPF.ViewModels.MainWindow
         WindowSettings WindowSettings
         {
             get;
-            set;
         }
     }
 }
