@@ -28,7 +28,8 @@
     FontFamily="Microsoft Sans Serif"
     FontSize="9"
     RenderOptions.ClearTypeHint="Enabled"
-    Foreground="White">
+    Foreground="White"
+    Loaded="Window_Loaded">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

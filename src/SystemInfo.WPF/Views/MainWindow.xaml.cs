@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Input;
+using SystemInfo.WPF.Util;
 
 namespace SystemInfo.WPF.Views
 {
@@ -12,6 +13,9 @@ namespace SystemInfo.WPF.Views
         {
             InitializeComponent();
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+            => InterlopUtil.HideFromTaskSwitcher((Window)sender);
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
