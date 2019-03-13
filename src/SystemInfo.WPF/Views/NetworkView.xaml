@@ -17,10 +17,24 @@
                         Margin="0,0,0,5">
                         <TextBlock
                             Text="{Binding Name, Mode=OneWay}" />
-                        <TextBlock
-                            Text="{Binding Received, Converter={StaticResource bytesToStringConverter}, ConverterParameter=1, StringFormat='Received: \{0\}/Sec', Mode=OneWay}" />
-                        <TextBlock
-                            Text="{Binding Send, Converter={StaticResource bytesToStringConverter}, ConverterParameter=1, StringFormat='Send: \{0\}/Sec', Mode=OneWay}" />
+                        <DockPanel>
+                            <TextBlock
+                                DockPanel.Dock="Left"
+                                Text="Received:" />
+                            <TextBlock
+                                DockPanel.Dock="Right"
+                                TextAlignment="Right"
+                                Text="{Binding Received, Converter={StaticResource bytesToStringConverter}, ConverterParameter=1, StringFormat='\{0\}/Sec', Mode=OneWay}" />
+                        </DockPanel>
+                        <DockPanel>
+                            <TextBlock
+                                DockPanel.Dock="Left"
+                                Text="Send:" />
+                            <TextBlock
+                                DockPanel.Dock="Right"
+                                TextAlignment="Right"
+                                Text="{Binding Send, Converter={StaticResource bytesToStringConverter}, ConverterParameter=1, StringFormat='\{0\}/Sec', Mode=OneWay}" />
+                        </DockPanel>
                     </StackPanel>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
