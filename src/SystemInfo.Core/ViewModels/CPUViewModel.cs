@@ -21,6 +21,7 @@ namespace SystemInfo.Core.ViewModels
             this.cpuController = cpuController;
             var totalCpuUseSubscription = cpuController
                 .TotalCpuUse
+                .ObserveOnDispatcher()
                 .Subscribe(x => TotalUse = x);
             disposables.Add(totalCpuUseSubscription);
 
