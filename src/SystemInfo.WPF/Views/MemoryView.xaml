@@ -1,0 +1,35 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="clr-namespace:SystemInfo.Core.ViewModels;assembly=SystemInfo.Core"
+    xmlns:conv="clr-namespace:SystemInfo.WPF.Converters">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary
+            Source="..\Resources\SegmentedProgressBar.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+    <conv:BytesToStringConverter
+        x:Key="bytesToStringConverter" />
+    <DataTemplate
+        DataType="{x:Type vm:MemoryViewModel}">
+        <StackPanel
+            DataContext="{Binding Model}">
+            <DockPanel
+                Margin="0,0,0,2">
+                <TextBlock
+                    Text="RAM: "
+                    DockPanel.Dock="Left" />
+                <TextBlock
+                    Text="{Binding Percantage, FallbackValue=0%, StringFormat='\{0:F0\}%', Mode=OneWay}"
+                    TextAlignment="Right"
+                    DockPanel.Dock="Right" />
+                <TextBlock
+                    Text="{Binding TotalUsed, FallbackValue=Name:, Converter= {StaticResource bytesToStringConverter}, Mode=OneWay}"
+                    TextAlignment="Right"
+                    Margin="5,0" />
+            </DockPanel>
+            <ProgressBar
+                Value="{Binding Percantage, Mode=OneWay}"
+                Style="{StaticResource segmentedBarStyle}" />
+        </StackPanel>
+    </DataTemplate>
+</ResourceDictionary>

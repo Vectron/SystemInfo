@@ -29,6 +29,7 @@ namespace SystemInfo.WPF
 
             var serviceProvider = new ServiceCollection()
                 .AddAssemblyResolver()
+                .AddRegisteredTypes()
                 .AddNonGenericLoggerError()
                 .AddFromAssemblies(new[] { "SystemInfo.Core" })
                 .AddWindows(Array.Empty<string>())
