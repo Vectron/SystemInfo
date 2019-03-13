@@ -8,6 +8,10 @@
         <MenuItem
             Header="Settings"
             Command="{Binding OpenSettingsCommand}" />
+        <MenuItem
+            Header="Lock Placement"
+            IsCheckable="True"
+            IsChecked="{Binding WindowSettings.LockPlacement}" />
         <Separator />
         <MenuItem
             Header="Exit"

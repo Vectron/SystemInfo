@@ -1,13 +1,18 @@
-﻿using System.Windows;
+﻿using Microsoft.Extensions.Options;
+using System.Windows;
 using System.Windows.Input;
+using SystemInfo.WPF.Settings;
 using VectronsLibrary.Wpf;
 
 namespace SystemInfo.WPF.ViewModels.NotifyIcon
 {
     public class NotifyIconViewModel : INotifyIconViewModel
     {
-        public NotifyIconViewModel()
+        private readonly IOptions<WindowSettings> options;
+
+        public NotifyIconViewModel(IOptions<WindowSettings> options)
         {
+            this.options = options;
         }
 
         public ICommand ExitApplicationCommand
@@ -15,5 +20,8 @@ namespace SystemInfo.WPF.ViewModels.NotifyIcon
 
         public ICommand OpenSettingsCommand
             => new RelayCommand(_ => { });
+
+        public WindowSettings WindowSettings
+            => options.Value;
     }
 }
