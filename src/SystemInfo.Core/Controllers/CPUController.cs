@@ -41,9 +41,11 @@ namespace SystemInfo.Core.Controllers
                 coreCounters.Add(CpuCoreUse);
             }
 
+            observer.OnNext(Enumerable.Repeat(0f, NumberOfCores));
+
             var updateTimer = Observable.Timer(TimeSpan.Zero, TimeSpan.FromSeconds(1))
-            .Select(_ => coreCounters.Select(counter => counter.NextValue()))
-            .Subscribe(observer);
+                .Select(_ => coreCounters.Select(counter => counter.NextValue()).ToArray())
+                .Subscribe(observer);
             disposables.Add(updateTimer);
             return disposables;
         }
