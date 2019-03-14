@@ -18,6 +18,9 @@ namespace SystemInfo.WPF.Settings
             LockPlacement = false;
             LeftPosition = 0D;
             TopPosition = 0D;
+            CpuProgressbarSettings = new ProgressbarSettings() { Height = 4 };
+            DrivesProgressbarSettings = new ProgressbarSettings();
+            MemoryProgressbarSettings = new ProgressbarSettings();
         }
 
         public string BackgroundColor
@@ -32,6 +35,18 @@ namespace SystemInfo.WPF.Settings
             set => SetField(ref borderColor, value);
         }
 
+        public ProgressbarSettings CpuProgressbarSettings
+        {
+            get;
+            set;
+        }
+
+        public ProgressbarSettings DrivesProgressbarSettings
+        {
+            get;
+            set;
+        }
+
         public double LeftPosition
         {
             get => leftPosition;
@@ -42,6 +57,12 @@ namespace SystemInfo.WPF.Settings
         {
             get => lockPlacement;
             set => SetField(ref lockPlacement, value);
+        }
+
+        public ProgressbarSettings MemoryProgressbarSettings
+        {
+            get;
+            set;
         }
 
         public double TopPosition

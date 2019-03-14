@@ -35,8 +35,25 @@
                                     Margin="5,0" />
                             </DockPanel>
                             <ProgressBar
+                                Background="{Binding DataContext.WindowSettings.DrivesProgressbarSettings.BackgroundColor, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
+                                Height="{Binding DataContext.WindowSettings.DrivesProgressbarSettings.Height, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
                                 Value="{Binding Percantage, Mode=OneWay}"
-                                Style="{StaticResource segmentedBarStyle}" />
+                                Style="{StaticResource segmentedBarStyle}">
+                                <ProgressBar.Foreground>
+                                    <LinearGradientBrush
+                                        EndPoint="1,0">
+                                        <GradientStop
+                                            Color="{Binding DataContext.WindowSettings.DrivesProgressbarSettings.ForegroundColorStart, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
+                                            Offset="0" />
+                                        <GradientStop
+                                            Color="{Binding DataContext.WindowSettings.DrivesProgressbarSettings.ForegroundColorMiddle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
+                                            Offset="0.6" />
+                                        <GradientStop
+                                            Color="{Binding DataContext.WindowSettings.DrivesProgressbarSettings.ForegroundColorEnd, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
+                                            Offset="1" />
+                                    </LinearGradientBrush>
+                                </ProgressBar.Foreground>
+                            </ProgressBar>
                         </StackPanel>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>

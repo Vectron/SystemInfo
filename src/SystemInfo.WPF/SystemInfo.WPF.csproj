@@ -65,6 +65,7 @@
     <Compile Include="Extensions\IServiceCollectionExtension.cs" />
     <Compile Include="Settings\DynamicContractResolver.cs" />
     <Compile Include="Settings\ISettingsSaver.cs" />
+    <Compile Include="Settings\ProgressbarSettings.cs" />
     <Compile Include="Settings\SettingsSaver.cs" />
     <Compile Include="Util\InterlopUtil.cs" />
     <Compile Include="Settings\WindowSettings.cs" />

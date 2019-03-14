@@ -26,9 +26,25 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <ProgressBar
-                            Height="4"
+                            Background="{Binding DataContext.WindowSettings.CpuProgressbarSettings.BackgroundColor, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
+                            Height="{Binding DataContext.WindowSettings.CpuProgressbarSettings.Height, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
                             Value="{Binding Mode=OneWay}"
-                            Style="{StaticResource segmentedBarStyle}" />
+                            Style="{StaticResource segmentedBarStyle}">
+                            <ProgressBar.Foreground>
+                                <LinearGradientBrush
+                                    EndPoint="1,0">
+                                    <GradientStop
+                                        Color="{Binding DataContext.WindowSettings.CpuProgressbarSettings.ForegroundColorStart, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
+                                        Offset="0" />
+                                    <GradientStop
+                                        Color="{Binding DataContext.WindowSettings.CpuProgressbarSettings.ForegroundColorMiddle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
+                                        Offset="0.6" />
+                                    <GradientStop
+                                        Color="{Binding DataContext.WindowSettings.CpuProgressbarSettings.ForegroundColorEnd, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
+                                        Offset="1" />
+                                </LinearGradientBrush>
+                            </ProgressBar.Foreground>
+                        </ProgressBar>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
