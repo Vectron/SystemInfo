@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using SystemInfo.WPF.Extensions;
@@ -19,9 +20,24 @@ namespace SystemInfo.WPF.Settings
             this.serviceDescriptors = serviceDescriptors;
         }
 
-        public void SaveConfiguration()
-        {
-            var serializerSettings = new JsonSerializerSettings()
+        private IEnumerable<(string, string)> GetSettingJsons
+            => serviceDescriptors
+            .Where(x => x.ServiceType.IsGenericType)
+            .Where(x => x.ServiceType.GetGenericTypeDefinition() == typeof(IConfigureOptions<>))
+            .AsParallel()
+            .Select(x =>
+            {
+                var genericType = x.ServiceType.GenericTypeArguments[0];
+                var filledSettings = serviceProvider.GetOptions(genericType);
+                var json = JsonConvert
+                    .SerializeObject(filledSettings, serializerSettings)
+                    .Replace(Environment.NewLine, Environment.NewLine + "  ");
+                return (genericType.Name, json);
+            })
+            .Where(x => x.Item2.Length > 2);
+
+        private JsonSerializerSettings serializerSettings
+            => new JsonSerializerSettings()
             {
                 ContractResolver = new DynamicContractResolver(serviceProvider),
                 NullValueHandling = NullValueHandling.Ignore,
@@ -29,27 +45,14 @@ namespace SystemInfo.WPF.Settings
                 Formatting = Formatting.Indented
             };
 
-            var generics = serviceDescriptors
-                .Where(x => x.ServiceType.IsGenericType)
-                .Where(x => x.ServiceType.GetGenericTypeDefinition() == typeof(IConfigureOptions<>))
-                //.AsParallel()
-                .Select(x =>
-                {
-                    var genericType = x.ServiceType.GenericTypeArguments[0];
-                    var filledSettings = serviceProvider.GetOptions(genericType);
-                    var json = JsonConvert
-                        .SerializeObject(filledSettings, serializerSettings)
-                        .Replace(Environment.NewLine, Environment.NewLine + "  ");
-                    return (genericType.Name, json);
-                })
-                .Where(x => x.Item2.Length > 2);
-
+        public void SaveConfiguration()
+        {
             StreamWriter sw = null;
             JsonTextWriter writer = null;
             try
             {
                 var startWritten = false;
-                foreach (var kv in generics)
+                foreach (var kv in GetSettingJsons)
                 {
                     if (!startWritten)
                     {

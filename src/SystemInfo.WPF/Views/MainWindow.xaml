@@ -54,12 +54,18 @@
                     Property="Focusable"
                     Value="False" />
             </Style>
+            <SolidColorBrush
+                x:Key="backgroundBrush"
+                Color="{Binding WindowSettings.BackgroundColor, Mode=OneWay}" />
+            <SolidColorBrush
+                x:Key="borderBrush"
+                Color="{Binding WindowSettings.BorderColor, Mode=OneWay}" />
         </ResourceDictionary>
     </Window.Resources>
     <Border
         Padding="0,15,0,15"
-        Background="{Binding WindowSettings.BackgroundColor}"
-        BorderBrush="{Binding WindowSettings.BorderColor}"
+        Background="{StaticResource backgroundBrush}"
+        BorderBrush="{StaticResource borderBrush}"
         BorderThickness="1"
         CornerRadius="20"
         Width="112">
