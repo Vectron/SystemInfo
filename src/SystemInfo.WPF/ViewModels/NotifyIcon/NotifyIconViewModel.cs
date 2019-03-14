@@ -9,14 +9,20 @@ namespace SystemInfo.WPF.ViewModels.NotifyIcon
     public class NotifyIconViewModel : INotifyIconViewModel
     {
         private readonly IOptions<WindowSettings> options;
+        private readonly ISettingsSaver settingsSaver;
 
-        public NotifyIconViewModel(IOptions<WindowSettings> options)
+        public NotifyIconViewModel(IOptions<WindowSettings> options, ISettingsSaver settingsSaver)
         {
             this.options = options;
+            this.settingsSaver = settingsSaver;
         }
 
         public ICommand ExitApplicationCommand
-            => new RelayCommand(_ => Application.Current.Shutdown());
+            => new RelayCommand(_ =>
+            {
+                settingsSaver.SaveConfiguration();
+                Application.Current.Shutdown();
+            });
 
         public ICommand OpenSettingsCommand
             => new RelayCommand(_ => { });

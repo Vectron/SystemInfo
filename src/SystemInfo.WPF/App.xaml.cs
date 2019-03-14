@@ -1,9 +1,11 @@
 ﻿using Hardcodet.Wpf.TaskbarNotification;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Windows;
 using SystemInfo.Core;
 using SystemInfo.WPF.Extensions;
+using SystemInfo.WPF.Settings;
 using SystemInfo.WPF.ViewModels.MainWindow;
 using SystemInfo.WPF.ViewModels.NotifyIcon;
 using SystemInfo.WPF.Views;
@@ -27,10 +29,18 @@ namespace SystemInfo.WPF
                 Shutdown();
             }
 
+            // Create a default configuration
+            var configuration = new ConfigurationBuilder()
+                .SetFileLoadExceptionHandler(x => x.Ignore = true)
+                .AddJsonFile("settings.json", true, true)
+                .Build();
+
             var serviceProvider = new ServiceCollection()
                 .AddAssemblyResolver()
                 .AddRegisteredTypes()
                 .AddOptions()
+                .AddSingleton<IConfiguration>(configuration)
+                .Configure<WindowSettings>(configuration.GetSection(typeof(WindowSettings).Name))
                 .AddNonGenericLoggerError()
                 .AddFromAssemblies(new[] { "SystemInfo.Core" })
                 .AddWindows(Array.Empty<string>())

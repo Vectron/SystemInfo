@@ -63,6 +63,9 @@
     <Compile Include="Converters\InverseBooleanConverter.cs" />
     <Compile Include="Extensions\IServiceProviderExtension.cs" />
     <Compile Include="Extensions\IServiceCollectionExtension.cs" />
+    <Compile Include="Settings\DynamicContractResolver.cs" />
+    <Compile Include="Settings\ISettingsSaver.cs" />
+    <Compile Include="Settings\SettingsSaver.cs" />
     <Compile Include="Util\InterlopUtil.cs" />
     <Compile Include="Settings\WindowSettings.cs" />
     <Compile Include="Util\NativeMethods.cs" />
@@ -93,7 +96,13 @@
     <PackageReference Include="Hardcodet.NotifyIcon.Wpf">
       <Version>1.0.8</Version>
     </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json">
+      <Version>2.2.0</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Options">
+      <Version>2.2.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions">
       <Version>2.2.0</Version>
     </PackageReference>
     <PackageReference Include="VectronsLibrary.DI">
