@@ -3,7 +3,6 @@ using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using SystemInfo.WPF.Extensions;
 
 namespace SystemInfo.WPF.Settings
 {
@@ -19,23 +18,22 @@ namespace SystemInfo.WPF.Settings
         protected override IList<JsonProperty> CreateProperties(Type type, MemberSerialization memberSerialization)
         {
             var defaultSettings = Activator.CreateInstance(type);
-            var filledObject = serviceProvider.GetOptions(type);
-
-            return base.CreateProperties(type, memberSerialization)
-                .Where(p =>
+            var properties = base.CreateProperties(type, memberSerialization)
+                .Select(p =>
                 {
                     var propertyInfo = type.GetProperty(p.PropertyName);
                     var defaultValue = propertyInfo.GetValue(defaultSettings);
-                    var filledValue = propertyInfo.GetValue(filledObject);
-
-                    if (defaultValue == null)
+                    p.ShouldSerialize = i =>
                     {
-                        return true;
-                    }
+                        var filledValue = propertyInfo.GetValue(i);
+                        return !defaultValue.Equals(filledValue);
+                    };
 
-                    return !defaultValue.Equals(filledValue);
+                    return p;
                 })
                 .ToList();
+
+            return properties;
         }
     }
 }
