@@ -32,72 +32,11 @@
     FontStyle="{Binding WindowSettings.FontSettings.Style}"
     FontWeight="{Binding WindowSettings.FontSettings.Weight}"
     Foreground="{Binding WindowSettings.FontSettings.Color, Converter={StaticResource colorToBrushConverter}}"
-    Loaded="Window_Loaded">
+    Loaded="Window_Loaded"
+    Template="{DynamicResource ItemsView}">
     <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary
-                    Source="CPUView.xaml" />
-                <ResourceDictionary
-                    Source="MemoryView.xaml" />
-                <ResourceDictionary
-                    Source="NetworkView.xaml" />
-                <ResourceDictionary
-                    Source="DrivesView.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-            <Style
-                TargetType="FrameworkElement">
-                <Setter
-                    Property="IsHitTestVisible"
-                    Value="False" />
-                <Setter
-                    Property="IsEnabled"
-                    Value="False" />
-                <Setter
-                    Property="Focusable"
-                    Value="False" />
-            </Style>
-            <SolidColorBrush
-                x:Key="backgroundBrush"
-                Color="{Binding WindowSettings.BackgroundColor, Mode=OneWay}" />
-            <SolidColorBrush
-                x:Key="borderBrush"
-                Color="{Binding WindowSettings.BorderColor, Mode=OneWay}" />
-        </ResourceDictionary>
+        <!--This has to be here because we cant use the Staticresource color converter if we put it in app.xaml-->
+        <ResourceDictionary
+            Source="ItemsView.xaml" />
     </Window.Resources>
-    <Border
-        Padding="0,15,0,15"
-        Background="{StaticResource backgroundBrush}"
-        BorderBrush="{StaticResource borderBrush}"
-        BorderThickness="1"
-        CornerRadius="20"
-        Width="112">
-        <ItemsControl
-            ItemsSource="{Binding Items}">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel>
-                        <Rectangle
-                            x:Name="Seperator"
-                            Fill="Gray"
-                            Height="1"
-                            Margin="0,5" />
-                        <ContentPresenter
-                            Margin="5,0"
-                            Content="{Binding}" />
-                    </StackPanel>
-                    <DataTemplate.Triggers>
-                        <DataTrigger
-                            Binding="{Binding RelativeSource={RelativeSource PreviousData}}"
-                            Value="{x:Null}">
-                            <Setter
-                                Property="Visibility"
-                                TargetName="Seperator"
-                                Value="Collapsed" />
-                        </DataTrigger>
-                    </DataTemplate.Triggers>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-    </Border>
 </Window>

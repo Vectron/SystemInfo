@@ -5,8 +5,8 @@ namespace SystemInfo.WPF.Settings
 {
     public class WindowSettings : ObservableObject
     {
-        private string backgroundColor;
-        private string borderColor;
+        private Color backgroundColor;
+        private Color borderColor;
         private FontSettings fontSettings;
         private double leftPosition;
         private bool lockPlacement;
@@ -14,8 +14,8 @@ namespace SystemInfo.WPF.Settings
 
         public WindowSettings()
         {
-            BackgroundColor = Colors.Black.ToString();
-            BorderColor = "#FF666666";
+            BackgroundColor = Colors.Black;
+            BorderColor = Color.FromArgb(0xFF, 0x66, 0x66, 0x66);
             LockPlacement = false;
             LeftPosition = 0D;
             TopPosition = 0D;
@@ -25,13 +25,13 @@ namespace SystemInfo.WPF.Settings
             FontSettings = new FontSettings();
         }
 
-        public string BackgroundColor
+        public Color BackgroundColor
         {
             get => backgroundColor;
             set => SetField(ref backgroundColor, value);
         }
 
-        public string BorderColor
+        public Color BorderColor
         {
             get => borderColor;
             set => SetField(ref borderColor, value);
