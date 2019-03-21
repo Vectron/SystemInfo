@@ -17,7 +17,7 @@ namespace SystemInfo.WPF.Settings
 
         public FontSettings()
         {
-            Color = Colors.LightPink;
+            Color = Colors.White;
             Family = new FontFamily("Microsoft Sans Serif");
             size = 9;
             Stretch = (FontStretch)Control.FontStretchProperty.DefaultMetadata.DefaultValue;
