@@ -12,6 +12,8 @@
             </ResourceDictionary.MergedDictionaries>
             <conv:InverseBooleanConverter
                 x:Key="inverseBooleanConverter" />
+            <conv:ColorToBrushConverter
+                x:Key="colorToBrushConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

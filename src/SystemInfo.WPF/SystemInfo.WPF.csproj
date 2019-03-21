@@ -63,10 +63,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Converters\BytesToStringConverter.cs" />
+    <Compile Include="Converters\ColorToBrushConverter.cs" />
     <Compile Include="Converters\InverseBooleanConverter.cs" />
     <Compile Include="Extensions\IServiceProviderExtension.cs" />
     <Compile Include="Extensions\IServiceCollectionExtension.cs" />
     <Compile Include="Settings\DynamicContractResolver.cs" />
+    <Compile Include="Settings\FontSettings.cs" />
     <Compile Include="Settings\ISettingsSaver.cs" />
     <Compile Include="Settings\ProgressbarSettings.cs" />
     <Compile Include="Settings\SettingsSaver.cs" />
@@ -113,7 +115,7 @@
       <Version>1.1.4</Version>
     </PackageReference>
     <PackageReference Include="VectronsLibrary.Wpf">
-      <Version>1.0.2</Version>
+      <Version>1.0.3</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup />

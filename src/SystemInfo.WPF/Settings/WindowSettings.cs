@@ -7,6 +7,7 @@ namespace SystemInfo.WPF.Settings
     {
         private string backgroundColor;
         private string borderColor;
+        private FontSettings fontSettings;
         private double leftPosition;
         private bool lockPlacement;
         private double topPosition;
@@ -21,6 +22,7 @@ namespace SystemInfo.WPF.Settings
             CpuProgressbarSettings = new ProgressbarSettings() { Height = 4 };
             DrivesProgressbarSettings = new ProgressbarSettings();
             MemoryProgressbarSettings = new ProgressbarSettings();
+            FontSettings = new FontSettings();
         }
 
         public string BackgroundColor
@@ -45,6 +47,12 @@ namespace SystemInfo.WPF.Settings
         {
             get;
             set;
+        }
+
+        public FontSettings FontSettings
+        {
+            get => fontSettings;
+            set => SetField(ref fontSettings, value);
         }
 
         public double LeftPosition
