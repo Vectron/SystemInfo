@@ -10,6 +10,7 @@ using SystemInfo.WPF.ViewModels.MainWindow;
 using SystemInfo.WPF.ViewModels.NotifyIcon;
 using SystemInfo.WPF.Views;
 using VectronsLibrary.DI;
+using VectronsLibrary.Wpf.Extensions;
 
 namespace SystemInfo.WPF
 {

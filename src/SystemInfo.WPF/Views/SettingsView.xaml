@@ -1,0 +1,18 @@
+﻿<Window
+    x:Class="SystemInfo.WPF.Views.SettingsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="Settings"
+    Height="450"
+    Width="800"
+    FontFamily="{Binding WindowSettings.FontSettings.Family}"
+    FontSize="{Binding WindowSettings.FontSettings.Size}"
+    FontStretch="{Binding WindowSettings.FontSettings.Stretch}"
+    FontStyle="{Binding WindowSettings.FontSettings.Style}"
+    FontWeight="{Binding WindowSettings.FontSettings.Weight}"
+    Foreground="{Binding WindowSettings.FontSettings.Color, Converter={StaticResource colorToBrushConverter}}">
+    <Grid></Grid>
+</Window>
