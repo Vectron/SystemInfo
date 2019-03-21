@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using System;
 using System.Windows;
 
@@ -16,16 +17,19 @@ namespace SystemInfo.WPF.Extensions
         }
 
         public static View GetView<View, ViewModel>(this IServiceProvider serviceProvider)
-                                    where View : FrameworkElement
+            where View : Window
         {
+            var scope = serviceProvider.CreateScope();
             var viewType = typeof(View);
-            if (!(serviceProvider.GetService(viewType) is View view))
+            if (!(scope.ServiceProvider.GetService(viewType) is View view))
             {
+                scope.Dispose();
                 throw new InvalidOperationException(string.Format(ServiceNotFound, viewType.FullName));
             }
 
+            view.Closed += (s, e) => scope.Dispose();
             var viewModelType = typeof(ViewModel);
-            var viewModel = serviceProvider.GetService(viewModelType);
+            var viewModel = scope.ServiceProvider.GetService(viewModelType);
             view.DataContext = viewModel ?? throw new InvalidOperationException(string.Format(ServiceNotFound, viewModelType.FullName));
             return view;
         }
