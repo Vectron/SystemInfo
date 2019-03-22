@@ -13,6 +13,7 @@ namespace SystemInfo.Core.ViewModels
         private readonly ICPUController cpuController;
         private readonly CompositeDisposable disposables = new CompositeDisposable();
         private bool disposedValue = false;
+        private object settings;
         private float totalUse;
 
         public CPUViewModel(ICPUController cpuController)
@@ -39,6 +40,12 @@ namespace SystemInfo.Core.ViewModels
         public ObservableCollection<float> CoreUses
         {
             get;
+        }
+
+        public object Settings
+        {
+            get => settings;
+            set => SetField(ref settings, value);
         }
 
         public float TotalUse

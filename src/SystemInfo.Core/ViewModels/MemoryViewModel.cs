@@ -12,6 +12,7 @@ namespace SystemInfo.Core.ViewModels
         private bool disposedValue = false;
         private IDisposable memoryUseSubscription;
         private UsageData model;
+        private object settings;
 
         public MemoryViewModel(IMemoryController memoryController)
         {
@@ -26,6 +27,12 @@ namespace SystemInfo.Core.ViewModels
         {
             get => model;
             set => SetField(ref model, value);
+        }
+
+        public object Settings
+        {
+            get => settings;
+            set => SetField(ref settings, value);
         }
 
         public void Dispose()

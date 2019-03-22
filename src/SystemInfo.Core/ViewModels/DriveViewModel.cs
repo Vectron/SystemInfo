@@ -14,6 +14,7 @@ namespace SystemInfo.Core.ViewModels
         private readonly CompositeDisposable disposables = new CompositeDisposable();
         private readonly IDriveSpaceController driveSpaceController;
         private bool disposedValue = false;
+        private object settings;
         private UsageData total;
 
         public DriveViewModel(IDriveSpaceController driveSpaceController)
@@ -43,6 +44,12 @@ namespace SystemInfo.Core.ViewModels
         {
             get;
             set;
+        }
+
+        public object Settings
+        {
+            get => settings;
+            set => SetField(ref settings, value);
         }
 
         public UsageData Total

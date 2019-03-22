@@ -2,5 +2,10 @@
 {
     public interface IViewModel
     {
+        object Settings
+        {
+            get;
+            set;
+        }
     }
 }

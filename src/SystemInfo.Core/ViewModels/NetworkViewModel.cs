@@ -13,6 +13,7 @@ namespace SystemInfo.Core.ViewModels
         private readonly INetworkController networkController;
         private bool disposedValue = false;
         private IDisposable networkUseSubscription;
+        private object settings;
 
         public NetworkViewModel(INetworkController networkController)
         {
@@ -32,6 +33,12 @@ namespace SystemInfo.Core.ViewModels
         {
             get;
             set;
+        }
+
+        public object Settings
+        {
+            get => settings;
+            set => SetField(ref settings, value);
         }
 
         public void Dispose()
