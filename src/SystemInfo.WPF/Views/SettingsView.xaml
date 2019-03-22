@@ -4,15 +4,137 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vconv="clr-namespace:VectronsLibrary.Wpf.Converters;assembly=VectronsLibrary.Wpf"
     mc:Ignorable="d"
     Title="Settings"
     Height="450"
     Width="800"
-    FontFamily="{Binding WindowSettings.FontSettings.Family}"
-    FontSize="{Binding WindowSettings.FontSettings.Size}"
-    FontStretch="{Binding WindowSettings.FontSettings.Stretch}"
-    FontStyle="{Binding WindowSettings.FontSettings.Style}"
-    FontWeight="{Binding WindowSettings.FontSettings.Weight}"
-    Foreground="{Binding WindowSettings.FontSettings.Color, Converter={StaticResource colorToBrushConverter}}">
-    <Grid></Grid>
+    ResizeMode="CanResizeWithGrip"
+    WindowStartupLocation="CenterScreen"
+    Name="root">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary
+                    Source="ItemsView.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <vconv:ColorToNameConverter
+                x:Key="colorToNameConverter" />
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid
+        Margin="5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition
+                Height="auto" />
+            <RowDefinition
+                Height="auto" />
+        </Grid.RowDefinitions>
+        <GroupBox
+            Grid.Column="0"
+            Grid.Row="0"
+            Header="CPU Bar Settings"></GroupBox>
+        <GroupBox
+            Grid.Column="0"
+            Grid.Row="1"
+            Header="Memory Bar Settings"></GroupBox>
+        <GroupBox
+            Grid.Column="0"
+            Grid.Row="2"
+            Header="Drives Bar Settings"></GroupBox>
+        <GroupBox
+            Grid.Column="0"
+            Grid.Row="3"
+            Header="Font Settings">
+            <WrapPanel
+                Orientation="Horizontal">
+                <TextBlock
+                    DataContext="{Binding NewSettings.FontSettings}"
+                    VerticalAlignment="Center">
+                    <TextBlock.Text>
+                        <MultiBinding
+                            StringFormat="{}{0}; {1}; {2}; {3}-{4}-{5}">
+                            <Binding
+                                Path="Family"
+                                FallbackValue="Microsoft Sans Serif" />
+                            <Binding
+                                Path="Size"
+                                FallbackValue="9" />
+                            <Binding
+                                Path="Color"
+                                FallbackValue="White"
+                                Converter="{StaticResource colorToNameConverter}" />
+                            <Binding
+                                Path="Style"
+                                FallbackValue="Normal" />
+                            <Binding
+                                Path="Weight"
+                                FallbackValue="Normal" />
+                            <Binding
+                                Path="Stretch"
+                                FallbackValue="Normal" />
+                        </MultiBinding>
+                    </TextBlock.Text></TextBlock>
+                <Button
+                    Margin="2"
+                    MinWidth="20"
+                    VerticalAlignment="Center"
+                    Command="{Binding ChangeFont}"
+                    CommandParameter="{Binding ElementName=root}"
+                    Content="..." />
+            </WrapPanel>
+        </GroupBox>
+        <StackPanel
+            Grid.Column="0"
+            Grid.Row="4"
+            Orientation="Horizontal"
+            HorizontalAlignment="Left">
+            <Button
+                MinHeight="25"
+                MinWidth="70"
+                Margin="5"
+                Content="Default"
+                Command="{Binding ResetDefault}" />
+            <Button
+                MinHeight="25"
+                MinWidth="70"
+                Margin="5"
+                Content="Reset"
+                Command="{Binding ResetStart}" />
+        </StackPanel>
+        <StackPanel
+            Grid.Column="1"
+            Grid.Row="4"
+            Orientation="Horizontal"
+            HorizontalAlignment="Right">
+            <Button
+                MinHeight="25"
+                MinWidth="70"
+                Margin="5"
+                Content="OK"
+                Command="{Binding Ok}"
+                Click="Button_Click" />
+            <Button
+                MinHeight="25"
+                MinWidth="70"
+                Margin="5"
+                Click="Button_Click"
+                Content="Cancel" />
+        </StackPanel>
+        <ContentControl
+            Grid.Column="1"
+            Grid.Row="0"
+            Grid.RowSpan="4"
+            RenderOptions.ClearTypeHint="Enabled"
+            UseLayoutRounding="True"
+            DataContext="{Binding MainWindowViewModel}"
+            Template="{StaticResource ItemsView}" />
+    </Grid>
 </Window>
