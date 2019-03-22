@@ -9,13 +9,41 @@
     </ResourceDictionary.MergedDictionaries>
     <conv:BytesToStringConverter
         x:Key="bytesToStringConverter" />
+    <conv:GradientConverter
+        x:Key="gradientConverter" />
     <DataTemplate
         DataType="{x:Type vm:DriveViewModel}">
         <StackPanel>
             <ItemsControl
+                Name="drivesBarItemsControl"
                 ItemsSource="{Binding Drives, Mode=OneWay}"
                 HorizontalContentAlignment="Stretch"
                 VerticalContentAlignment="Top">
+                <ItemsControl.Resources>
+                    <Style
+                        TargetType="ProgressBar">
+                        <Setter
+                            Property="Background"
+                            Value="{Binding Settings.BackgroundColor }" />
+                        <Setter
+                            Property="Height"
+                            Value="{Binding Settings.Height }" />
+                        <Setter
+                            Property="Foreground">
+                            <Setter.Value>
+                                <MultiBinding
+                                    Converter="{StaticResource gradientConverter}">
+                                    <Binding
+                                        Path="Settings.ForegroundColorStart" />
+                                    <Binding
+                                        Path="Settings.ForegroundColorMiddle" />
+                                    <Binding
+                                        Path="Settings.ForegroundColorEnd" />
+                                </MultiBinding>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ItemsControl.Resources>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <StackPanel
@@ -35,25 +63,8 @@
                                     Margin="5,0" />
                             </DockPanel>
                             <ProgressBar
-                                Background="{Binding DataContext.WindowSettings.DrivesProgressbarSettings.BackgroundColor, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
-                                Height="{Binding DataContext.WindowSettings.DrivesProgressbarSettings.Height, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
                                 Value="{Binding Percantage, Mode=OneWay}"
-                                Style="{StaticResource segmentedBarStyle}">
-                                <ProgressBar.Foreground>
-                                    <LinearGradientBrush
-                                        EndPoint="1,0">
-                                        <GradientStop
-                                            Color="{Binding DataContext.WindowSettings.DrivesProgressbarSettings.ForegroundColorStart, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
-                                            Offset="0" />
-                                        <GradientStop
-                                            Color="{Binding DataContext.WindowSettings.DrivesProgressbarSettings.ForegroundColorMiddle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
-                                            Offset="0.6" />
-                                        <GradientStop
-                                            Color="{Binding DataContext.WindowSettings.DrivesProgressbarSettings.ForegroundColorEnd, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
-                                            Offset="1" />
-                                    </LinearGradientBrush>
-                                </ProgressBar.Foreground>
-                            </ProgressBar>
+                                Style="{StaticResource segmentedBarStyle}" />
                         </StackPanel>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>

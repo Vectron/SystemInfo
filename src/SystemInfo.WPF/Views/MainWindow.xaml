@@ -26,12 +26,6 @@
     UseLayoutRounding="True"
     WindowStyle="None"
     RenderOptions.ClearTypeHint="Enabled"
-    FontFamily="{Binding WindowSettings.FontSettings.Family}"
-    FontSize="{Binding WindowSettings.FontSettings.Size}"
-    FontStretch="{Binding WindowSettings.FontSettings.Stretch}"
-    FontStyle="{Binding WindowSettings.FontSettings.Style}"
-    FontWeight="{Binding WindowSettings.FontSettings.Weight}"
-    Foreground="{Binding WindowSettings.FontSettings.Color, Converter={StaticResource colorToBrushConverter}}"
     Loaded="Window_Loaded"
     Template="{DynamicResource ItemsView}">
     <Window.Resources>
