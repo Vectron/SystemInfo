@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vconv="clr-namespace:VectronsLibrary.Wpf.Converters;assembly=VectronsLibrary.Wpf"
+    xmlns:vctr="clr-namespace:VectronsLibrary.Wpf.Controlls;assembly=VectronsLibrary.Wpf"
     mc:Ignorable="d"
     Title="Settings"
     Height="450"
@@ -29,11 +30,17 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
             <RowDefinition
                 Height="auto" />
+            <RowDefinition
+                Height="auto" />
+            <RowDefinition
+                Height="auto" />
+            <RowDefinition
+                Height="auto" />
+            <RowDefinition
+                Height="auto" />
+            <RowDefinition />
             <RowDefinition
                 Height="auto" />
         </Grid.RowDefinitions>
@@ -91,9 +98,62 @@
                     Content="..." />
             </WrapPanel>
         </GroupBox>
-        <StackPanel
+        <GroupBox
             Grid.Column="0"
             Grid.Row="4"
+            Header="Window Settings">
+            <StackPanel
+                Grid.IsSharedSizeScope="True">
+                <StackPanel.Resources>
+                    <Thickness
+                        x:Key="margin"
+                        Bottom="2"
+                        Top="2"
+                        Left="2"
+                        Right="2" />
+                    <Style
+                        TargetType="vctr:LabelledNumTextBox">
+                        <Setter
+                            Property="Margin"
+                            Value="{StaticResource margin}" />
+                    </Style>
+                    <Style
+                        TargetType="vctr:LabelledCheckBox">
+                        <Setter
+                            Property="Margin"
+                            Value="{StaticResource margin}" />
+                    </Style>
+                    <Style
+                        TargetType="vctr:LabelledColorPicker">
+                        <Setter
+                            Property="Margin"
+                            Value="{StaticResource margin}" />
+                    </Style>
+                </StackPanel.Resources>
+                <vctr:LabelledNumTextBox
+                    AllowNegative="False"
+                    AllowDecimal="True"
+                    Text="{Binding NewSettings.LeftPosition}"
+                    Label="Left Position" />
+                <vctr:LabelledNumTextBox
+                    AllowNegative="False"
+                    AllowDecimal="True"
+                    Text="{Binding NewSettings.TopPosition}"
+                    Label="Top Position" />
+                <vctr:LabelledCheckBox
+                    IsChecked="{Binding NewSettings.LockPlacement}"
+                    Label="Lock Placement" />
+                <vctr:LabelledColorPicker
+                    SelectedColor="{Binding NewSettings.BackgroundColor, Mode=TwoWay}"
+                    Label="Background Color" />
+                <vctr:LabelledColorPicker
+                    SelectedColor="{Binding NewSettings.BorderColor, Mode=TwoWay}"
+                    Label="Border Color" />
+            </StackPanel>
+        </GroupBox>
+        <StackPanel
+            Grid.Column="0"
+            Grid.Row="6"
             Orientation="Horizontal"
             HorizontalAlignment="Left">
             <Button
@@ -111,7 +171,7 @@
         </StackPanel>
         <StackPanel
             Grid.Column="1"
-            Grid.Row="4"
+            Grid.Row="6"
             Orientation="Horizontal"
             HorizontalAlignment="Right">
             <Button
@@ -131,7 +191,7 @@
         <ContentControl
             Grid.Column="1"
             Grid.Row="0"
-            Grid.RowSpan="4"
+            Grid.RowSpan="6"
             RenderOptions.ClearTypeHint="Enabled"
             UseLayoutRounding="True"
             DataContext="{Binding MainWindowViewModel}"
