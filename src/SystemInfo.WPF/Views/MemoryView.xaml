@@ -14,31 +14,6 @@
     <DataTemplate
         DataType="{x:Type vm:MemoryViewModel}">
         <StackPanel>
-            <StackPanel.Resources>
-                <Style
-                    TargetType="ProgressBar">
-                    <Setter
-                        Property="Background"
-                        Value="{Binding Settings.BackgroundColor }" />
-                    <Setter
-                        Property="Height"
-                        Value="{Binding Settings.Height }" />
-                    <Setter
-                        Property="Foreground">
-                        <Setter.Value>
-                            <MultiBinding
-                                Converter="{StaticResource gradientConverter}">
-                                <Binding
-                                    Path="Settings.ForegroundColorStart" />
-                                <Binding
-                                    Path="Settings.ForegroundColorMiddle" />
-                                <Binding
-                                    Path="Settings.ForegroundColorEnd" />
-                            </MultiBinding>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </StackPanel.Resources>
             <DockPanel
                 DataContext="{Binding Model}"
                 Margin="0,0,0,2">
@@ -55,9 +30,22 @@
                     Margin="5,0" />
             </DockPanel>
             <ProgressBar
-                DataContext="{Binding Model}"
-                Value="{Binding Percantage, Mode=OneWay}"
-                Style="{StaticResource segmentedBarStyle}" />
+                Value="{Binding Model.Percantage, Mode=OneWay}"
+                Style="{StaticResource segmentedBarStyle}"
+                Height="{Binding Settings.Height}"
+                Background="{Binding Settings.BackgroundColor, Converter={StaticResource colorToBrushConverter}}">
+                <ProgressBar.Foreground>
+                    <MultiBinding
+                        Converter="{StaticResource gradientConverter}">
+                        <Binding
+                            Path="Settings.ForegroundColorStart" />
+                        <Binding
+                            Path="Settings.ForegroundColorMiddle" />
+                        <Binding
+                            Path="Settings.ForegroundColorEnd" />
+                    </MultiBinding>
+                </ProgressBar.Foreground>
+            </ProgressBar>
         </StackPanel>
     </DataTemplate>
 </ResourceDictionary>

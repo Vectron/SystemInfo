@@ -19,31 +19,6 @@
                 ItemsSource="{Binding Drives, Mode=OneWay}"
                 HorizontalContentAlignment="Stretch"
                 VerticalContentAlignment="Top">
-                <ItemsControl.Resources>
-                    <Style
-                        TargetType="ProgressBar">
-                        <Setter
-                            Property="Background"
-                            Value="{Binding Settings.BackgroundColor }" />
-                        <Setter
-                            Property="Height"
-                            Value="{Binding Settings.Height }" />
-                        <Setter
-                            Property="Foreground">
-                            <Setter.Value>
-                                <MultiBinding
-                                    Converter="{StaticResource gradientConverter}">
-                                    <Binding
-                                        Path="Settings.ForegroundColorStart" />
-                                    <Binding
-                                        Path="Settings.ForegroundColorMiddle" />
-                                    <Binding
-                                        Path="Settings.ForegroundColorEnd" />
-                                </MultiBinding>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </ItemsControl.Resources>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <StackPanel
@@ -64,30 +39,60 @@
                             </DockPanel>
                             <ProgressBar
                                 Value="{Binding Percantage, Mode=OneWay}"
-                                Style="{StaticResource segmentedBarStyle}" />
+                                Style="{StaticResource segmentedBarStyle}"
+                                Height="{Binding DataContext.Settings.Height, ElementName=drivesBarItemsControl}"
+                                Background="{Binding DataContext.Settings.BackgroundColor, ElementName=drivesBarItemsControl, Converter={StaticResource colorToBrushConverter}}">
+                                <ProgressBar.Foreground>
+                                    <MultiBinding
+                                        Converter="{StaticResource gradientConverter}">
+                                        <Binding
+                                            Path="DataContext.Settings.ForegroundColorStart"
+                                            ElementName="drivesBarItemsControl" />
+                                        <Binding
+                                            Path="DataContext.Settings.ForegroundColorMiddle"
+                                            ElementName="drivesBarItemsControl" />
+                                        <Binding
+                                            Path="DataContext.Settings.ForegroundColorEnd"
+                                            ElementName="drivesBarItemsControl" />
+                                    </MultiBinding>
+                                </ProgressBar.Foreground>
+                            </ProgressBar>
                         </StackPanel>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-            <StackPanel
-                DataContext="{Binding Total, Mode=OneWay}">
+            <StackPanel>
                 <DockPanel
                     Margin="0,0,0,2">
                     <TextBlock
                         Text="Total: "
                         DockPanel.Dock="Left" />
                     <TextBlock
-                        Text="{Binding Percantage, FallbackValue=0%, StringFormat='\{0:F0\}%', Mode=OneWay}"
+                        Text="{Binding Total.Percantage, FallbackValue=0%, StringFormat='\{0:F0\}%', Mode=OneWay}"
                         TextAlignment="Right"
                         DockPanel.Dock="Right" />
                     <TextBlock
-                        Text="{Binding Available, Converter= {StaticResource bytesToStringConverter}, Mode=OneWay}"
+                        Text="{Binding Total.Available, Converter= {StaticResource bytesToStringConverter}, Mode=OneWay}"
                         TextAlignment="Right"
                         Margin="5,0" />
                 </DockPanel>
                 <ProgressBar
-                    Value="{Binding Percantage, Mode=OneWay}"
-                    Style="{StaticResource segmentedBarStyle}" />
+                    Value="{Binding Total.Percantage, Mode=OneWay}"
+                    Style="{StaticResource segmentedBarStyle}"
+                    Height="{Binding Settings.Height}"
+                    Background="{Binding Settings.BackgroundColor, Converter={StaticResource colorToBrushConverter}}">
+                    <ProgressBar.Foreground>
+                        <MultiBinding
+                            Converter="{StaticResource gradientConverter}">
+                            <Binding
+                                Path="Settings.ForegroundColorStart" />
+                            <Binding
+                                Path="Settings.ForegroundColorMiddle" />
+                            <Binding
+                                Path="Settings.ForegroundColorEnd" />
+                        </MultiBinding>
+                    </ProgressBar.Foreground>
+                </ProgressBar>
             </StackPanel>
         </StackPanel>
     </DataTemplate>
