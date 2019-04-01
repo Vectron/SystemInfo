@@ -47,14 +47,17 @@ namespace SystemInfo.WPF.ViewModels.MainWindow
                 switch (item.GetType().Name)
                 {
                     case nameof(CPUViewModel):
+                        item.Settings = null;
                         item.Settings = windowSettings.CpuProgressbarSettings;
                         break;
 
                     case nameof(MemoryViewModel):
+                        item.Settings = null;
                         item.Settings = windowSettings.MemoryProgressbarSettings;
                         break;
 
                     case nameof(DriveViewModel):
+                        item.Settings = null;
                         item.Settings = windowSettings.DrivesProgressbarSettings;
                         break;
 
