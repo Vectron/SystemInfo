@@ -10,9 +10,19 @@ namespace SystemInfo.WPF.Converters
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            var brush = new LinearGradientBrush();
-            brush.StartPoint = new Point(0, 0);
-            brush.EndPoint = new Point(1, 1);
+            var brush = new LinearGradientBrush
+            {
+                StartPoint = new Point(0, 0),
+                EndPoint = new Point(1, 1)
+            };
+
+            if (values.Length != 3
+                || (values[0].GetType() != typeof(Color))
+                || (values[1].GetType() != typeof(Color))
+                || (values[2].GetType() != typeof(Color)))
+            {
+                return brush;
+            }
 
             brush.GradientStops.Add(new GradientStop((Color)values[0], 0));
             brush.GradientStops.Add(new GradientStop((Color)values[1], 0.6));
