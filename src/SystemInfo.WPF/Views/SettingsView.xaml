@@ -8,7 +8,7 @@
     xmlns:vctr="clr-namespace:VectronsLibrary.Wpf.Controlls;assembly=VectronsLibrary.Wpf"
     mc:Ignorable="d"
     Title="Settings"
-    Height="450"
+    Height="600"
     Width="800"
     ResizeMode="CanResizeWithGrip"
     WindowStartupLocation="CenterScreen"
@@ -29,10 +29,12 @@
                         AllowDecimal="False"
                         AllowNegative="False"
                         Label="Height"
-                        Text="{Binding Height, Mode=TwoWay}" />
+                        Text="{Binding Height, Mode=TwoWay}"
+                        Margin="2" />
                     <vctr:LabelledColorPicker
                         Label="Background Color"
-                        SelectedColor="{Binding BackgroundColor, Mode=TwoWay}" />
+                        SelectedColor="{Binding BackgroundColor, Mode=TwoWay}"
+                        Margin="2" />
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition
@@ -107,8 +109,8 @@
                 Template="{StaticResource progressBarSettings}" />
         </GroupBox>
         <GroupBox
-            Grid.Column="0"
-            Grid.Row="1"
+            Grid.Column="1"
+            Grid.Row="0"
             Header="Memory Bar Settings"
             DataContext="{Binding NewSettings.MemoryProgressbarSettings}">
             <Control
@@ -256,8 +258,8 @@
         </StackPanel>
         <ContentControl
             Grid.Column="1"
-            Grid.Row="0"
-            Grid.RowSpan="6"
+            Grid.Row="1"
+            Grid.RowSpan="5"
             RenderOptions.ClearTypeHint="Enabled"
             UseLayoutRounding="True"
             DataContext="{Binding MainWindowViewModel}"
