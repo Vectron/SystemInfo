@@ -21,5 +21,7 @@
         x:Key="NotifyIcon"
         IconSource="route.ico"
         ToolTipText="System Info, Right-click for menu"
-        ContextMenu="{StaticResource SysTrayMenu}" />
+        ContextMenu="{StaticResource SysTrayMenu}"
+        MenuActivation="LeftOrRightClick"
+        NoLeftClickDelay="True" />
 </ResourceDictionary>
