@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
+    <?include $(sys.CURRENTDIR)\Config.wxi?>
+    <Product
+        Id="*"
+        Name="$(var.Product_Name) - $(var.Product_Version)"
+        Language="1033"
+        Version="$(var.Product_Version)"
+        Manufacturer="$(var.Product_Manufacturer)"
+        UpgradeCode="$(var.UpgradeCode)">
+
+        <Package
+            InstallerVersion="200"
+            Compressed="yes"
+            InstallScope="perMachine" />
+
+        <Upgrade Id='$(var.UpgradeCode)'>
+            <UpgradeVersion
+                OnlyDetect='no'
+                Property='PREVIOUSFOUND'
+                Minimum='0.0.0'
+                IncludeMinimum='yes'
+                Maximum='$(var.Product_Version)'
+                IncludeMaximum='no' />
+        </Upgrade>
+        <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+
+        <MediaTemplate EmbedCab="yes" />
+
+        <!--Check for .Net Framework 4.7.2-->
+        <PropertyRef Id="NETFRAMEWORK45" />
+        <Condition Message="This application requires .NET Framework 4.7.2. Please install the .NET Framework then run this installer again.">
+            <![CDATA[Installed OR NETFRAMEWORK45]]>
+        </Condition>
+
+        <Icon
+            Id="I.MainIcon.ico"
+            SourceFile='$(var.Product_Icon)' />
+
+        <Property Id='ARPPRODUCTICON'>I.MainIcon.ico</Property>
+        <Property Id='ARPNOREPAIR'>1</Property>
+
+        <WixVariable
+            Id="WixUIBannerBmp"
+            Value="Banner.bmp" />
+        <WixVariable
+            Id="WixUIDialogBmp"
+            Value="Dialog.bmp" />
+
+        <UIRef Id="WixUI_CustomInstallDir" />
+
+        <Feature
+            Id="ProductFeature"
+            Title="$(var.Product_Name)"
+            Level="1">
+            <ComponentGroupRef Id="CG.ProductMainComponents" />
+            <ComponentGroupRef Id='$(var.MainComponentGroup)' />
+        </Feature>
+    </Product>
+</Wix>

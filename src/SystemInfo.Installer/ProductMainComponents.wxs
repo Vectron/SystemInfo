@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <?include $(sys.CURRENTDIR)\Config.wxi?>
+    <Fragment>
+        <Directory
+            Id="TARGETDIR"
+            Name="SourceDir">
+
+            <!--Directory general structure-->
+            <Directory Id="ProgramFilesFolder">
+                <Directory
+                    Id="D.ManufactuarFolder"
+                    Name ="$(var.Product_Manufacturer)">
+                    <Directory
+                        Id="INSTALLFOLDER"
+                        Name="$(var.Product_Name)">
+                    </Directory>
+                </Directory>
+            </Directory>
+
+            <!--Startup Programs Menu-->
+            <Directory Id="ProgramMenuFolder">
+                <Directory
+                    Id="ProgramMenuDir"
+                    Name="$(var.Product_Manufacturer)">
+                    <Directory
+                        Id="D.StartFolder"
+                        Name='$(var.Product_Name)'>
+                        <Component
+                            Id="C.Uninstall"
+                            Guid="*">
+                            <Shortcut
+                                Id="S.Uninstall"
+                                Name="Uninstall $(var.Product_Name)"
+                                Target="[SystemFolder]msiexec.exe"
+                                Arguments="/x [ProductCode]"
+                                Description="Uninstalls the $(var.Product_Name) Application" />
+                            <RemoveFolder
+                                Id="RF.Uninstall"
+                                Directory="D.StartFolder"
+                                On ="uninstall" />
+                            <RemoveFolder
+                                Id="RF.ProgramMenuDir"
+                                Directory="ProgramMenuDir"
+                                On ="uninstall" />
+                            <RegistryValue
+                                Id="RV.Uninstall"
+                                Root="HKCU"
+                                Key="Software\$(var.Product_Manufacturer)\$(var.Product_Name)"
+                                Name="uninstall"
+                                Type="integer"
+                                Value="1"
+                                KeyPath="yes" />
+                        </Component>
+                    </Directory>
+                    <Directory
+                        Id="StartupFolder"
+                        Name="Startup">
+                    </Directory>
+                </Directory>
+            </Directory>
+
+            <!--Desktop-->
+            <Directory Id="DesktopFolder"
+                       Name="Desktop" />
+        </Directory>
+    </Fragment>
+
+    <Fragment>
+        <DirectoryRef Id="INSTALLFOLDER">
+            <Component
+                Id="C.MainExecutable"
+                Guid="*"
+                Shared="no"
+                Permanent="no">
+                <File
+                    Id="MainExecutable"
+                    Source="$(var.Product_Source_Folder)$(var.MainExeID)"
+                    Vital="yes"
+                    KeyPath="yes" />
+
+                <RegistryKey
+                    Id="RK.RegInstallDir"
+                    Root="HKLM"
+                    Key="SOFTWARE\$(var.Product_Manufacturer)\$(var.Product_Name)"
+                    ForceDeleteOnUninstall="yes">
+                    <RegistryValue
+                        Type="string"
+                        Name="InstallDir"
+                        Value="[INSTALLFOLDER]" />
+                    <RegistryValue
+                        Type="integer"
+                        Name="Flag"
+                        Value="0" />
+                </RegistryKey>
+
+                <Shortcut
+                    Id="S.MainExeProgramMenu"
+                    Directory="D.StartFolder"
+                    Name="$(var.Product_Name)"
+                    WorkingDirectory="INSTALLDIR"
+                    Description="Launches $(var.Product_Name)"
+                    Icon="I.MainIcon.ico"
+                    Advertise="yes" />
+                <Shortcut
+                    Id="S.MainExeDesktop"
+                    Directory="DesktopFolder"
+                    Name="$(var.Product_Name)"
+                    WorkingDirectory="INSTALLDIR"
+                    Description="Launches $(var.Product_Name)"
+                    Icon="I.MainIcon.ico"
+                    Advertise="yes" />
+                <Shortcut
+                    Id ="S.MainExeStartupFolder"
+                    Directory="StartupFolder"
+                    Name="$(var.Product_Name)"
+                    WorkingDirectory="INSTALLDIR"
+                    Description="Launches $(var.Product_Name)"
+                    Icon="I.MainIcon.ico"
+                    Advertise="yes"
+                    Arguments="5" />
+            </Component>
+        </DirectoryRef>
+    </Fragment>
+
+    <Fragment>
+        <ComponentGroup
+            Id="CG.ProductMainComponents"
+            Directory="INSTALLFOLDER">
+            <ComponentRef
+                Id ="C.MainExecutable" />
+            <ComponentRef
+                Id ="C.Uninstall" />
+        </ComponentGroup>
+    </Fragment>
+</Wix>
