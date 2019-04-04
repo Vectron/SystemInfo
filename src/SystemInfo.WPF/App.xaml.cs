@@ -33,7 +33,7 @@ namespace SystemInfo.WPF
             // Create a default configuration
             var configuration = new ConfigurationBuilder()
                 .SetFileLoadExceptionHandler(x => x.Ignore = true)
-                .AddJsonFile("settings.json", true, true)
+                .AddJsonFile(SettingsHelper.GetSettingsFilePath(), true, true)
                 .Build();
 
             var serviceProvider = new ServiceCollection()

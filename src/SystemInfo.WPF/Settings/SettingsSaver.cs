@@ -5,9 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using SystemInfo.WPF.Extensions;
-using VectronsLibrary.DI;
 
 namespace SystemInfo.WPF.Settings
 {
@@ -59,7 +57,8 @@ namespace SystemInfo.WPF.Settings
                     if (!startWritten)
                     {
                         // open the writer when we actually have something to write
-                        var configFile = Path.Combine(CreateAndGetDataFolder(), "settings.json");
+                        var configFile = SettingsHelper.GetSettingsFilePath();
+                        SettingsHelper.CreateIfNotExcist(configFile);
                         sw = new StreamWriter(configFile);
                         writer = new JsonTextWriter(sw) { AutoCompleteOnClose = true, Formatting = Formatting.Indented };
                         writer.WriteStartObject();
@@ -76,39 +75,6 @@ namespace SystemInfo.WPF.Settings
                 disposable?.Dispose();
                 sw?.Dispose();
             }
-        }
-
-        private string CreateAndGetDataFolder()
-        {
-            var entryAssembly = Assembly.GetEntryAssembly();
-            var appdataFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-
-            if (string.IsNullOrEmpty(appdataFolder))
-            {
-                return Helper.AssemblyDirectory;
-            }
-
-            var fullPath = appdataFolder;
-
-            var attributes = entryAssembly.GetCustomAttributes(typeof(AssemblyCompanyAttribute), false);
-
-            if (attributes.Length > 0)
-            {
-                var attribute = attributes[0] as AssemblyCompanyAttribute;
-                if (!string.IsNullOrWhiteSpace(attribute.Company))
-                {
-                    fullPath = Path.Combine(fullPath, attribute.Company);
-                }
-            }
-
-            var appName = entryAssembly.GetName().Name.Split('.').FirstOrDefault();
-            if (!string.IsNullOrWhiteSpace(appName))
-            {
-                fullPath = Path.Combine(fullPath, appName);
-            }
-
-            Directory.CreateDirectory(fullPath);
-            return fullPath;
         }
     }
 }

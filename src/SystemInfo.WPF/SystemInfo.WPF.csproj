@@ -72,6 +72,7 @@
     <Compile Include="Settings\FontSettings.cs" />
     <Compile Include="Settings\ISettingsSaver.cs" />
     <Compile Include="Settings\ProgressbarSettings.cs" />
+    <Compile Include="Settings\SettingsHelper.cs" />
     <Compile Include="Settings\SettingsSaver.cs" />
     <Compile Include="Util\InterlopUtil.cs" />
     <Compile Include="Settings\WindowSettings.cs" />
