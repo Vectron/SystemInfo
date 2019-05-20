@@ -11,7 +11,8 @@
         <MenuItem
             Header="Lock Placement"
             IsCheckable="True"
-            IsChecked="{Binding WindowSettings.LockPlacement}" />
+            IsChecked="{Binding WindowSettings.LockPlacement}"
+            Command="{Binding SaveSettingsCommand}" />
         <Separator />
         <MenuItem
             Header="Exit"

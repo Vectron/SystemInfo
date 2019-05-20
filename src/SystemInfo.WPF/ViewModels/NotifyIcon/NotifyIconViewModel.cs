@@ -37,6 +37,9 @@ namespace SystemInfo.WPF.ViewModels.NotifyIcon
                 view.Show();
             });
 
+        public ICommand SaveSettingsCommand
+            => new RelayCommand(_ => settingsSaver.SaveConfiguration());
+
         public WindowSettings WindowSettings
             => options.Value;
     }

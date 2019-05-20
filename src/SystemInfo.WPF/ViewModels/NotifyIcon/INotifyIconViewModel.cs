@@ -13,5 +13,10 @@ namespace SystemInfo.WPF.ViewModels.NotifyIcon
         {
             get;
         }
+
+        ICommand SaveSettingsCommand
+        {
+            get;
+        }
     }
 }
