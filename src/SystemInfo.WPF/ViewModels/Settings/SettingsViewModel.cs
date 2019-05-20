@@ -13,11 +13,13 @@ namespace SystemInfo.WPF.ViewModels.Settings
     {
         private readonly WindowSettings defaultSettings = new WindowSettings();
         private readonly IOptions<WindowSettings> settings;
+        private readonly ISettingsSaver settingsSaver;
 
-        public SettingsViewModel(IOptions<WindowSettings> settings, IMainWindowViewModel mainWindowViewModel)
+        public SettingsViewModel(IOptions<WindowSettings> settings, IMainWindowViewModel mainWindowViewModel, ISettingsSaver settingsSaver)
         {
             this.settings = settings;
             MainWindowViewModel = mainWindowViewModel;
+            this.settingsSaver = settingsSaver;
             mainWindowViewModel.WindowSettings = new WindowSettings();
             CopyWindowSettings(WindowSettings, NewSettings);
         }
@@ -64,7 +66,11 @@ namespace SystemInfo.WPF.ViewModels.Settings
             => MainWindowViewModel.WindowSettings;
 
         public ICommand Ok
-            => new RelayCommand(_ => CopyWindowSettings(NewSettings, WindowSettings));
+            => new RelayCommand(_ =>
+            {
+                CopyWindowSettings(NewSettings, WindowSettings);
+                settingsSaver.SaveConfiguration();
+            });
 
         public ICommand ResetDefault
             => new RelayCommand(_ => CopyWindowSettings(defaultSettings, NewSettings));
