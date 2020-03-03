@@ -14,7 +14,18 @@ namespace SystemInfo.Core.Controllers
             .Select(_ => DriveInfo
                 .GetDrives()
                 .Where(d => d.IsReady && (d.DriveType == DriveType.Fixed || d.DriveType == DriveType.Network))
-                .Select(d => new DriveSpaceData(d.Name, (ulong)d.TotalSize, (ulong)d.AvailableFreeSpace)))
+                .Select(d =>
+                {
+                    try
+                    {
+                        return new DriveSpaceData(d.Name, (ulong)d.TotalSize, (ulong)d.AvailableFreeSpace);
+                    }
+                    catch (Exception)
+                    {
+                        return null;
+                    }
+                })
+                .Where(x => x != null))
             .Publish()
             .RefCount();
 
