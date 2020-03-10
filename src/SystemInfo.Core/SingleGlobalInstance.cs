@@ -20,7 +20,7 @@ namespace SystemInfo.Core
         }
 
         public SingleGlobalInstance(string gui)
-                    : this(Timeout.InfiniteTimeSpan, gui)
+            : this(Timeout.InfiniteTimeSpan, gui)
         {
         }
 
@@ -79,7 +79,7 @@ namespace SystemInfo.Core
         {
             var mutexName = string.IsNullOrWhiteSpace(gui) ? GetApplicationGui() : gui;
             string mutexId = string.Format(@"Global\{{{0}}}", mutexName);
-            var mutex = new Mutex(true, mutexName);
+            var mutex = new Mutex(true, mutexId);
 
             var allowEveryoneRule = new MutexAccessRule(new SecurityIdentifier(WellKnownSidType.WorldSid, null), MutexRights.FullControl, AccessControlType.Allow);
             var securitySettings = new MutexSecurity();
