@@ -3,59 +3,56 @@
      xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
     <?include $(sys.CURRENTDIR)\Config.wxi?>
     <Product
+        Name="$(var.Product_Name)"
         Id="*"
-        Name="$(var.Product_Name) - $(var.Product_Version)"
+        UpgradeCode="$(var.UpgradeCode)"
         Language="1033"
+        Codepage="1252"
         Version="$(var.Product_Version)"
-        Manufacturer="$(var.Product_Manufacturer)"
-        UpgradeCode="$(var.UpgradeCode)">
+        Manufacturer="$(var.Product_Manufacturer)">
 
         <Package
+            Id="*"
+            Keywords="Installer"
+            Description="$(var.Product_Manufacturer)'s $(var.Product_Name) $(var.Product_Version) Installer"
+            Manufacturer="$(var.Product_Manufacturer)"
             InstallerVersion="200"
+            Languages="1033"
             Compressed="yes"
+            SummaryCodepage="1252"
             InstallScope="perMachine" />
 
-        <Upgrade Id='$(var.UpgradeCode)'>
+        <Upgrade Id="$(var.UpgradeCode)">
             <UpgradeVersion
-                OnlyDetect='no'
-                Property='PREVIOUSFOUND'
-                Minimum='0.0.0'
-                IncludeMinimum='yes'
-                Maximum='$(var.Product_Version)'
-                IncludeMaximum='no' />
+                OnlyDetect="no"
+                Property="PREVIOUSFOUND"
+                Minimum="0.0.0"
+                IncludeMinimum="yes"
+                Maximum="$(var.Product_Version)"
+                IncludeMaximum="no" />
         </Upgrade>
         <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
-
         <MediaTemplate EmbedCab="yes" />
 
-        <!--Check for .Net Framework 4.7.2-->
-        <PropertyRef Id="NETFRAMEWORK45" />
-        <Condition Message="This application requires .NET Framework 4.7.2. Please install the .NET Framework then run this installer again.">
-            <![CDATA[Installed OR NETFRAMEWORK45]]>
-        </Condition>
+        <Icon Id="I.MainIcon.exe" SourceFile="$(var.Product_Icon)" />
 
-        <Icon
-            Id="I.MainIcon.ico"
-            SourceFile='$(var.Product_Icon)' />
+        <Directory Id="TARGETDIR" Name="SourceDir" />
 
-        <Property Id='ARPPRODUCTICON'>I.MainIcon.ico</Property>
-        <Property Id='ARPNOREPAIR'>1</Property>
+        <Property Id="ARPPRODUCTICON">I.MainIcon.exe</Property>
+        <Property Id="ARPNOREPAIR">1</Property>
 
-        <WixVariable
-            Id="WixUIBannerBmp"
-            Value="Banner.bmp" />
-        <WixVariable
-            Id="WixUIDialogBmp"
-            Value="Dialog.bmp" />
+        <WixVariable Id="WixUIBannerBmp" Value="Resources/Banner.bmp" />
+        <WixVariable Id="WixUIDialogBmp" Value="Resources/Dialog.bmp" />
 
         <UIRef Id="WixUI_CustomInstallDir" />
 
-        <Feature
-            Id="ProductFeature"
-            Title="$(var.Product_Name)"
-            Level="1">
-            <ComponentGroupRef Id="CG.ProductMainComponents" />
-            <ComponentGroupRef Id='$(var.MainComponentGroup)' />
+        <Feature Id="Complete" Title="$(var.Product_Name)" Description="The complete package." Display="expand" Level="1" ConfigurableDirectory="INSTALLDIR">
+            <Feature Id="MainProgram" Title="Program" Description="The main executable." Level="1">
+                <ComponentRef Id="C.MainExecutable" />
+                <ComponentRef Id="C.ProgramMenuDir" />
+
+                <ComponentGroupRef Id="$(var.MainComponentGroup)" />
+            </Feature>
         </Feature>
     </Product>
 </Wix>
