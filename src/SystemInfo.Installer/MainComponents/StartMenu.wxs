@@ -13,11 +13,29 @@
                             Target="[SystemFolder]msiexec.exe"
                             Arguments="/x [ProductCode]"
                             Description="Uninstalls the $(var.Product_Name) Application" />
+                        <Shortcut Id="S.MainExeProgramMenu"
+                                  Name="$(var.Product_Name)"
+                                  WorkingDirectory="INSTALLDIR"
+                                  Icon="I.MainIcon.exe"
+                                  IconIndex="0"
+                                  Target="[INSTALLDIR]$(var.MainExeID)" />
                         <RemoveFolder Id="RF.ProgramMenuDir" Directory="D.ProgramMenuDir" On="uninstall" />
                         <RegistryValue Root='HKCU' Key='Software\[Manufacturer]\[ProductName]' Type='string' Value='' KeyPath='yes' />
                     </Component>
 
-                    <Directory Id="StartupFolder" Name="Startup" />
+                    <Directory Id="StartupFolder" Name="Startup">
+                        <Component Id="C.StartupFolder">
+                            <RegistryKey Id="RK.RegStartupShortcut" Root="HKCU" Key="SOFTWARE\[Manufacturer]\[ProductName]" ForceDeleteOnUninstall="yes">
+                                <RegistryValue Type="integer" Name="STSC" Value="1" KeyPath="yes" />
+                            </RegistryKey>
+                            <Shortcut Id="S.MainExeStartup"
+                                      Name="$(var.Product_Name)"
+                                      WorkingDirectory="INSTALLDIR"
+                                      Icon="I.MainIcon.exe"
+                                      IconIndex="0"
+                                      Target="[INSTALLDIR]$(var.MainExeID)" />
+                        </Component>
+                    </Directory>
                 </Directory>
             </Directory>
         </DirectoryRef>

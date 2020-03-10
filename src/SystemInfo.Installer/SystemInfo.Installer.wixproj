@@ -65,19 +65,19 @@
     <Error Text="The WiX Toolset v3.11 (or newer) build tools must be installed to build this project. To download the WiX Toolset, see http://wixtoolset.org/releases/" />
   </Target>
   <Target Name="BeforeBuild">
-	<PropertyGroup>
-	  <RID>Any</RID>
-	  <framework>netcoreapp3.1</framework>
-	  <ProjectFile>..\SystemInfo.WPF\SystemInfo.WPF.csproj</ProjectFile>
-    </PropertyGroup>	
-	<PropertyGroup Condition=" '$(RID)' == 'Any' ">
-	  <PublishFolder>..\SystemInfo.WPF\bin\$(Configuration)\$(framework)\publish\</PublishFolder>
-    </PropertyGroup>	
-	<PropertyGroup Condition=" '$(RID)' != 'Any' ">
-	  <PublishFolder>..\SystemInfo.WPF\bin\$(Configuration)\$(framework)\$(RID)\publish\</PublishFolder>
-    </PropertyGroup>	
-    <Exec Command="dotnet publish $(ProjectFile) -f $(framework) -c $(Configuration) --self-contained false" Condition=" '$(RID)' == 'Any' "/>
-	<Exec Command="dotnet publish $(ProjectFile) -f $(framework) -c $(Configuration) -r $(RID) --self-contained false" Condition=" '$(RID)' != 'Any' "/>
+    <PropertyGroup>
+      <RID>Any</RID>
+      <framework>netcoreapp3.1</framework>
+      <ProjectFile>..\SystemInfo.WPF\SystemInfo.WPF.csproj</ProjectFile>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(RID)' == 'Any' ">
+      <PublishFolder>..\SystemInfo.WPF\bin\$(Configuration)\$(framework)\publish\</PublishFolder>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(RID)' != 'Any' ">
+      <PublishFolder>..\SystemInfo.WPF\bin\$(Configuration)\$(framework)\$(RID)\publish\</PublishFolder>
+    </PropertyGroup>
+    <Exec Command="dotnet publish $(ProjectFile) -f $(framework) -c $(Configuration) --self-contained false" Condition=" '$(RID)' == 'Any' " />
+    <Exec Command="dotnet publish $(ProjectFile) -f $(framework) -c $(Configuration) -r $(RID) --self-contained false" Condition=" '$(RID)' != 'Any' " />
     <PropertyGroup>
       <LinkerBaseInputPaths>$(PublishFolder)</LinkerBaseInputPaths>
       <DefineConstants>BasePath=$(PublishFolder)</DefineConstants>

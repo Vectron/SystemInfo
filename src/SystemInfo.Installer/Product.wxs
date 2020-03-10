@@ -47,11 +47,21 @@
         <UIRef Id="WixUI_CustomInstallDir" />
 
         <Feature Id="Complete" Title="$(var.Product_Name)" Description="The complete package." Display="expand" Level="1" ConfigurableDirectory="INSTALLDIR">
-            <Feature Id="MainProgram" Title="Program" Description="The main executable." Level="1">
+            <Feature Id="MainProgram" Title="Program" Description="The main executable." Level="1" Absent="disallow">
                 <ComponentRef Id="C.MainExecutable" />
-                <ComponentRef Id="C.ProgramMenuDir" />
-
                 <ComponentGroupRef Id="$(var.MainComponentGroup)" />
+            </Feature>
+
+            <Feature Id="StartMenuEntry" Title="Start menu entries" Level="1">
+                <ComponentRef Id="C.ProgramMenuDir" />
+            </Feature>
+
+            <Feature Id="StartupEntry" Title="Startup entry" Level="1">
+                <ComponentRef Id="C.StartupFolder" />
+            </Feature>
+
+            <Feature Id="DesktopEntry" Title="Desktop shortcut" Level="4">
+                <ComponentRef Id="C.DesktopShortcut" />
             </Feature>
         </Feature>
     </Product>
