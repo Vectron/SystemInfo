@@ -124,7 +124,7 @@
       <Version>1.1.4</Version>
     </PackageReference>
     <PackageReference Include="VectronsLibrary.Wpf">
-      <Version>1.0.5</Version>
+      <Version>3.0.2</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup />
