@@ -1,19 +1,26 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
      xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
     <?include $(sys.CURRENTDIR)\Config.wxi?>
     <Product
         Id="*"
-        Name="$(var.Product_Name) - $(var.Product_Version)"
+        Name="$(var.Product_Name)"
         Language="1033"
+        Codepage="1252"
         Version="$(var.Product_Version)"
         Manufacturer="$(var.Product_Manufacturer)"
         UpgradeCode="$(var.UpgradeCode)">
 
         <Package
+            Id="*"
+            Keywords="Installer"
+            Description="$(var.Product_Manufacturer)'s $(var.Product_Name) $(var.Product_Version) Installer"
+            Manufacturer="$(var.Product_Manufacturer)"
             InstallerVersion="200"
+            Languages="1033"
             Compressed="yes"
-            InstallScope="perMachine" />
+            SummaryCodepage="1252"
+            InstallScope="perMachine"/>
 
         <Upgrade Id='$(var.UpgradeCode)'>
             <UpgradeVersion
@@ -37,16 +44,16 @@
         <Icon
             Id="I.MainIcon.ico"
             SourceFile='$(var.Product_Icon)' />
-
+        
         <Property Id='ARPPRODUCTICON'>I.MainIcon.ico</Property>
         <Property Id='ARPNOREPAIR'>1</Property>
 
         <WixVariable
             Id="WixUIBannerBmp"
-            Value="Banner.bmp" />
+            Value="Resources/Banner.bmp" />
         <WixVariable
             Id="WixUIDialogBmp"
-            Value="Dialog.bmp" />
+            Value="Resources/Dialog.bmp" />
 
         <UIRef Id="WixUI_CustomInstallDir" />
 
