@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Reactive.Linq;
+using System.Threading;
 using SystemInfo.Core.Controllers;
 using SystemInfo.Core.Poco;
 using VectronsLibrary;
-using VectronsLibrary.Extensions;
 
 namespace SystemInfo.Core.ViewModels
 {
@@ -21,12 +22,8 @@ namespace SystemInfo.Core.ViewModels
             Models = new ObservableCollection<NetworkData>();
             networkUseSubscription = networkController
                .NetworkUse
-               .ObserveOnDispatcher()
-               .Subscribe(x =>
-               {
-                   Models.Clear();
-                   Models.AddRange(x);
-               });
+               .ObserveOn(SynchronizationContext.Current)
+               .Subscribe(x => Models.UpdateAndRemove(x));
         }
 
         public ObservableCollection<NetworkData> Models

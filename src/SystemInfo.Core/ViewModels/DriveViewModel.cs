@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
+using System.Threading;
 using SystemInfo.Core.Controllers;
 using SystemInfo.Core.Poco;
 using VectronsLibrary;
-using VectronsLibrary.Extensions;
 
 namespace SystemInfo.Core.ViewModels
 {
@@ -24,12 +25,8 @@ namespace SystemInfo.Core.ViewModels
             Drives = new ObservableCollection<DriveSpaceData>();
             var driveUseSubscription = driveSpaceController
                 .HDDUse
-                .ObserveOnDispatcher()
-                .Subscribe(x =>
-                {
-                    Drives.Clear();
-                    Drives.AddRange(x);
-                });
+                .ObserveOn(SynchronizationContext.Current)
+                .Subscribe(x => Drives.UpdateAndRemove(x));
 
             disposables.Add(driveUseSubscription);
             var totalUseSubscription = driveSpaceController

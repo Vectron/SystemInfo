@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Controllers\CPUController.cs" />
     <Compile Include="Controllers\DriveSpaceController.cs" />
+    <Compile Include="Extenions\ICollectionExtension.cs" />
     <Compile Include="Poco\DriveSpaceData.cs" />
     <Compile Include="Controllers\ICPUController.cs" />
     <Compile Include="Controllers\IDriveSpaceController.cs" />

@@ -19,7 +19,6 @@ namespace SystemInfo.Core.ViewModels
             this.memoryController = memoryController;
             memoryUseSubscription = memoryController
                .MemoryUse
-               .ObserveOnDispatcher()
                .Subscribe(x => Model = x);
         }
 

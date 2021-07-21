@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
+using System.Threading;
 using SystemInfo.Core.Controllers;
 using VectronsLibrary;
-using VectronsLibrary.Extensions;
 
 namespace SystemInfo.Core.ViewModels
 {
@@ -22,18 +23,13 @@ namespace SystemInfo.Core.ViewModels
             this.cpuController = cpuController;
             var totalCpuUseSubscription = cpuController
                 .TotalCpuUse
-                .ObserveOnDispatcher()
                 .Subscribe(x => TotalUse = x);
             disposables.Add(totalCpuUseSubscription);
 
             var coreUseSubscription = cpuController
                 .CoreUse
-                .ObserveOnDispatcher()
-                .Subscribe(x =>
-                {
-                    CoreUses.Clear();
-                    CoreUses.AddRange(x);
-                });
+                .ObserveOn(SynchronizationContext.Current)
+                .Subscribe(x => CoreUses.UpdateAndRemove(x));
             disposables.Add(coreUseSubscription);
         }
 
