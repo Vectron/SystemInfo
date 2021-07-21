@@ -4,7 +4,6 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Version>1.0.1</Version>
     <Description>System Info core files.</Description>
   </PropertyGroup>
   
