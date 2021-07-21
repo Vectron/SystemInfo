@@ -43,7 +43,6 @@ namespace SystemInfo.Core.ViewModels
         public ObservableCollection<DriveSpaceData> Drives
         {
             get;
-            set;
         }
 
         public object Settings
