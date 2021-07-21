@@ -24,10 +24,9 @@
     <Compile Include="UI.wxs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Banner.bmp" />
     <Content Include="Config.wxi" />
-    <Content Include="Dialog.bmp" />
-    <Content Include="route.ico" />
+    <Content Include="Resources\Banner.bmp" />
+    <Content Include="Resources\Dialog.bmp" />
     <Compile Include="SystemInfo.WPF.wxs" />
   </ItemGroup>
   <ItemGroup>
@@ -43,6 +42,9 @@
       <HintPath>$(WixExtDir)\WixNetFxExtension.dll</HintPath>
       <Name>WixNetFxExtension</Name>
     </WixExtension>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources" />
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" Condition=" '$(WixTargetsPath)' != '' " />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets" Condition=" '$(WixTargetsPath)' == '' AND Exists('$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets') " />
