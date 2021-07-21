@@ -1,8 +1,8 @@
-﻿using Hardcodet.Wpf.TaskbarNotification;
+﻿using System;
+using System.Windows;
+using Hardcodet.Wpf.TaskbarNotification;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Windows;
 using SystemInfo.Core;
 using SystemInfo.WPF.Extensions;
 using SystemInfo.WPF.Settings;
@@ -22,7 +22,7 @@ namespace SystemInfo.WPF
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            instanceLock = new SingleGlobalInstance(TimeSpan.FromSeconds(1));
+            instanceLock = new SingleGlobalInstance(TimeSpan.FromSeconds(1), "9b8e7757-9368-4034-9ecd-7892e7f730f7");
 
             if (!instanceLock.GetMutex())
             {
