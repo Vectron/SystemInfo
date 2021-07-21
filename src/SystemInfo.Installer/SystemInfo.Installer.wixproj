@@ -23,7 +23,8 @@
     <Compile Include="MainComponents\InstallDir.wxs" />
     <Compile Include="MainComponents\StartMenu.wxs" />
     <Compile Include="Product.wxs" />
-    <Compile Include="UI.wxs" />
+    <Compile Include="UI\StartOnExit.wxs" />
+    <Compile Include="UI\WixUI_CustomMondo.wxs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Config.wxi" />
@@ -47,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="MainComponents" />
+    <Folder Include="UI" />
     <Folder Include="Resources" />
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" Condition=" '$(WixTargetsPath)' != '' " />

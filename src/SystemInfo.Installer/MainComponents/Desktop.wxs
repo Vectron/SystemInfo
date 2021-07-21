@@ -1,8 +1,22 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <?include $(sys.CURRENTDIR)\Config.wxi?>
     <Fragment>
         <DirectoryRef Id="TARGETDIR">
-            <Directory Id="DesktopFolder" />
+            <Directory Id="DesktopFolder">
+                <Component Id="C.DesktopShortcut">
+                    <Shortcut Id="S.MainExeDesktop"
+                              Name="$(var.Product_Name)"
+                              WorkingDirectory="INSTALLFOLDER"
+                              Icon="I.MainIcon.ico"
+                              IconIndex="0"
+                              Target="[INSTALLFOLDER]$(var.MainExeID)" />
+
+                    <RegistryKey Id="RK.RegDesktopShortcut" Root="HKCU" Key="SOFTWARE\[Manufacturer]\[ProductName]" ForceDeleteOnUninstall="yes">
+                        <RegistryValue Type="integer" Name="DTSC" Value="1" KeyPath="yes" />
+                    </RegistryKey>
+                </Component>
+            </Directory>
         </DirectoryRef>
     </Fragment>
 </Wix>

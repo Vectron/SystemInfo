@@ -57,15 +57,23 @@
             Id="WixUIDialogBmp"
             Value="Resources/Dialog.bmp" />
 
-        <UIRef Id="WixUI_CustomInstallDir" />
+        <UIRef Id="WixUI_CustomMondo" />
 
-        <Feature
-            Id="ProductFeature"
-            Title="$(var.Product_Name)"
-            Level="1">
+        <Feature Id="Options" Title="$(var.Product_Name)" Display="expand" Level="1" ConfigurableDirectory="INSTALLFOLDER" Absent="disallow" AllowAdvertise="no">
             <ComponentRef Id="C.MainExecutable" />
-            <ComponentRef Id="C.ProgramMenuDir" />
-            <ComponentGroupRef Id='$(var.MainComponentGroup)' />
+            <ComponentGroupRef Id="$(var.MainComponentGroup)" />
+
+            <Feature Id="StartMenuEntry" Title="Start menu entries" Level="1" AllowAdvertise="no">
+                <ComponentRef Id="C.ProgramMenuDir" />
+            </Feature>
+
+            <Feature Id="StartupEntry" Title="Startup entry" Level="1" AllowAdvertise="no">
+                <ComponentRef Id="C.StartupFolder" />
+            </Feature>
+
+            <Feature Id="DesktopEntry" Title="Desktop shortcut" Level="4" AllowAdvertise="no">
+                <ComponentRef Id="C.DesktopShortcut" />
+            </Feature>
         </Feature>
     </Product>
 </Wix>

@@ -3,7 +3,6 @@
     <?include $(sys.CURRENTDIR)\Config.wxi?>
     <Fragment>
         <DirectoryRef Id="TARGETDIR">
-            <!--Startup Programs Menu-->
             <Directory Id="ProgramMenuFolder">
                 <Directory Id="D.ProgramMenuDir" Name="$(var.Product_Name)">
                     <Component Id="C.ProgramMenuDir" Guid="*">
@@ -13,11 +12,34 @@
                             Target="[SystemFolder]msiexec.exe"
                             Arguments="/x [ProductCode]"
                             Description="Uninstalls the $(var.Product_Name) Application" />
+                        <Shortcut
+                            Id="S.MainExeProgramMenu"
+                            Name="$(var.Product_Name)"
+                            WorkingDirectory="INSTALLFOLDER"
+                            Icon="I.MainIcon.ico"
+                            IconIndex="0"
+                            Target="[INSTALLFOLDER]$(var.MainExeID)" />
+                        
                         <RemoveFolder Id="RF.ProgramMenuDir" Directory="D.ProgramMenuDir" On="uninstall" />
-                        <RegistryValue Root='HKCU' Key='Software\[Manufacturer]\[ProductName]' Type='string' Value='' KeyPath='yes' />
+                        
+                        <RegistryKey Id="RK.RegProgramMenuShortcut" Root="HKCU" Key="SOFTWARE\[Manufacturer]\[ProductName]" ForceDeleteOnUninstall="yes">
+                            <RegistryValue Type="integer" Name="PMSC" Value="1" KeyPath="yes" />
+                        </RegistryKey>
                     </Component>
 
-                    <Directory Id="StartupFolder" Name="Startup" />
+                    <Directory Id="StartupFolder" Name="Startup">
+                        <Component Id="C.StartupFolder">
+                            <RegistryKey Id="RK.RegStartupShortcut" Root="HKCU" Key="SOFTWARE\[Manufacturer]\[ProductName]" ForceDeleteOnUninstall="yes">
+                                <RegistryValue Type="integer" Name="STSC" Value="1" KeyPath="yes" />
+                            </RegistryKey>
+                            <Shortcut Id="S.MainExeStartup"
+                                      Name="$(var.Product_Name)"
+                                      WorkingDirectory="INSTALLFOLDER"
+                                      Icon="I.MainIcon.ico"
+                                      IconIndex="0"
+                                      Target="[INSTALLFOLDER]$(var.MainExeID)" />
+                        </Component>
+                    </Directory>
                 </Directory>
             </Directory>
         </DirectoryRef>
