@@ -25,16 +25,18 @@
                 x:Key="progressBarSettings">
                 <StackPanel
                     Grid.IsSharedSizeScope="True">
-                    <vctr:LabelledNumTextBox
-                        AllowDecimal="False"
-                        AllowNegative="False"
-                        Label="Height"
-                        Text="{Binding Height, Mode=TwoWay}"
-                        Margin="2" />
-                    <vctr:LabelledColorPicker
-                        Label="Background Color"
-                        SelectedColor="{Binding BackgroundColor, Mode=TwoWay}"
-                        Margin="2" />
+                    <vctr:LabeledControll Margin="2" Label="Height">
+                        <vctr:NumericTextBox
+                            AllowDecimal="False"
+                            AllowNegative="False"
+                            Text="{Binding Height, Mode=TwoWay}" />
+                    </vctr:LabeledControll>
+                    <vctr:LabeledControll
+                        Margin="2"
+                        Label="Background Color">
+                        <vctr:ColorPicker
+                            SelectedColor="{Binding BackgroundColor, Mode=TwoWay}" />
+                    </vctr:LabeledControll>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition
@@ -180,43 +182,41 @@
                         Left="2"
                         Right="2" />
                     <Style
-                        TargetType="vctr:LabelledNumTextBox">
-                        <Setter
-                            Property="Margin"
-                            Value="{StaticResource margin}" />
-                    </Style>
-                    <Style
-                        TargetType="vctr:LabelledCheckBox">
-                        <Setter
-                            Property="Margin"
-                            Value="{StaticResource margin}" />
-                    </Style>
-                    <Style
-                        TargetType="vctr:LabelledColorPicker">
+                        TargetType="vctr:LabeledControll">
                         <Setter
                             Property="Margin"
                             Value="{StaticResource margin}" />
                     </Style>
                 </StackPanel.Resources>
-                <vctr:LabelledNumTextBox
-                    AllowNegative="False"
-                    AllowDecimal="True"
-                    Text="{Binding NewSettings.LeftPosition, Mode=TwoWay}"
-                    Label="Left Position" />
-                <vctr:LabelledNumTextBox
-                    AllowNegative="False"
-                    AllowDecimal="True"
-                    Text="{Binding NewSettings.TopPosition, Mode=TwoWay}"
-                    Label="Top Position" />
-                <vctr:LabelledCheckBox
-                    IsChecked="{Binding NewSettings.LockPlacement, Mode=TwoWay}"
-                    Label="Lock Placement" />
-                <vctr:LabelledColorPicker
-                    SelectedColor="{Binding NewSettings.BackgroundColor, Mode=TwoWay}"
-                    Label="Background Color" />
-                <vctr:LabelledColorPicker
-                    SelectedColor="{Binding NewSettings.BorderColor, Mode=TwoWay}"
-                    Label="Border Color" />
+                <vctr:LabeledControll
+                    Label="Left Position">
+                    <vctr:NumericTextBox
+                        AllowNegative="False"
+                        AllowDecimal="True"
+                        Text="{Binding NewSettings.LeftPosition, Mode=TwoWay}" />
+                </vctr:LabeledControll>
+                <vctr:LabeledControll
+                    Label="Top Position">
+                    <vctr:NumericTextBox
+                        AllowNegative="False"
+                        AllowDecimal="True"
+                        Text="{Binding NewSettings.TopPosition, Mode=TwoWay}" />
+                </vctr:LabeledControll>
+                <vctr:LabeledControll
+                    Label="Lock Placement">
+                    <CheckBox
+                        IsChecked="{Binding NewSettings.LockPlacement, Mode=TwoWay}" />
+                </vctr:LabeledControll>
+                <vctr:LabeledControll
+                    Label="Background Color">
+                    <vctr:ColorPicker
+                        SelectedColor="{Binding NewSettings.BackgroundColor, Mode=TwoWay}" />
+                </vctr:LabeledControll>
+                <vctr:LabeledControll
+                    Label="Border Color">
+                    <vctr:ColorPicker
+                        SelectedColor="{Binding NewSettings.BorderColor, Mode=TwoWay}" />
+                </vctr:LabeledControll>
             </StackPanel>
         </GroupBox>
         <StackPanel
