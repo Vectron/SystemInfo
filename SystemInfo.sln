@@ -12,6 +12,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SystemInfo.WPF", "src\SystemInfo.WPF\SystemInfo.WPF.csproj", "{1613D3C7-4359-4751-950A-8C408595DE77}"
 EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "SystemInfo.Installer", "src\SystemInfo.Installer\SystemInfo.Installer.wixproj", "{B219F054-82BE-464B-8033-0A24644822A2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1613D3C7-4359-4751-950A-8C408595DE77} = {1613D3C7-4359-4751-950A-8C408595DE77}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{221C5A58-0068-4194-AA00-3424766CDC3B}"
 	ProjectSection(SolutionItems) = preProject

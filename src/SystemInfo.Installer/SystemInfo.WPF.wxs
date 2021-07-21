@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
     <?include $(sys.CURRENTDIR)\Config.wxi?>
     <Fragment>
@@ -7,15 +7,15 @@
                        Guid="*"
                        Shared="no"
                        Permanent="no">
-                <File Source="$(var.Product_Source_Folder)Hardcodet.Wpf.TaskbarNotification.dll"
+                <File Source="$(var.Product_Source_Folder)Hardcodet.NotifyIcon.Wpf.dll"
                       KeyPath="yes" />
             </Component>
 
-            <Component Id ="C.Microsoft.Expression.Interactions.dll"
+            <Component Id ="C.Microsoft.Bcl.AsyncInterfaces.dll"
                        Guid="*"
                        Shared="no"
                        Permanent="no">
-                <File Source="$(var.Product_Source_Folder)Microsoft.Expression.Interactions.dll"
+                <File Source="$(var.Product_Source_Folder)Microsoft.Bcl.AsyncInterfaces.dll"
                       KeyPath="yes" />
             </Component>
 
@@ -131,6 +131,14 @@
                       KeyPath="yes" />
             </Component>
 
+            <Component Id ="C.Microsoft.Xaml.Behaviors.dll"
+                       Guid="*"
+                       Shared="no"
+                       Permanent="no">
+                <File Source="$(var.Product_Source_Folder)Microsoft.Xaml.Behaviors.dll"
+                      KeyPath="yes" />
+            </Component>
+
             <Component Id ="C.Newtonsoft.Json.dll"
                        Guid="*"
                        Shared="no"
@@ -144,14 +152,6 @@
                        Shared="no"
                        Permanent="no">
                 <File Source="$(var.Product_Source_Folder)System.Buffers.dll"
-                      KeyPath="yes" />
-            </Component>
-
-            <Component Id ="C.System.ComponentModel.Annotations.dll"
-                       Guid="*"
-                       Shared="no"
-                       Permanent="no">
-                <File Source="$(var.Product_Source_Folder)System.ComponentModel.Annotations.dll"
                       KeyPath="yes" />
             </Component>
 
@@ -187,6 +187,46 @@
                       KeyPath="yes" />
             </Component>
 
+            <Component Id ="C.System.Security.AccessControl.dll"
+                       Guid="*"
+                       Shared="no"
+                       Permanent="no">
+                <File Source="$(var.Product_Source_Folder)System.Security.AccessControl.dll"
+                      KeyPath="yes" />
+            </Component>
+
+            <Component Id ="C.System.Security.Principal.Windows.dll"
+                       Guid="*"
+                       Shared="no"
+                       Permanent="no">
+                <File Source="$(var.Product_Source_Folder)System.Security.Principal.Windows.dll"
+                      KeyPath="yes" />
+            </Component>
+
+            <Component Id ="C.System.Text.Encodings.Web.dll"
+                       Guid="*"
+                       Shared="no"
+                       Permanent="no">
+                <File Source="$(var.Product_Source_Folder)System.Text.Encodings.Web.dll"
+                      KeyPath="yes" />
+            </Component>
+
+            <Component Id ="C.System.Text.Json.dll"
+                       Guid="*"
+                       Shared="no"
+                       Permanent="no">
+                <File Source="$(var.Product_Source_Folder)System.Text.Json.dll"
+                      KeyPath="yes" />
+            </Component>
+
+            <Component Id ="C.System.Threading.AccessControl.dll"
+                       Guid="*"
+                       Shared="no"
+                       Permanent="no">
+                <File Source="$(var.Product_Source_Folder)System.Threading.AccessControl.dll"
+                      KeyPath="yes" />
+            </Component>            
+
             <Component Id ="C.System.Threading.Tasks.Extensions.dll"
                        Guid="*"
                        Shared="no"
@@ -200,14 +240,6 @@
                        Shared="no"
                        Permanent="no">
                 <File Source="$(var.Product_Source_Folder)System.ValueTuple.dll"
-                      KeyPath="yes" />
-            </Component>
-
-            <Component Id ="C.System.Windows.Interactivity.dll"
-                       Guid="*"
-                       Shared="no"
-                       Permanent="no">
-                <File Source="$(var.Product_Source_Folder)System.Windows.Interactivity.dll"
                       KeyPath="yes" />
             </Component>
 
@@ -264,7 +296,7 @@
     <Fragment>
         <ComponentGroup Id="CG.SystemInfo.WPF">
             <ComponentRef Id ="C.Hardcodet.Wpf.TaskbarNotification.dll" />
-            <ComponentRef Id ="C.Microsoft.Expression.Interactions.dll" />
+            <ComponentRef Id ="C.Microsoft.Bcl.AsyncInterfaces.dll" />
             <ComponentRef Id ="C.Microsoft.Extensions.Configuration.Abstractions.dll" />
             <ComponentRef Id ="C.Microsoft.Extensions.Configuration.Binder.dll" />
             <ComponentRef Id ="C.Microsoft.Extensions.Configuration.dll" />
@@ -279,16 +311,20 @@
             <ComponentRef Id ="C.Microsoft.Extensions.Options.ConfigurationExtensions.dll" />
             <ComponentRef Id ="C.Microsoft.Extensions.Options.dll" />
             <ComponentRef Id ="C.Microsoft.Extensions.Primitives.dll" />
+            <ComponentRef Id="C.Microsoft.Xaml.Behaviors.dll"/>
             <ComponentRef Id ="C.Newtonsoft.Json.dll" />
             <ComponentRef Id ="C.System.Buffers.dll" />
-            <ComponentRef Id ="C.System.ComponentModel.Annotations.dll" />
             <ComponentRef Id ="C.System.Memory.dll" />
             <ComponentRef Id ="C.System.Numerics.Vectors.dll" />
             <ComponentRef Id ="C.System.Reactive.dll" />
-            <ComponentRef Id ="C.System.Runtime.CompilerServices.Unsafe.dll" />
+            <ComponentRef Id ="C.System.Runtime.CompilerServices.Unsafe.dll" />            
+            <ComponentRef Id ="C.System.Security.AccessControl.dll" />
+            <ComponentRef Id ="C.System.Security.Principal.Windows.dll" />
+            <ComponentRef Id ="C.System.Text.Encodings.Web.dll" />
+            <ComponentRef Id ="C.System.Text.Json.dll" />
+            <ComponentRef Id ="C.System.Threading.AccessControl.dll" />            
             <ComponentRef Id ="C.System.Threading.Tasks.Extensions.dll" />
             <ComponentRef Id ="C.System.ValueTuple.dll" />
-            <ComponentRef Id ="C.System.Windows.Interactivity.dll" />
             <ComponentRef Id ="C.SystemInfo.Core.dll" />
             <ComponentRef Id ="C.SystemInfo.WPF.exe.config" />
             <ComponentRef Id ="C.VectronsLibrary.DI.Abstraction.dll" />
