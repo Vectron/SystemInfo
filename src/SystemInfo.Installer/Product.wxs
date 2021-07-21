@@ -45,6 +45,8 @@
             Id="I.MainIcon.ico"
             SourceFile='$(var.Product_Icon)' />
         
+        <Directory Id="TARGETDIR" Name="SourceDir" />
+        
         <Property Id='ARPPRODUCTICON'>I.MainIcon.ico</Property>
         <Property Id='ARPNOREPAIR'>1</Property>
 
@@ -61,7 +63,8 @@
             Id="ProductFeature"
             Title="$(var.Product_Name)"
             Level="1">
-            <ComponentGroupRef Id="CG.ProductMainComponents" />
+            <ComponentRef Id="C.MainExecutable" />
+            <ComponentRef Id="C.ProgramMenuDir" />
             <ComponentGroupRef Id='$(var.MainComponentGroup)' />
         </Feature>
     </Product>

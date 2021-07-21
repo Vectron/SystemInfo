@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <?include $(sys.CURRENTDIR)\Config.wxi?>
+    <Fragment>
+        <DirectoryRef Id="TARGETDIR">
+            <!--Startup Programs Menu-->
+            <Directory Id="ProgramMenuFolder">
+                <Directory Id="D.ProgramMenuDir" Name="$(var.Product_Name)">
+                    <Component Id="C.ProgramMenuDir" Guid="*">
+                        <Shortcut
+                            Id="S.Uninstall"
+                            Name="Uninstall $(var.Product_Name)"
+                            Target="[SystemFolder]msiexec.exe"
+                            Arguments="/x [ProductCode]"
+                            Description="Uninstalls the $(var.Product_Name) Application" />
+                        <RemoveFolder Id="RF.ProgramMenuDir" Directory="D.ProgramMenuDir" On="uninstall" />
+                        <RegistryValue Root='HKCU' Key='Software\[Manufacturer]\[ProductName]' Type='string' Value='' KeyPath='yes' />
+                    </Component>
+
+                    <Directory Id="StartupFolder" Name="Startup" />
+                </Directory>
+            </Directory>
+        </DirectoryRef>
+    </Fragment>
+</Wix>
