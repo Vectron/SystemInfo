@@ -1,19 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.SDK">
   <PropertyGroup>
-    <TargetFramework>net472</TargetFramework>
     <OutputType>Library</OutputType>
   </PropertyGroup>
 
   <PropertyGroup>
     <Version>1.0.1</Version>
-    <Authors>Vectron</Authors>
-    <Company>Vectron</Company>
     <Description>System Info core files.</Description>
-    <Copyright>Vectron</Copyright>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/Vectron/SystemInfo</PackageProjectUrl>
   </PropertyGroup>
-
+  
   <ItemGroup>
     <PackageReference Include="System.Management" Version="5.0.0" />
     <PackageReference Include="System.Reactive" Version="5.0.0" />

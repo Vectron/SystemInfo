@@ -1,6 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net472</TargetFramework>
     <UseWPF>true</UseWPF>
     <OutputType>WinExe</OutputType>
     <ApplicationIcon>Resources\route.ico</ApplicationIcon>
@@ -8,12 +7,7 @@
 
   <PropertyGroup>
     <Version>1.0.2</Version>
-    <Authors>Vectron</Authors>
-    <Company>Vectron</Company>
     <Description>System Info wpf project.</Description>
-    <Copyright>Vectron</Copyright>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/Vectron/SystemInfo</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,0 +1,13 @@
+﻿<Project>
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <Authors>Vectron</Authors>
+    <Company>Vectron</Company>
+    <Copyright>Vectron</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/Vectron/SystemInfo</PackageProjectUrl>
+  </PropertyGroup>
+</Project>
