@@ -10,6 +10,6 @@
   <ItemGroup>
     <PackageReference Include="System.Management" Version="5.0.0" />
     <PackageReference Include="System.Reactive" Version="5.0.0" />
-    <PackageReference Include="VectronsLibrary" Version="1.1.4" />
+    <PackageReference Include="VectronsLibrary" Version="1.1.12" />
   </ItemGroup>
 </Project>
