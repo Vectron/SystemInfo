@@ -7,55 +7,54 @@ using SystemInfo.Core.Controllers;
 using SystemInfo.Core.Poco;
 using VectronsLibrary;
 
-namespace SystemInfo.Core.ViewModels
+namespace SystemInfo.Core.ViewModels;
+
+/// <summary>
+/// A view model for showing network information.
+/// </summary>
+public sealed class NetworkViewModel : ObservableObject, IDisposable, IViewModel
 {
+    private readonly IDisposable networkUseSubscription;
+    private bool disposed;
+    private object? settings;
+
     /// <summary>
-    /// A view model for showing network information.
+    /// Initializes a new instance of the <see cref="NetworkViewModel"/> class.
     /// </summary>
-    public sealed class NetworkViewModel : ObservableObject, IDisposable, IViewModel
+    /// <param name="networkController">The <see cref="INetworkController"/>.</param>
+    public NetworkViewModel(INetworkController networkController)
     {
-        private readonly IDisposable networkUseSubscription;
-        private bool disposed;
-        private object? settings;
+        Models = [];
+        networkUseSubscription = networkController
+           .NetworkUse
+           .ObserveOn(SynchronizationContext.Current ?? new SynchronizationContext())
+           .Subscribe(x => Models.UpdateAndRemove(x));
+    }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="NetworkViewModel"/> class.
-        /// </summary>
-        /// <param name="networkController">The <see cref="INetworkController"/>.</param>
-        public NetworkViewModel(INetworkController networkController)
+    /// <summary>
+    /// Gets an <see cref="ObservableCollection{T}"/>. with data on all interfaces.
+    /// </summary>
+    public ObservableCollection<NetworkData> Models
+    {
+        get;
+    }
+
+    /// <inheritdoc/>
+    public object? Settings
+    {
+        get => settings;
+        set => SetField(ref settings, value);
+    }
+
+    /// <inheritdoc/>
+    public void Dispose()
+    {
+        if (disposed)
         {
-            Models = new ObservableCollection<NetworkData>();
-            networkUseSubscription = networkController
-               .NetworkUse
-               .ObserveOn(SynchronizationContext.Current)
-               .Subscribe(x => Models.UpdateAndRemove(x));
+            return;
         }
 
-        /// <summary>
-        /// Gets an <see cref="ObservableCollection{T}"/>. with data on all interfaces.
-        /// </summary>
-        public ObservableCollection<NetworkData> Models
-        {
-            get;
-        }
-
-        /// <inheritdoc/>
-        public object? Settings
-        {
-            get => settings;
-            set => SetField(ref settings, value);
-        }
-
-        /// <inheritdoc/>
-        public void Dispose()
-        {
-            if (disposed)
-            {
-                return;
-            }
-
-            disposed = true;
-            networkUseSubscription.Dispose();
-        }
+        disposed = true;
+        networkUseSubscription.Dispose();
     }
 }

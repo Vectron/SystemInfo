@@ -1,13 +1,12 @@
-namespace SystemInfo.WPF.Settings
+namespace SystemInfo.WPF.Settings;
+
+/// <summary>
+/// Represents a class for saving settings.
+/// </summary>
+public interface ISettingsSaver
 {
     /// <summary>
-    /// Represents a class for saving settings.
+    /// Save the configuration.
     /// </summary>
-    public interface ISettingsSaver
-    {
-        /// <summary>
-        /// Save the configuration.
-        /// </summary>
-        void SaveConfiguration();
-    }
+    void SaveConfiguration();
 }
