@@ -2,27 +2,26 @@ using System;
 using System.Collections.Generic;
 using SystemInfo.Core.Poco;
 
-namespace SystemInfo.Core.Controllers
+namespace SystemInfo.Core.Controllers;
+
+/// <summary>
+/// An controller for monitoring hdd space usage.
+/// </summary>
+public interface IDriveSpaceController
 {
     /// <summary>
-    /// An controller for monitoring hdd space usage.
+    /// Gets an <see cref="IObservable{T}"/> with data on every drive.
     /// </summary>
-    public interface IDriveSpaceController
+    IObservable<IEnumerable<DriveSpaceData>> HDDUse
     {
-        /// <summary>
-        /// Gets an <see cref="IObservable{T}"/> with data on every drive.
-        /// </summary>
-        IObservable<IEnumerable<DriveSpaceData>> HDDUse
-        {
-            get;
-        }
+        get;
+    }
 
-        /// <summary>
-        /// Gets an <see cref="IObservable{T}"/> reporting total drive use.
-        /// </summary>
-        IObservable<UsageData> TotalHDDUse
-        {
-            get;
-        }
+    /// <summary>
+    /// Gets an <see cref="IObservable{T}"/> reporting total drive use.
+    /// </summary>
+    IObservable<UsageData> TotalHDDUse
+    {
+        get;
     }
 }

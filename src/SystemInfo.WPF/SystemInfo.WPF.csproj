@@ -1,5 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <TargetPlatformIdentifier>windows</TargetPlatformIdentifier>
     <UseWPF>true</UseWPF>
     <OutputType>WinExe</OutputType>
     <ApplicationIcon>Resources\route.ico</ApplicationIcon>
@@ -7,6 +8,7 @@
 
   <PropertyGroup>
     <Description>System Info wpf project.</Description>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <ItemGroup>
