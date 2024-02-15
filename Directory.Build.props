@@ -3,6 +3,7 @@
     <TargetFramework>net472</TargetFramework>
   </PropertyGroup>
   
+  <!--Package settings-->
   <PropertyGroup>
     <Authors>Vectron</Authors>
     <Company>Vectron</Company>
