@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Windows;
 using Hardcodet.Wpf.TaskbarNotification;
 using Microsoft.Extensions.Configuration;
@@ -14,11 +14,31 @@ using VectronsLibrary.Wpf.Extensions;
 
 namespace SystemInfo.WPF
 {
-    public partial class App : Application
+    /// <summary>
+    /// The main application entry point.
+    /// </summary>
+    public partial class App : Application, IDisposable
     {
-        private SingleGlobalInstance instanceLock;
-        private TaskbarIcon notifyIcon;
-        private MainWindow window;
+        private const string CoreAssembly = "SystemInfo.Core";
+        private bool disposed;
+        private SingleGlobalInstance? instanceLock;
+        private TaskbarIcon? notifyIcon;
+        private ServiceProvider? serviceProvider;
+        private MainWindow? window;
+
+        /// <inheritdoc/>
+        public virtual void Dispose()
+        {
+            if (disposed)
+            {
+                return;
+            }
+
+            disposed = true;
+            instanceLock?.Dispose();
+            serviceProvider?.Dispose();
+            GC.SuppressFinalize(this);
+        }
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
@@ -26,26 +46,26 @@ namespace SystemInfo.WPF
 
             if (!instanceLock.GetMutex())
             {
-                MessageBox.Show("System Info is already running");
+                _ = MessageBox.Show("System Info is already running");
                 Shutdown();
             }
 
             // Create a default configuration
             var configuration = new ConfigurationBuilder()
                 .SetFileLoadExceptionHandler(x => x.Ignore = true)
-                .AddJsonFile(SettingsHelper.GetSettingsFilePath(), true, true)
+                .AddJsonFile(SettingsHelper.GetSettingsFilePath(), optional: true, reloadOnChange: true)
                 .Build();
 
-            var serviceProvider = new ServiceCollection()
-                .AddAssemblyResolver()
-                .AddRegisteredTypes()
-                .AddOptions()
-                .AddSingleton<IConfiguration>(configuration)
-                .Configure<WindowSettings>(configuration.GetSection(typeof(WindowSettings).Name))
-                .AddNonGenericLoggerError()
-                .AddFromAssemblies(new[] { "SystemInfo.Core" })
-                .AddWindows(Array.Empty<string>())
-                .BuildServiceProvider();
+            serviceProvider = new ServiceCollection()
+                 .AddAssemblyResolver()
+                 .AddRegisteredTypes()
+                 .AddOptions()
+                 .AddSingleton<IConfiguration>(configuration)
+                 .Configure<WindowSettings>(configuration.GetSection(nameof(WindowSettings)))
+                 .AddNonGenericLoggerError()
+                 .AddFromAssemblies(new[] { CoreAssembly })
+                 .AddWindows(Array.Empty<string>())
+                 .BuildServiceProvider();
 
             notifyIcon = (TaskbarIcon)FindResource("NotifyIcon");
             notifyIcon.DataContext = serviceProvider.GetRequiredService<INotifyIconViewModel>();

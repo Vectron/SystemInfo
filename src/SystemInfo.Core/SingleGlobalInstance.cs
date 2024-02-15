@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -8,33 +8,53 @@ using System.Threading;
 
 namespace SystemInfo.Core
 {
-    public class SingleGlobalInstance : IDisposable
+    /// <summary>
+    /// Helper for only starting the application one time.
+    /// </summary>
+    public sealed class SingleGlobalInstance : IDisposable
     {
         private readonly Mutex mutex;
         private readonly TimeSpan timeOut;
-        private bool hasHandle = false;
+        private bool hasHandle;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SingleGlobalInstance"/> class.
+        /// </summary>
         public SingleGlobalInstance()
             : this(Timeout.InfiniteTimeSpan, string.Empty)
         {
         }
 
-        public SingleGlobalInstance(string gui)
-                    : this(Timeout.InfiniteTimeSpan, gui)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SingleGlobalInstance"/> class.
+        /// </summary>
+        /// <param name="id">A guid to monitor.</param>
+        public SingleGlobalInstance(string id)
+            : this(Timeout.InfiniteTimeSpan, id)
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SingleGlobalInstance"/> class.
+        /// </summary>
+        /// <param name="timeOut">A <see cref="TimeSpan"/> how long to try before erroring.</param>
         public SingleGlobalInstance(TimeSpan timeOut)
             : this(timeOut, string.Empty)
         {
         }
 
-        public SingleGlobalInstance(TimeSpan timeOut, string gui)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SingleGlobalInstance"/> class.
+        /// </summary>
+        /// <param name="timeOut">A <see cref="TimeSpan"/> how long to try before erroring.</param>
+        /// <param name="id">A guid to monitor.</param>
+        public SingleGlobalInstance(TimeSpan timeOut, string id)
         {
             this.timeOut = timeOut;
-            mutex = InitMutex(gui);
+            mutex = InitMutex(id);
         }
 
+        /// <inheritdoc/>
         public void Dispose()
         {
             if (mutex != null)
@@ -48,11 +68,15 @@ namespace SystemInfo.Core
             }
         }
 
+        /// <summary>
+        /// Get the global mutex.
+        /// </summary>
+        /// <returns><see langword="true"/> when mutex is gotten, otherwise <see langword="false"/>.</returns>
         public bool GetMutex()
         {
             try
             {
-                hasHandle = mutex.WaitOne(timeOut, false);
+                hasHandle = mutex.WaitOne(timeOut, exitContext: false);
             }
             catch (AbandonedMutexException)
             {
@@ -62,31 +86,26 @@ namespace SystemInfo.Core
             return hasHandle;
         }
 
-        private string GetApplicationGui()
+        private static string GetApplicationGuid()
         {
-            var guidAttributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(GuidAttribute), false);
-            var guidAttribute = guidAttributes.FirstOrDefault();
-
-            if (guidAttribute == null)
-            {
-                throw new ArgumentException($"{nameof(GuidAttribute)} is not defined for this app");
-            }
-
+            var guidAttributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(GuidAttribute), inherit: false);
+            var guidAttribute = guidAttributes.FirstOrDefault()
+                ?? throw new InvalidOperationException($"{nameof(GuidAttribute)} is not defined for this app");
             return ((GuidAttribute)guidAttribute).Value;
         }
 
-        private Mutex InitMutex(string gui)
+        private static Mutex InitMutex(string id)
         {
-            var mutexName = string.IsNullOrWhiteSpace(gui) ? GetApplicationGui() : gui;
-            string mutexId = string.Format(@"Global\{{{0}}}", mutexName);
-            var mutex = new Mutex(true, mutexId);
+            var mutexName = string.IsNullOrWhiteSpace(id) ? GetApplicationGuid() : id;
+            var mutexId = string.Format(System.Globalization.CultureInfo.InvariantCulture, @"Global\{{{0}}}", mutexName);
+            var newMutex = new Mutex(initiallyOwned: true, mutexId);
 
-            var allowEveryoneRule = new MutexAccessRule(new SecurityIdentifier(WellKnownSidType.WorldSid, null), MutexRights.FullControl, AccessControlType.Allow);
+            var allowEveryoneRule = new MutexAccessRule(new SecurityIdentifier(WellKnownSidType.WorldSid, domainSid: null), MutexRights.FullControl, AccessControlType.Allow);
             var securitySettings = new MutexSecurity();
             securitySettings.AddAccessRule(allowEveryoneRule);
-            mutex.SetAccessControl(securitySettings);
+            newMutex.SetAccessControl(securitySettings);
 
-            return mutex;
+            return newMutex;
         }
     }
 }

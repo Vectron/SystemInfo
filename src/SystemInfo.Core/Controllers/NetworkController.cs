@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.NetworkInformation;
@@ -7,10 +7,14 @@ using SystemInfo.Core.Poco;
 
 namespace SystemInfo.Core.Controllers
 {
+    /// <summary>
+    /// Implementation of <see cref="INetworkController"/>.
+    /// </summary>
     public class NetworkController : INetworkController
     {
-        private readonly Dictionary<string, (long send, long received, DateTime dateTime)> previous = new Dictionary<string, (long, long, DateTime)>();
+        private readonly Dictionary<string, (long Send, long Received, DateTime DateTime)> previous = new Dictionary<string, (long, long, DateTime)>(StringComparer.Ordinal);
 
+        /// <inheritdoc/>
         public IObservable<IEnumerable<NetworkData>> NetworkUse
             => Observable
             .Timer(TimeSpan.Zero, TimeSpan.FromSeconds(1))
@@ -18,17 +22,17 @@ namespace SystemInfo.Core.Controllers
             .Publish()
             .RefCount();
 
-        private IEnumerable<NetworkInterface> GetInterfaces
+        private static IEnumerable<NetworkInterface> GetInterfaces
             => NetworkInterface
             .GetAllNetworkInterfaces()
-            .Where(x => x.OperationalStatus == OperationalStatus.Up)
-            .Where(x => x.NetworkInterfaceType == NetworkInterfaceType.Wireless80211
-                || x.NetworkInterfaceType == NetworkInterfaceType.GigabitEthernet
-                || x.NetworkInterfaceType == NetworkInterfaceType.FastEthernetT
-                || x.NetworkInterfaceType == NetworkInterfaceType.FastEthernetFx
-                || x.NetworkInterfaceType == NetworkInterfaceType.Ethernet);
+            .Where(x => x.OperationalStatus == OperationalStatus.Up
+                && (x.NetworkInterfaceType == NetworkInterfaceType.Wireless80211
+                    || x.NetworkInterfaceType == NetworkInterfaceType.GigabitEthernet
+                    || x.NetworkInterfaceType == NetworkInterfaceType.FastEthernetT
+                    || x.NetworkInterfaceType == NetworkInterfaceType.FastEthernetFx
+                    || x.NetworkInterfaceType == NetworkInterfaceType.Ethernet));
 
-        private IEnumerable<NetworkData> GetData()
+        private List<NetworkData> GetData()
         {
             var result = new List<NetworkData>();
 
@@ -38,17 +42,17 @@ namespace SystemInfo.Core.Controllers
                 {
                     var totalBytesSend = networkInterface.GetIPStatistics().BytesSent;
                     var totalBytesReceived = networkInterface.GetIPStatistics().BytesReceived;
-                    var currentime = DateTime.Now;
+                    var currenTime = DateTime.Now;
 
-                    double totalSeconds = (currentime - sendReceived.Item3).TotalSeconds;
+                    var totalSeconds = (currenTime - sendReceived.Item3).TotalSeconds;
 
-                    long bytesSend = totalBytesSend - sendReceived.Item1;
+                    var bytesSend = totalBytesSend - sendReceived.Item1;
                     var bytesSendPerSecond = bytesSend / totalSeconds;
 
-                    long bytesReceived = totalBytesReceived - sendReceived.Item2;
+                    var bytesReceived = totalBytesReceived - sendReceived.Item2;
                     var bytesReceivedPerSecond = bytesReceived / totalSeconds;
 
-                    previous[networkInterface.Name] = (totalBytesSend, totalBytesReceived, currentime);
+                    previous[networkInterface.Name] = (totalBytesSend, totalBytesReceived, currenTime);
                     var data = new NetworkData(networkInterface.Name, (ulong)bytesSendPerSecond, (ulong)bytesReceivedPerSecond);
                     result.Add(data);
                 }
@@ -56,8 +60,8 @@ namespace SystemInfo.Core.Controllers
                 {
                     var totalBytesSend = networkInterface.GetIPStatistics().BytesSent;
                     var totalBytesReceived = networkInterface.GetIPStatistics().BytesReceived;
-                    var currentime = DateTime.Now;
-                    previous.Add(networkInterface.Name, (totalBytesSend, totalBytesReceived, currentime));
+                    var currenTime = DateTime.Now;
+                    previous.Add(networkInterface.Name, (totalBytesSend, totalBytesReceived, currenTime));
                 }
             }
 

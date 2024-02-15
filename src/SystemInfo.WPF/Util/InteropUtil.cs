@@ -1,10 +1,13 @@
-﻿using System;
+using System;
 using System.Windows;
 using System.Windows.Interop;
 
 namespace SystemInfo.WPF.Util
 {
-    internal static class InterlopUtil
+    /// <summary>
+    /// Utilities for interopting with the os.
+    /// </summary>
+    internal static class InteropUtil
     {
         [Flags]
         private enum ExtendedWindowStyles
@@ -20,8 +23,10 @@ namespace SystemInfo.WPF.Util
             WS_EX_LAYOUTRTL = 0x00400000,
             WS_EX_LEFT = 0x00000000,
             WS_EX_LEFTSCROLLBAR = 0x00004000,
-            WS_EX_LTRREADING = 0x00000000,
+
+            // WS_EX_LTRREADING = 0x00000000,
             WS_EX_MDICHILD = 0x00000040,
+
             WS_EX_NOACTIVATE = 0x08000000,
             WS_EX_NOINHERITLAYOUT = 0x00100000,
             WS_EX_NOPARENTNOTIFY = 0x00000004,
@@ -29,8 +34,10 @@ namespace SystemInfo.WPF.Util
             WS_EX_OVERLAPPEDWINDOW = WS_EX_WINDOWEDGE | WS_EX_CLIENTEDGE,
             WS_EX_PALETTEWINDOW = WS_EX_WINDOWEDGE | WS_EX_TOOLWINDOW | WS_EX_TOPMOST,
             WS_EX_RIGHT = 0x00001000,
-            WS_EX_RIGHTSCROLLBAR = 0x00000000,
+
+            // WS_EX_RIGHTSCROLLBAR = 0x00000000,
             WS_EX_RTLREADING = 0x00002000,
+
             WS_EX_STATICEDGE = 0x00020000,
             WS_EX_TOOLWINDOW = 0x00000080,
             WS_EX_TOPMOST = 0x00000008,
@@ -38,16 +45,17 @@ namespace SystemInfo.WPF.Util
             WS_EX_WINDOWEDGE = 0x00000100,
         }
 
+        /// <summary>
+        /// Hide window from task switcher.
+        /// </summary>
+        /// <param name="window">The window to hide.</param>
         public static void HideFromTaskSwitcher(Window window)
         {
             var wndHelper = new WindowInteropHelper(window);
             var exStyle = (ExtendedWindowStyles)NativeMethods.GetWindowLongPtr(wndHelper.Handle, NativeMethods.WindowLongFlags.GWL_EXSTYLE);
 
             exStyle |= ExtendedWindowStyles.WS_EX_TOOLWINDOW;
-            NativeMethods.SetWindowLongPtr(wndHelper.Handle, NativeMethods.WindowLongFlags.GWL_EXSTYLE, (IntPtr)exStyle);
+            _ = NativeMethods.SetWindowLongPtr(wndHelper.Handle, NativeMethods.WindowLongFlags.GWL_EXSTYLE, (IntPtr)exStyle);
         }
-
-        private static int IntPtrToInt32(IntPtr intPtr)
-            => unchecked((int)intPtr.ToInt64());
     }
 }

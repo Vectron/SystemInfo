@@ -1,39 +1,27 @@
-﻿<ResourceDictionary
+<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:conv="clr-namespace:SystemInfo.WPF.Converters"
     xmlns:local="clr-namespace:SystemInfo.WPF.Views">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary
-            Source="CPUView.xaml" />
-        <ResourceDictionary
-            Source="MemoryView.xaml" />
-        <ResourceDictionary
-            Source="NetworkView.xaml" />
-        <ResourceDictionary
-            Source="DrivesView.xaml" />
+        <ResourceDictionary Source="CPUView.xaml" />
+        <ResourceDictionary Source="MemoryView.xaml" />
+        <ResourceDictionary Source="NetworkView.xaml" />
+        <ResourceDictionary Source="DrivesView.xaml" />
     </ResourceDictionary.MergedDictionaries>
-    <Style
-        TargetType="FrameworkElement">
-        <Setter
-            Property="IsHitTestVisible"
-            Value="False" />
-        <Setter
-            Property="IsEnabled"
-            Value="False" />
-        <Setter
-            Property="Focusable"
-            Value="False" />
+    <Style TargetType="FrameworkElement">
+        <Setter Property="IsHitTestVisible" Value="False" />
+        <Setter Property="IsEnabled" Value="False" />
+        <Setter Property="Focusable" Value="False" />
     </Style>
-    <ControlTemplate
-        x:Key="ItemsView">
+    <ControlTemplate x:Key="ItemsView">
         <Border
+            Width="112"
             Padding="0,15,0,15"
             Background="{Binding WindowSettings.BackgroundColor, Mode=OneWay, Converter={StaticResource colorToBrushConverter}}"
             BorderBrush="{Binding WindowSettings.BorderColor, Mode=OneWay, Converter={StaticResource colorToBrushConverter}}"
             BorderThickness="1"
-            CornerRadius="20"
-            Width="112">
+            CornerRadius="20">
             <ItemsControl
                 FontFamily="{Binding WindowSettings.FontSettings.Family}"
                 FontSize="{Binding WindowSettings.FontSettings.Size}"
@@ -47,21 +35,14 @@
                         <StackPanel>
                             <Rectangle
                                 x:Name="Seperator"
-                                Fill="Gray"
                                 Height="1"
-                                Margin="0,5" />
-                            <ContentPresenter
-                                Margin="5,0"
-                                Content="{Binding}" />
+                                Margin="0,5"
+                                Fill="Gray" />
+                            <ContentPresenter Margin="5,0" Content="{Binding}" />
                         </StackPanel>
                         <DataTemplate.Triggers>
-                            <DataTrigger
-                                Binding="{Binding RelativeSource={RelativeSource PreviousData}}"
-                                Value="{x:Null}">
-                                <Setter
-                                    Property="Visibility"
-                                    TargetName="Seperator"
-                                    Value="Collapsed" />
+                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource PreviousData}}" Value="{x:Null}">
+                                <Setter TargetName="Seperator" Property="Visibility" Value="Collapsed" />
                             </DataTrigger>
                         </DataTemplate.Triggers>
                     </DataTemplate>

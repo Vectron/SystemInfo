@@ -1,39 +1,31 @@
-﻿<ResourceDictionary
+<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:vm="clr-namespace:SystemInfo.Core.ViewModels;assembly=SystemInfo.Core"
-    xmlns:conv="clr-namespace:SystemInfo.WPF.Converters">
-    <conv:BytesToStringConverter
-        x:Key="bytesToStringConverter" />
-    <DataTemplate
-        DataType="{x:Type vm:NetworkViewModel}">
+    xmlns:conv="clr-namespace:SystemInfo.WPF.Converters"
+    xmlns:vm="clr-namespace:SystemInfo.Core.ViewModels;assembly=SystemInfo.Core">
+    <conv:BytesToStringConverter x:Key="bytesToStringConverter" />
+    <DataTemplate DataType="{x:Type vm:NetworkViewModel}">
         <ItemsControl
-            ItemsSource="{Binding Models, Mode=OneWay}"
             HorizontalContentAlignment="Stretch"
-            VerticalContentAlignment="Top">
+            VerticalContentAlignment="Top"
+            ItemsSource="{Binding Models, Mode=OneWay}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel
-                        Margin="0,0,0,5">
-                        <TextBlock
-                            Text="{Binding Name, Mode=OneWay}" />
+                    <StackPanel Margin="0,0,0,5">
+                        <TextBlock Text="{Binding Name, Mode=OneWay}" />
                         <DockPanel>
-                            <TextBlock
-                                DockPanel.Dock="Left"
-                                Text="Received:" />
+                            <TextBlock DockPanel.Dock="Left" Text="Received:" />
                             <TextBlock
                                 DockPanel.Dock="Right"
-                                TextAlignment="Right"
-                                Text="{Binding Received, Converter={StaticResource bytesToStringConverter}, ConverterParameter=1, StringFormat='\{0\}/Sec', Mode=OneWay}" />
+                                Text="{Binding Received, Converter={StaticResource bytesToStringConverter}, ConverterParameter=1, StringFormat='\{0\}/Sec', Mode=OneWay}"
+                                TextAlignment="Right" />
                         </DockPanel>
                         <DockPanel>
-                            <TextBlock
-                                DockPanel.Dock="Left"
-                                Text="Send:" />
+                            <TextBlock DockPanel.Dock="Left" Text="Send:" />
                             <TextBlock
                                 DockPanel.Dock="Right"
-                                TextAlignment="Right"
-                                Text="{Binding Send, Converter={StaticResource bytesToStringConverter}, ConverterParameter=1, StringFormat='\{0\}/Sec', Mode=OneWay}" />
+                                Text="{Binding Send, Converter={StaticResource bytesToStringConverter}, ConverterParameter=1, StringFormat='\{0\}/Sec', Mode=OneWay}"
+                                TextAlignment="Right" />
                         </DockPanel>
                     </StackPanel>
                 </DataTemplate>
