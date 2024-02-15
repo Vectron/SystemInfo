@@ -9,6 +9,7 @@
     <Copyright>Vectron</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/Vectron/SystemInfo</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <!--Settings to move the bin en output folders to the root folder-->
