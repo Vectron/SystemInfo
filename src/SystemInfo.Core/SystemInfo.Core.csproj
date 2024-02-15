@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.SDK">
+<Project Sdk="Microsoft.NET.SDK">
   <PropertyGroup>
     <OutputType>Library</OutputType>
   </PropertyGroup>
@@ -8,8 +8,8 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="System.Management" Version="7.0.0" />
-    <PackageReference Include="System.Reactive" Version="5.0.0" />
+    <PackageReference Include="System.Management" Version="7.0.2" />
+    <PackageReference Include="System.Reactive" Version="6.0.0" />
     <PackageReference Include="VectronsLibrary" Version="1.1.12" />
   </ItemGroup>
 </Project>
