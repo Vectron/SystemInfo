@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -7,8 +7,12 @@ using SystemInfo.Core.Poco;
 
 namespace SystemInfo.Core.Controllers
 {
+    /// <summary>
+    /// Implementation of <see cref="IDriveSpaceController"/>.
+    /// </summary>
     public class DriveSpaceController : IDriveSpaceController
     {
+        /// <inheritdoc/>
         public IObservable<IEnumerable<DriveSpaceData>> HDDUse
             => Observable.Timer(TimeSpan.Zero, TimeSpan.FromSeconds(10))
             .Select(_ => DriveInfo
@@ -25,17 +29,19 @@ namespace SystemInfo.Core.Controllers
                         return null;
                     }
                 })
-                .Where(x => x != null))
+                .Where(x => x != null)
+                .Select(x => x!))
             .Publish()
             .RefCount();
 
+        /// <inheritdoc/>
         public IObservable<UsageData> TotalHDDUse
             => Observable.Timer(TimeSpan.Zero, TimeSpan.FromSeconds(10))
             .Select(_ => GetTotalHDDUse())
             .Publish()
             .RefCount();
 
-        private UsageData GetTotalHDDUse()
+        private static UsageData GetTotalHDDUse()
         {
             var allDrives = DriveInfo
                 .GetDrives()

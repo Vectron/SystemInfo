@@ -1,47 +1,53 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 
 namespace SystemInfo.Core.Controllers
 {
+    /// <summary>
+    /// Implementation of <see cref="ICPUController"/>.
+    /// </summary>
     public class CPUController : ICPUController
     {
+        /// <inheritdoc/>
         public IObservable<IEnumerable<float>> CoreUse
             => Observable
-            .Create<IEnumerable<float>>(x => GetCoreUseStream(x))
+            .Create<IEnumerable<float>>(GetCoreUseStream)
             .Publish()
             .RefCount();
 
+        /// <inheritdoc/>
         public IObservable<float> TotalCpuUse
             => Observable
-            .Create<float>(x => GetTotalUseStream(x))
+            .Create<float>(GetTotalUseStream)
             .Publish()
             .RefCount();
 
         private IDisposable GetCoreUseStream(IObserver<IEnumerable<float>> observer)
         {
             var disposables = new CompositeDisposable();
-            var NumberOfCores = Environment.ProcessorCount;
+            var numberOfCores = Environment.ProcessorCount;
             var coreCounters = new List<PerformanceCounter>();
 
-            for (int i = 0; i < NumberOfCores; i++)
+            for (var i = 0; i < numberOfCores; i++)
             {
-                var CpuCoreUse = new PerformanceCounter()
+                var cpuCoreUse = new PerformanceCounter()
                 {
                     CategoryName = "Processor",
                     CounterName = "% Processor Time",
-                    InstanceName = i.ToString(),
-                    ReadOnly = true
+                    InstanceName = i.ToString(CultureInfo.InvariantCulture),
+                    ReadOnly = true,
                 };
 
-                disposables.Add(CpuCoreUse);
-                coreCounters.Add(CpuCoreUse);
+                disposables.Add(cpuCoreUse);
+                coreCounters.Add(cpuCoreUse);
             }
 
-            observer.OnNext(Enumerable.Repeat(0f, NumberOfCores));
+            observer.OnNext(Enumerable.Repeat(0f, numberOfCores));
 
             var updateTimer = Observable.Timer(TimeSpan.Zero, TimeSpan.FromSeconds(1))
                 .Select(_ => coreCounters.Select(counter => counter.NextValue()).ToArray())
@@ -53,17 +59,17 @@ namespace SystemInfo.Core.Controllers
         private IDisposable GetTotalUseStream(IObserver<float> observer)
         {
             var disposables = new CompositeDisposable();
-            var CpuTotalUse = new PerformanceCounter()
+            var cpuTotalUse = new PerformanceCounter()
             {
                 CategoryName = "Processor",
                 CounterName = "% Processor Time",
                 InstanceName = "_Total",
-                ReadOnly = true
+                ReadOnly = true,
             };
 
-            disposables.Add(CpuTotalUse);
+            disposables.Add(cpuTotalUse);
             var updateTimer = Observable.Timer(TimeSpan.Zero, TimeSpan.FromSeconds(1))
-                .Select(_ => CpuTotalUse.NextValue())
+                .Select(_ => cpuTotalUse.NextValue())
                 .Subscribe(observer);
             disposables.Add(updateTimer);
 

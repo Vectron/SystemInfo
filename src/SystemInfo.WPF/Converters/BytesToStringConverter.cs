@@ -1,12 +1,16 @@
-﻿using System;
+using System;
 using System.Globalization;
 using System.Windows.Data;
 
 namespace SystemInfo.WPF.Converters
 {
+    /// <summary>
+    /// An <see cref="IValueConverter"/> for converting ulong to string.
+    /// </summary>
     [ValueConversion(typeof(ulong), typeof(string))]
-    internal class BytesToStringConverter : IValueConverter
+    internal sealed class BytesToStringConverter : IValueConverter
     {
+        /// <inheritdoc/>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (targetType != typeof(string))
@@ -22,9 +26,8 @@ namespace SystemInfo.WPF.Converters
             return VectronsLibrary.Utils.FormatBytes((ulong)value);
         }
 
+        /// <inheritdoc/>
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotSupportedException();
-        }
+            => throw new NotSupportedException();
     }
 }

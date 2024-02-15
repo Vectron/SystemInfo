@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Reactive.Disposables;
@@ -9,18 +9,23 @@ using VectronsLibrary;
 
 namespace SystemInfo.Core.ViewModels
 {
-    public class CPUViewModel : ObservableObject, IDisposable, IViewModel
+    /// <summary>
+    /// A view model for displaying the Cpu data.
+    /// </summary>
+    public sealed class CPUViewModel : ObservableObject, IDisposable, IViewModel
     {
-        private readonly ICPUController cpuController;
         private readonly CompositeDisposable disposables = new CompositeDisposable();
-        private bool disposedValue = false;
-        private object settings;
+        private bool disposed;
+        private object? settings;
         private float totalUse;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CPUViewModel"/> class.
+        /// </summary>
+        /// <param name="cpuController">The <see cref="ICPUController"/>.</param>
         public CPUViewModel(ICPUController cpuController)
         {
             CoreUses = new ObservableCollection<float>();
-            this.cpuController = cpuController;
             var totalCpuUseSubscription = cpuController
                 .TotalCpuUse
                 .Subscribe(x => TotalUse = x);
@@ -33,39 +38,40 @@ namespace SystemInfo.Core.ViewModels
             disposables.Add(coreUseSubscription);
         }
 
+        /// <summary>
+        /// Gets the usage of each core.
+        /// </summary>
         public ObservableCollection<float> CoreUses
         {
             get;
         }
 
-        public object Settings
+        /// <inheritdoc/>
+        public object? Settings
         {
             get => settings;
             set => SetField(ref settings, value);
         }
 
+        /// <summary>
+        /// Gets or sets the total cpu usage.
+        /// </summary>
         public float TotalUse
         {
             get => totalUse;
             set => SetField(ref totalUse, value);
         }
 
+        /// <inheritdoc/>
         public void Dispose()
         {
-            Dispose(true);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!disposedValue)
+            if (disposed)
             {
-                if (disposing)
-                {
-                    disposables.Dispose();
-                }
-
-                disposedValue = true;
+                return;
             }
+
+            disposed = true;
+            disposables.Dispose();
         }
     }
 }

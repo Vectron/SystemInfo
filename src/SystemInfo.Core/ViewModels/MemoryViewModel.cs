@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Reactive.Linq;
 using SystemInfo.Core.Controllers;
 using SystemInfo.Core.Poco;
@@ -6,51 +6,54 @@ using VectronsLibrary;
 
 namespace SystemInfo.Core.ViewModels
 {
-    public class MemoryViewModel : ObservableObject, IDisposable, IViewModel
+    /// <summary>
+    /// A view model that shows data of the memory.
+    /// </summary>
+    public sealed class MemoryViewModel : ObservableObject, IDisposable, IViewModel
     {
-        private readonly IMemoryController memoryController;
-        private bool disposedValue = false;
-        private IDisposable memoryUseSubscription;
+        private readonly IDisposable memoryUseSubscription;
+        private bool disposed;
         private UsageData model;
-        private object settings;
+        private object? settings;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MemoryViewModel"/> class.
+        /// </summary>
+        /// <param name="memoryController">The <see cref="IMemoryController"/>.</param>
         public MemoryViewModel(IMemoryController memoryController)
         {
-            this.memoryController = memoryController;
+            model = new UsageData(0, 0);
             memoryUseSubscription = memoryController
-               .MemoryUse
-               .Subscribe(x => Model = x);
+                .MemoryUse
+                .Subscribe(x => Model = x);
         }
 
+        /// <summary>
+        /// Gets or sets the usage of the memory.
+        /// </summary>
         public UsageData Model
         {
             get => model;
             set => SetField(ref model, value);
         }
 
-        public object Settings
+        /// <inheritdoc/>
+        public object? Settings
         {
             get => settings;
             set => SetField(ref settings, value);
         }
 
+        /// <inheritdoc/>
         public void Dispose()
         {
-            Dispose(true);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!disposedValue)
+            if (disposed)
             {
-                if (disposing)
-                {
-                    memoryUseSubscription?.Dispose();
-                    memoryUseSubscription = null;
-                }
-
-                disposedValue = true;
+                return;
             }
+
+            disposed = true;
+            memoryUseSubscription.Dispose();
         }
     }
 }

@@ -1,36 +1,35 @@
-﻿<Window
+<Window
     x:Class="SystemInfo.WPF.Views.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
     Title=""
     Width="160"
     Height="450"
     MinWidth="100"
     MinHeight="200"
-    WindowStartupLocation="Manual"
-    Left="{Binding WindowSettings.LeftPosition, Mode=TwoWay}"
-    Top="{Binding WindowSettings.TopPosition, Mode=TwoWay}"
     AllowsTransparency="True"
     Background="Transparent"
     Focusable="False"
-    IsTabStop="False"
-    MouseDown="Window_MouseDown"
     IsHitTestVisible="{Binding WindowSettings.LockPlacement, Converter={StaticResource inverseBooleanConverter}}"
+    IsTabStop="False"
+    Left="{Binding WindowSettings.LeftPosition, Mode=TwoWay}"
+    Loaded="Window_Loaded"
+    MouseDown="Window_MouseDown"
+    RenderOptions.ClearTypeHint="Enabled"
     ResizeMode="NoResize"
     ScrollViewer.VerticalScrollBarVisibility="Disabled"
     ShowInTaskbar="False"
     SizeToContent="WidthAndHeight"
+    Template="{DynamicResource ItemsView}"
+    Top="{Binding WindowSettings.TopPosition, Mode=TwoWay}"
     UseLayoutRounding="True"
+    WindowStartupLocation="Manual"
     WindowStyle="None"
-    RenderOptions.ClearTypeHint="Enabled"
-    Loaded="Window_Loaded"
-    Template="{DynamicResource ItemsView}">
+    mc:Ignorable="d">
     <Window.Resources>
-        <!--This has to be here because we cant use the Staticresource color converter if we put it in app.xaml-->
-        <ResourceDictionary
-            Source="ItemsView.xaml" />
+        <!--  This has to be here because we cant use the Staticresource color converter if we put it in app.xaml  -->
+        <ResourceDictionary Source="ItemsView.xaml" />
     </Window.Resources>
 </Window>

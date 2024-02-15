@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Reactive.Disposables;
@@ -10,19 +10,24 @@ using VectronsLibrary;
 
 namespace SystemInfo.Core.ViewModels
 {
-    public class DriveViewModel : ObservableObject, IDisposable, IViewModel
+    /// <summary>
+    /// A view model for showing disk data.
+    /// </summary>
+    public sealed class DriveViewModel : ObservableObject, IDisposable, IViewModel
     {
         private readonly CompositeDisposable disposables = new CompositeDisposable();
-        private readonly IDriveSpaceController driveSpaceController;
-        private bool disposedValue = false;
-        private object settings;
+        private bool disposed;
+        private object? settings;
         private UsageData total;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DriveViewModel"/> class.
+        /// </summary>
+        /// <param name="driveSpaceController">The <see cref="IDriveSpaceController"/>.</param>
         public DriveViewModel(IDriveSpaceController driveSpaceController)
         {
-            this.driveSpaceController = driveSpaceController;
-
             Drives = new ObservableCollection<DriveSpaceData>();
+            total = new UsageData(0, 0);
             var driveUseSubscription = driveSpaceController
                 .HDDUse
                 .ObserveOn(SynchronizationContext.Current)
@@ -37,38 +42,40 @@ namespace SystemInfo.Core.ViewModels
             disposables.Add(totalUseSubscription);
         }
 
+        /// <summary>
+        /// Gets an <see cref="ObservableCollection{T}"/> containing information of all drives.
+        /// </summary>
         public ObservableCollection<DriveSpaceData> Drives
         {
             get;
         }
 
-        public object Settings
+        /// <inheritdoc/>
+        public object? Settings
         {
             get => settings;
             set => SetField(ref settings, value);
         }
 
+        /// <summary>
+        /// Gets or sets the total use of the drives.
+        /// </summary>
         public UsageData Total
         {
             get => total;
             set => SetField(ref total, value);
         }
 
+        /// <inheritdoc/>
         public void Dispose()
         {
-            Dispose(true);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!disposedValue)
+            if (disposed)
             {
-                if (disposing)
-                {
-                }
-
-                disposedValue = true;
+                return;
             }
+
+            disposed = true;
+            disposables.Dispose();
         }
     }
 }
