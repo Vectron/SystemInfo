@@ -24,5 +24,8 @@
 
   <ItemGroup>
     <PackageReference Include="Nerdbank.GitVersioning" Version="3.5.119" PrivateAssets="All" />
+  <ItemGroup>
+    <None Include="$(SolutionDir)\LICENSE.txt" Pack="true" PackagePath="" />
+    <None Include="$(SolutionDir)\README.md" Pack="true" PackagePath="" />
   </ItemGroup>
 </Project>
