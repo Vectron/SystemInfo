@@ -1,25 +1,12 @@
-namespace SystemInfo.Core.Poco
-{
-    /// <summary>
-    /// Represents the <see cref="UsageData"/> of an hard drive.
-    /// </summary>
-    public class DriveSpaceData : UsageData
-    {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="DriveSpaceData"/> class.
-        /// </summary>
-        /// <param name="name">The name of the drive.</param>
-        /// <param name="size">The total size.</param>
-        /// <param name="available">The available size.</param>
-        public DriveSpaceData(string name, ulong size, ulong available)
-            : base(size, available) => Name = name;
+namespace SystemInfo.Core.Poco;
 
-        /// <summary>
-        /// Gets the name of this drive.
-        /// </summary>
-        public string Name
-        {
-            get;
-        }
-    }
-}
+/// <summary>
+/// Represents the <see cref="UsageData"/> of an hard drive.
+/// </summary>
+/// <remarks>
+/// Initializes a new instance of the <see cref="DriveSpaceData"/> class.
+/// </remarks>
+/// <param name="Name">The name of the drive.</param>
+/// <param name="Size">The total size.</param>
+/// <param name="Available">The available size.</param>
+public record class DriveSpaceData(string Name, ulong Size, ulong Available) : UsageData(Size, Available);
