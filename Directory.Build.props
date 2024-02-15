@@ -1,8 +1,17 @@
 <Project>
   <PropertyGroup>
     <TargetFramework>net472</TargetFramework>
+    <Deterministic>true</Deterministic>
+    <Nullable>enable</Nullable>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors></WarningsAsErrors>
+    <WarningsNotAsErrors>MA0026</WarningsNotAsErrors>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisLevel>latest</AnalysisLevel>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
-  
+
   <!--Package settings-->
   <PropertyGroup>
     <Authors>Vectron</Authors>
