@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Reactive.Linq;
@@ -9,16 +9,21 @@ using VectronsLibrary;
 
 namespace SystemInfo.Core.ViewModels
 {
-    public class NetworkViewModel : ObservableObject, IDisposable, IViewModel
+    /// <summary>
+    /// A view model for showing network information.
+    /// </summary>
+    public sealed class NetworkViewModel : ObservableObject, IDisposable, IViewModel
     {
-        private readonly INetworkController networkController;
-        private bool disposedValue = false;
-        private IDisposable networkUseSubscription;
-        private object settings;
+        private readonly IDisposable networkUseSubscription;
+        private bool disposed;
+        private object? settings;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NetworkViewModel"/> class.
+        /// </summary>
+        /// <param name="networkController">The <see cref="INetworkController"/>.</param>
         public NetworkViewModel(INetworkController networkController)
         {
-            this.networkController = networkController;
             Models = new ObservableCollection<NetworkData>();
             networkUseSubscription = networkController
                .NetworkUse
@@ -26,35 +31,31 @@ namespace SystemInfo.Core.ViewModels
                .Subscribe(x => Models.UpdateAndRemove(x));
         }
 
+        /// <summary>
+        /// Gets an <see cref="ObservableCollection{T}"/>. with data on all interfaces.
+        /// </summary>
         public ObservableCollection<NetworkData> Models
         {
             get;
-            set;
         }
 
-        public object Settings
+        /// <inheritdoc/>
+        public object? Settings
         {
             get => settings;
             set => SetField(ref settings, value);
         }
 
+        /// <inheritdoc/>
         public void Dispose()
         {
-            Dispose(true);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!disposedValue)
+            if (disposed)
             {
-                if (disposing)
-                {
-                    networkUseSubscription?.Dispose();
-                    networkUseSubscription = null;
-                }
-
-                disposedValue = true;
+                return;
             }
+
+            disposed = true;
+            networkUseSubscription.Dispose();
         }
     }
 }

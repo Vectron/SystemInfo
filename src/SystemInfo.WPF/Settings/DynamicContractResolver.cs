@@ -1,20 +1,17 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace SystemInfo.WPF.Settings
 {
-    internal class DynamicContractResolver : DefaultContractResolver
+    /// <summary>
+    /// A <see cref="DefaultContractResolver"/> for resolving json types.
+    /// </summary>
+    internal sealed class DynamicContractResolver : DefaultContractResolver
     {
-        private readonly IServiceProvider serviceProvider;
-
-        public DynamicContractResolver(IServiceProvider serviceProvider)
-        {
-            this.serviceProvider = serviceProvider;
-        }
-
+        /// <inheritdoc/>
         protected override IList<JsonProperty> CreateProperties(Type type, MemberSerialization memberSerialization)
         {
             var defaultSettings = Activator.CreateInstance(type);

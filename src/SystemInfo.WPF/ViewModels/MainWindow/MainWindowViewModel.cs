@@ -1,6 +1,7 @@
-﻿using Microsoft.Extensions.Options;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using Microsoft.Extensions.Options;
 using SystemInfo.Core.ViewModels;
 using SystemInfo.WPF.Settings;
 using VectronsLibrary;
@@ -8,11 +9,19 @@ using VectronsLibrary.DI.Factory;
 
 namespace SystemInfo.WPF.ViewModels.MainWindow
 {
+    /// <summary>
+    /// The view model for the main window.
+    /// </summary>
     public class MainWindowViewModel : ObservableObject, IMainWindowViewModel
     {
         private readonly IFactory<IViewModel> viewModelFactory;
         private WindowSettings windowSettings;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainWindowViewModel"/> class.
+        /// </summary>
+        /// <param name="viewModelFactory">The <see cref="IFactory{IViewModel}"/>.</param>
+        /// <param name="options">The window settings.</param>
         public MainWindowViewModel(IFactory<IViewModel> viewModelFactory, IOptions<WindowSettings> options)
         {
             Items = new ObservableCollection<object>();
@@ -25,40 +34,42 @@ namespace SystemInfo.WPF.ViewModels.MainWindow
             SetSettings();
         }
 
+        /// <inheritdoc/>
         public ICollection<object> Items
         {
             get;
         }
 
+        /// <inheritdoc/>
         public WindowSettings WindowSettings
         {
             get => windowSettings;
             set
             {
-                SetField(ref windowSettings, value);
+                _ = SetField(ref windowSettings, value);
                 SetSettings();
             }
         }
 
         private void SetSettings()
         {
-            foreach (IViewModel item in Items)
+            foreach (var item in Items.Cast<IViewModel>())
             {
                 switch (item.GetType().Name)
                 {
                     case nameof(CPUViewModel):
                         item.Settings = null;
-                        item.Settings = windowSettings.CpuProgressbarSettings;
+                        item.Settings = windowSettings.CpuProgressBarSettings;
                         break;
 
                     case nameof(MemoryViewModel):
                         item.Settings = null;
-                        item.Settings = windowSettings.MemoryProgressbarSettings;
+                        item.Settings = windowSettings.MemoryProgressBarSettings;
                         break;
 
                     case nameof(DriveViewModel):
                         item.Settings = null;
-                        item.Settings = windowSettings.DrivesProgressbarSettings;
+                        item.Settings = windowSettings.DrivesProgressBarSettings;
                         break;
 
                     case nameof(NetworkViewModel):

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Management;
@@ -8,11 +8,15 @@ using SystemInfo.Core.Poco;
 
 namespace SystemInfo.Core.Controllers
 {
+    /// <summary>
+    /// Implementation of <see cref="IMemoryController"/>.
+    /// </summary>
     public class MemoryController : IMemoryController
     {
+        /// <inheritdoc/>
         public IObservable<UsageData> MemoryUse
             => Observable
-            .Create<UsageData>(x => GetMemoryUseStream(x))
+            .Create<UsageData>(GetMemoryUseStream)
             .Publish()
             .RefCount();
 
@@ -23,24 +27,24 @@ namespace SystemInfo.Core.Controllers
 
             using (var mos_System = new ManagementObjectSearcher("select TotalVisibleMemorySize from Win32_OperatingSystem"))
             {
-                totalVisibleMemorySize = (ulong)mos_System
-                    .Get()
+                using var managementBaseObjects = mos_System.Get();
+                totalVisibleMemorySize = (ulong)managementBaseObjects
                     .Cast<ManagementObject>()
                     .First()
                     .Properties["TotalVisibleMemorySize"]
                     .Value;
             }
 
-            var availibleMemoryPerformanceCounter = new PerformanceCounter()
+            var availableMemoryPerformanceCounter = new PerformanceCounter()
             {
                 CategoryName = "Memory",
                 CounterName = "Available bytes",
                 ReadOnly = true,
             };
 
-            disposables.Add(availibleMemoryPerformanceCounter);
+            disposables.Add(availableMemoryPerformanceCounter);
             var updateTimer = Observable.Timer(TimeSpan.Zero, TimeSpan.FromSeconds(1))
-                .Select(_ => availibleMemoryPerformanceCounter.NextValue())
+                .Select(_ => availableMemoryPerformanceCounter.NextValue())
                 .Select(x => Convert.ToUInt64(x))
                 .Select(x => new UsageData(totalVisibleMemorySize * 1024, x))
                 .Subscribe(observer);

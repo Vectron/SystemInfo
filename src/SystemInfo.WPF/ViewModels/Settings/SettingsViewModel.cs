@@ -1,6 +1,6 @@
-﻿using Microsoft.Extensions.Options;
 using System.Windows;
 using System.Windows.Input;
+using Microsoft.Extensions.Options;
 using SystemInfo.WPF.Settings;
 using SystemInfo.WPF.ViewModels.MainWindow;
 using VectronsLibrary;
@@ -9,12 +9,21 @@ using VectronsLibrary.Wpf.Dialogs;
 
 namespace SystemInfo.WPF.ViewModels.Settings
 {
+    /// <summary>
+    /// Implementation of <see cref="ISettingsViewModel"/>.
+    /// </summary>
     public class SettingsViewModel : ObservableObject, ISettingsViewModel
     {
         private readonly WindowSettings defaultSettings = new WindowSettings();
         private readonly IOptions<WindowSettings> settings;
         private readonly ISettingsSaver settingsSaver;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SettingsViewModel"/> class.
+        /// </summary>
+        /// <param name="settings">The window settings.</param>
+        /// <param name="mainWindowViewModel">The <see cref="IMainWindowViewModel"/>.</param>
+        /// <param name="settingsSaver">The <see cref="ISettingsSaver"/>.</param>
         public SettingsViewModel(IOptions<WindowSettings> settings, IMainWindowViewModel mainWindowViewModel, ISettingsSaver settingsSaver)
         {
             this.settings = settings;
@@ -24,12 +33,14 @@ namespace SystemInfo.WPF.ViewModels.Settings
             CopyWindowSettings(WindowSettings, NewSettings);
         }
 
+        /// <summary>
+        /// Gets an <see cref="ICommand"/> to change fonts.
+        /// </summary>
         public ICommand ChangeFont
             => new RelayCommand(w =>
             {
-                var parrent = w as Window;
-
-                var fontpicker = new FontPickerDialog(parrent)
+                var parent = w as Window;
+                var fontPicker = new FontPickerDialog(parent!)
                 {
                     DefaultFontColor = defaultSettings.FontSettings.Color,
                     DefaultFontFamily = defaultSettings.FontSettings.Family,
@@ -46,25 +57,34 @@ namespace SystemInfo.WPF.ViewModels.Settings
                     SelectedFontWeight = NewSettings.FontSettings.Weight,
                 };
 
-                if (fontpicker.ShowDialog() == true)
+                if (fontPicker.ShowDialog() == true)
                 {
-                    NewSettings.FontSettings.Color = fontpicker.SelectedFontColor;
-                    NewSettings.FontSettings.Family = fontpicker.SelectedFontFamily;
-                    NewSettings.FontSettings.Size = fontpicker.SelectedFontSize;
-                    NewSettings.FontSettings.Stretch = fontpicker.SelectedFontStretch;
-                    NewSettings.FontSettings.Style = fontpicker.SelectedFontStyle;
-                    NewSettings.FontSettings.Weight = fontpicker.SelectedFontWeight;
+                    NewSettings.FontSettings.Color = fontPicker.SelectedFontColor;
+                    NewSettings.FontSettings.Family = fontPicker.SelectedFontFamily;
+                    NewSettings.FontSettings.Size = fontPicker.SelectedFontSize;
+                    NewSettings.FontSettings.Stretch = fontPicker.SelectedFontStretch;
+                    NewSettings.FontSettings.Style = fontPicker.SelectedFontStyle;
+                    NewSettings.FontSettings.Weight = fontPicker.SelectedFontWeight;
                 }
             });
 
+        /// <summary>
+        /// Gets the view model for the main window.
+        /// </summary>
         public IMainWindowViewModel MainWindowViewModel
         {
             get;
         }
 
+        /// <summary>
+        /// Gets the new window settings.
+        /// </summary>
         public WindowSettings NewSettings
             => MainWindowViewModel.WindowSettings;
 
+        /// <summary>
+        /// Gets an <see cref="ICommand"/> to apply the settings.
+        /// </summary>
         public ICommand Ok
             => new RelayCommand(_ =>
             {
@@ -72,16 +92,25 @@ namespace SystemInfo.WPF.ViewModels.Settings
                 settingsSaver.SaveConfiguration();
             });
 
+        /// <summary>
+        /// Gets an <see cref="ICommand"/> to reset the settings to default..
+        /// </summary>
         public ICommand ResetDefault
             => new RelayCommand(_ => CopyWindowSettings(defaultSettings, NewSettings));
 
+        /// <summary>
+        /// Gets an <see cref="ICommand"/> to reset the settings to the start value.
+        /// </summary>
         public ICommand ResetStart
             => new RelayCommand(_ => CopyWindowSettings(WindowSettings, NewSettings));
 
+        /// <summary>
+        /// Gets the current window settings.
+        /// </summary>
         public WindowSettings WindowSettings
             => settings.Value;
 
-        private void CopyFontSettings(FontSettings source, FontSettings target)
+        private static void CopyFontSettings(FontSettings source, FontSettings target)
         {
             target.Color = source.Color;
             target.Family = source.Family;
@@ -91,7 +120,7 @@ namespace SystemInfo.WPF.ViewModels.Settings
             target.Weight = source.Weight;
         }
 
-        private void CopyProgressbarSettings(ProgressbarSettings source, ProgressbarSettings target)
+        private static void CopyProgressBarSettings(ProgressBarSettings source, ProgressBarSettings target)
         {
             target.BackgroundColor = source.BackgroundColor;
             target.ForegroundColorEnd = source.ForegroundColorEnd;
@@ -100,7 +129,7 @@ namespace SystemInfo.WPF.ViewModels.Settings
             target.Height = source.Height;
         }
 
-        private void CopyWindowSettings(WindowSettings source, WindowSettings target)
+        private static void CopyWindowSettings(WindowSettings source, WindowSettings target)
         {
             target.BackgroundColor = source.BackgroundColor;
             target.BorderColor = source.BorderColor;
@@ -108,9 +137,9 @@ namespace SystemInfo.WPF.ViewModels.Settings
             target.LockPlacement = source.LockPlacement;
             target.TopPosition = source.TopPosition;
 
-            CopyProgressbarSettings(source.CpuProgressbarSettings, target.CpuProgressbarSettings);
-            CopyProgressbarSettings(source.DrivesProgressbarSettings, target.DrivesProgressbarSettings);
-            CopyProgressbarSettings(source.MemoryProgressbarSettings, target.MemoryProgressbarSettings);
+            CopyProgressBarSettings(source.CpuProgressBarSettings, target.CpuProgressBarSettings);
+            CopyProgressBarSettings(source.DrivesProgressBarSettings, target.DrivesProgressBarSettings);
+            CopyProgressBarSettings(source.MemoryProgressBarSettings, target.MemoryProgressBarSettings);
             CopyFontSettings(source.FontSettings, target.FontSettings);
         }
     }

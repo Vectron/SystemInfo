@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
@@ -6,14 +6,18 @@ using System.Windows.Media;
 
 namespace SystemInfo.WPF.Converters
 {
+    /// <summary>
+    /// An <see cref="IMultiValueConverter"/> for converting gradients.
+    /// </summary>
     public class GradientConverter : IMultiValueConverter
     {
+        /// <inheritdoc/>
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
             var brush = new LinearGradientBrush
             {
                 StartPoint = new Point(0, 0),
-                EndPoint = new Point(1, 1)
+                EndPoint = new Point(1, 1),
             };
 
             if (values.Length != 3
@@ -31,9 +35,8 @@ namespace SystemInfo.WPF.Converters
             return brush;
         }
 
+        /// <inheritdoc/>
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
+            => throw new NotSupportedException();
     }
 }
