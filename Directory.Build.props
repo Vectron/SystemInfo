@@ -1,6 +1,6 @@
 <Project>
   <PropertyGroup>
-    <TargetFramework>net472</TargetFramework>
+    <TargetFrameworks>net8.0</TargetFrameworks>
     <LangVersion>8.0</LangVersion>
     <Deterministic>true</Deterministic>
     <Nullable>enable</Nullable>

@@ -3,34 +3,33 @@ using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media;
 
-namespace SystemInfo.WPF.Converters
+namespace SystemInfo.WPF.Converters;
+
+/// <summary>
+/// An <see cref="IValueConverter"/> for converting colors to brushes.
+/// </summary>
+[ValueConversion(typeof(Color), typeof(Brush))]
+public class ColorToBrushConverter : IValueConverter
 {
-    /// <summary>
-    /// An <see cref="IValueConverter"/> for converting colors to brushes.
-    /// </summary>
-    [ValueConversion(typeof(Color), typeof(Brush))]
-    public class ColorToBrushConverter : IValueConverter
+    /// <inheritdoc/>
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        /// <inheritdoc/>
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        if (targetType != typeof(Brush))
         {
-            if (targetType != typeof(Brush))
-            {
-                throw new InvalidOperationException($"The target must be a {nameof(Brush)}");
-            }
-
-            return new SolidColorBrush((Color)value);
+            throw new InvalidOperationException($"The target must be a {nameof(Brush)}");
         }
 
-        /// <inheritdoc/>
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (targetType != typeof(Color))
-            {
-                throw new InvalidOperationException($"The target must be a {nameof(Color)}");
-            }
+        return new SolidColorBrush((Color)value);
+    }
 
-            return ((SolidColorBrush)value).Color;
+    /// <inheritdoc/>
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (targetType != typeof(Color))
+        {
+            throw new InvalidOperationException($"The target must be a {nameof(Color)}");
         }
+
+        return ((SolidColorBrush)value).Color;
     }
 }
