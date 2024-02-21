@@ -2,7 +2,6 @@ using System.Windows;
 using System.Windows.Input;
 using Microsoft.Extensions.Options;
 using SystemInfo.WPF.Settings;
-using SystemInfo.WPF.ViewModels.MainWindow;
 using VectronsLibrary;
 using VectronsLibrary.Wpf;
 using VectronsLibrary.Wpf.Dialogs;

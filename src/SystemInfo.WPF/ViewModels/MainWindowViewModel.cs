@@ -4,7 +4,7 @@ using SystemInfo.WPF.Settings;
 using VectronsLibrary;
 using VectronsLibrary.DI.Factory;
 
-namespace SystemInfo.WPF.ViewModels.MainWindow;
+namespace SystemInfo.WPF.ViewModels;
 
 /// <summary>
 /// The view model for the main window.
