@@ -1,35 +1,9 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
-     xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
     <?include $(sys.CURRENTDIR)\Config.wxi?>
-    <Product
-        Id="*"
-        Name="$(var.Product_Name)"
-        Language="1033"
-        Codepage="1252"
-        Version="$(var.Product_Version)"
-        Manufacturer="$(var.Product_Manufacturer)"
-        UpgradeCode="$(var.UpgradeCode)">
+    <Package Name="$(var.Product_Name)" Language="1033" Codepage="1252" Version="$(var.Product_Version)" Manufacturer="$(var.Product_Manufacturer)" UpgradeCode="$(var.UpgradeCode)" InstallerVersion="200"><SummaryInformation Keywords="Installer" Description="$(var.Product_Manufacturer)'s $(var.Product_Name) $(var.Product_Version) Installer" Manufacturer="$(var.Product_Manufacturer)" />
 
-        <Package
-            Id="*"
-            Keywords="Installer"
-            Description="$(var.Product_Manufacturer)'s $(var.Product_Name) $(var.Product_Version) Installer"
-            Manufacturer="$(var.Product_Manufacturer)"
-            InstallerVersion="200"
-            Languages="1033"
-            Compressed="yes"
-            SummaryCodepage="1252"
-            InstallScope="perMachine"/>
-
-        <Upgrade Id='$(var.UpgradeCode)'>
-            <UpgradeVersion
-                OnlyDetect='no'
-                Property='PREVIOUSFOUND'
-                Minimum='0.0.0'
-                IncludeMinimum='yes'
-                Maximum='$(var.Product_Version)'
-                IncludeMaximum='no' />
+        <Upgrade Id="$(var.UpgradeCode)">
+            <UpgradeVersion OnlyDetect="no" Property="PREVIOUSFOUND" Minimum="0.0.0" IncludeMinimum="yes" Maximum="$(var.Product_Version)" IncludeMaximum="no" />
         </Upgrade>
         <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
 
@@ -37,29 +11,21 @@
 
         <!--Check for .Net Framework 4.7.2-->
         <PropertyRef Id="NETFRAMEWORK45" />
-        <Condition Message="This application requires .NET Framework 4.7.2. Please install the .NET Framework then run this installer again.">
-            <![CDATA[Installed OR NETFRAMEWORK45]]>
-        </Condition>
+        <Launch Condition="Installed OR NETFRAMEWORK45" Message="This application requires .NET Framework 4.7.2. Please install the .NET Framework then run this installer again." />
 
-        <Icon
-            Id="I.MainIcon.ico"
-            SourceFile='$(var.Product_Icon)' />
+        <Icon Id="I.MainIcon.ico" SourceFile="$(var.Product_Icon)" />
         
-        <Directory Id="TARGETDIR" Name="SourceDir" />
         
-        <Property Id='ARPPRODUCTICON'>I.MainIcon.ico</Property>
-        <Property Id='ARPNOREPAIR'>1</Property>
+        
+        <Property Id="ARPPRODUCTICON" Value="I.MainIcon.ico" />
+        <Property Id="ARPNOREPAIR" Value="1" />
 
-        <WixVariable
-            Id="WixUIBannerBmp"
-            Value="Resources/Banner.bmp" />
-        <WixVariable
-            Id="WixUIDialogBmp"
-            Value="Resources/Dialog.bmp" />
+        <WixVariable Id="WixUIBannerBmp" Value="Resources/Banner.bmp" />
+        <WixVariable Id="WixUIDialogBmp" Value="Resources/Dialog.bmp" />
 
         <UIRef Id="WixUI_CustomMondo" />
 
-        <Feature Id="Options" Title="$(var.Product_Name)" Display="expand" Level="1" ConfigurableDirectory="INSTALLFOLDER" Absent="disallow" AllowAdvertise="no">
+        <Feature Id="Options" Title="$(var.Product_Name)" Display="expand" Level="1" ConfigurableDirectory="INSTALLFOLDER" AllowAdvertise="no" AllowAbsent="no">
             <ComponentRef Id="C.MainExecutable" />
             <ComponentGroupRef Id="$(var.MainComponentGroup)" />
 
@@ -75,5 +41,5 @@
                 <ComponentRef Id="C.DesktopShortcut" />
             </Feature>
         </Feature>
-    </Product>
+    </Package>
 </Wix>

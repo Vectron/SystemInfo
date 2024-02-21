@@ -1,15 +1,12 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
     <?include $(sys.CURRENTDIR)\Config.wxi?>
     <Fragment>
         <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="Launch $(var.Product_Name)" />
         <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOX" Value="1" />
-        <CustomAction Id="LaunchApplication" FileKey="MainExecutable" ExeCommand="" Return="asyncNoWait" Impersonate="yes" />
+        <CustomAction Id="LaunchApplication" ExeCommand="" Return="asyncNoWait" Impersonate="yes" FileRef="MainExecutable" />
 
         <UI Id="StartOnExit">
-            <Publish Dialog="ExitDialog" Control="Finish" Event="DoAction" Value="LaunchApplication">
-                WIXUI_EXITDIALOGOPTIONALCHECKBOX = 1 and NOT Installed
-            </Publish>
+            <Publish Dialog="ExitDialog" Control="Finish" Event="DoAction" Value="LaunchApplication" Condition="WIXUI_EXITDIALOGOPTIONALCHECKBOX = 1 and NOT Installed" />
         </UI>
 
         <UIRef Id="WixUI_Common" />

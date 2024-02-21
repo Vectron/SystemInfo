@@ -1,17 +1,12 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
     <?include $(sys.CURRENTDIR)\Config.wxi?>
     <Fragment>
-        <DirectoryRef Id="TARGETDIR">
-            <Directory Id="ProgramFilesFolder">
-                <Directory Id="D.ManufactuarFolder" Name ="$(var.Product_Manufacturer)">
+            <StandardDirectory Id="ProgramFilesFolder">
+                <Directory Id="D.ManufactuarFolder" Name="$(var.Product_Manufacturer)">
                     <Directory Id="INSTALLFOLDER" Name="$(var.Product_Name)">
-                        <Component Id="C.MainExecutable"
-                                   Guid="*"
-                                   Shared="no"
-                                   Permanent="no">
+                        <Component Id="C.MainExecutable" Shared="no" Permanent="no">
 
-                            <File Id="MainExecutable" Source="$(var.Product_Source_Folder)$(var.MainExeID)" Vital="yes" KeyPath="yes"/>
+                            <File Id="MainExecutable" Source="$(var.Product_Source_Folder)$(var.MainExeID)" Vital="yes" KeyPath="yes" />
                             
                             <RegistryKey Id="RK.RegInstallDir" Root="HKLM" Key="SOFTWARE\[Manufacturer]\[ProductName]" ForceDeleteOnUninstall="yes">
                                 <RegistryValue Type="string" Name="INSTALLFOLDER" Value="[INSTALLFOLDER]" />
@@ -19,7 +14,6 @@
                         </Component>
                     </Directory>
                 </Directory>
-            </Directory>
-        </DirectoryRef>
-    </Fragment>
+            </StandardDirectory>
+        </Fragment>
 </Wix>

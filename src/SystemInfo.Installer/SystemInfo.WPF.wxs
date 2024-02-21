@@ -1,336 +1,191 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
     <?include $(sys.CURRENTDIR)\Config.wxi?>
     <Fragment>
-        <DirectoryRef Id ="INSTALLFOLDER">
-            <Component Id ="C.Hardcodet.Wpf.TaskbarNotification.dll"
-                       Guid="*"
-                       Shared="no"
-                       Permanent="no">
-                <File Source="$(var.Product_Source_Folder)Hardcodet.NotifyIcon.Wpf.dll"
-                      KeyPath="yes" />
+        <DirectoryRef Id="INSTALLFOLDER">
+            <Component Id="C.Hardcodet.Wpf.TaskbarNotification.dll" Shared="no" Permanent="no">
+                <File Id="___var.Product_Source_Folder_Hardcodet.NotifyIcon.Wpf.dll" Source="$(var.Product_Source_Folder)Hardcodet.NotifyIcon.Wpf.dll" KeyPath="yes" />
             </Component>
 
-            <Component Id ="C.Microsoft.Bcl.AsyncInterfaces.dll"
-                       Guid="*"
-                       Shared="no"
-                       Permanent="no">
-                <File Source="$(var.Product_Source_Folder)Microsoft.Bcl.AsyncInterfaces.dll"
-                      KeyPath="yes" />
+            <Component Id="C.Microsoft.Bcl.AsyncInterfaces.dll" Shared="no" Permanent="no">
+                <File Id="___var.Product_Source_Folder_Microsoft.Bcl.AsyncInterfaces.dll" Source="$(var.Product_Source_Folder)Microsoft.Bcl.AsyncInterfaces.dll" KeyPath="yes" />
             </Component>
 
-            <Component Id ="C.Microsoft.Extensions.Configuration.Abstractions.dll"
-                       Guid="*"
-                       Shared="no"
-                       Permanent="no">
-                <File Source="$(var.Product_Source_Folder)Microsoft.Extensions.Configuration.Abstractions.dll"
-                      KeyPath="yes" />
+            <Component Id="C.Microsoft.Extensions.Configuration.Abstractions.dll" Shared="no" Permanent="no">
+                <File Id="___var.Product_Source_Folder_Microsoft.Extensions.Configuration.Abstractions.dll" Source="$(var.Product_Source_Folder)Microsoft.Extensions.Configuration.Abstractions.dll" KeyPath="yes" />
             </Component>
 
-            <Component Id ="C.Microsoft.Extensions.Configuration.Binder.dll"
-                       Guid="*"
-                       Shared="no"
-                       Permanent="no">
-                <File Source="$(var.Product_Source_Folder)Microsoft.Extensions.Configuration.Binder.dll"
-                      KeyPath="yes" />
+            <Component Id="C.Microsoft.Extensions.Configuration.Binder.dll" Shared="no" Permanent="no">
+                <File Id="___var.Product_Source_Folder_Microsoft.Extensions.Configuration.Binder.dll" Source="$(var.Product_Source_Folder)Microsoft.Extensions.Configuration.Binder.dll" KeyPath="yes" />
             </Component>
 
-            <Component Id ="C.Microsoft.Extensions.Configuration.dll"
-                       Guid="*"
-                       Shared="no"
-                       Permanent="no">
-                <File Source="$(var.Product_Source_Folder)Microsoft.Extensions.Configuration.dll"
-                      KeyPath="yes" />
+            <Component Id="C.Microsoft.Extensions.Configuration.dll" Shared="no" Permanent="no">
+                <File Id="___var.Product_Source_Folder_Microsoft.Extensions.Configuration.dll" Source="$(var.Product_Source_Folder)Microsoft.Extensions.Configuration.dll" KeyPath="yes" />
             </Component>
 
-            <Component Id ="C.Microsoft.Extensions.Configuration.FileExtensions.dll"
-                       Guid="*"
-                       Shared="no"
-                       Permanent="no">
-                <File Source="$(var.Product_Source_Folder)Microsoft.Extensions.Configuration.FileExtensions.dll"
-                      KeyPath="yes" />
+            <Component Id="C.Microsoft.Extensions.Configuration.FileExtensions.dll" Shared="no" Permanent="no">
+                <File Id="___var.Product_Source_Folder_Microsoft.Extensions.Configuration.FileExtensions.dll" Source="$(var.Product_Source_Folder)Microsoft.Extensions.Configuration.FileExtensions.dll" KeyPath="yes" />
             </Component>
 
-            <Component Id ="C.Microsoft.Extensions.Configuration.Json.dll"
-                       Guid="*"
-                       Shared="no"
-                       Permanent="no">
-                <File Source="$(var.Product_Source_Folder)Microsoft.Extensions.Configuration.Json.dll"
-                      KeyPath="yes" />
+            <Component Id="C.Microsoft.Extensions.Configuration.Json.dll" Shared="no" Permanent="no">
+                <File Id="___var.Product_Source_Folder_Microsoft.Extensions.Configuration.Json.dll" Source="$(var.Product_Source_Folder)Microsoft.Extensions.Configuration.Json.dll" KeyPath="yes" />
             </Component>
 
-            <Component Id ="C.Microsoft.Extensions.DependencyInjection.Abstractions.dll"
-                       Guid="*"
-                       Shared="no"
-                       Permanent="no">
-                <File Source="$(var.Product_Source_Folder)Microsoft.Extensions.DependencyInjection.Abstractions.dll"
-                      KeyPath="yes" />
+            <Component Id="C.Microsoft.Extensions.DependencyInjection.Abstractions.dll" Shared="no" Permanent="no">
+                <File Id="___var.Product_Source_Folder_Microsoft.Extensions.DependencyInjection.Abstractions.dll" Source="$(var.Product_Source_Folder)Microsoft.Extensions.DependencyInjection.Abstractions.dll" KeyPath="yes" />
             </Component>
 
-            <Component Id ="C.Microsoft.Extensions.DependencyInjection.dll"
-                       Guid="*"
-                       Shared="no"
-                       Permanent="no">
-                <File Source="$(var.Product_Source_Folder)Microsoft.Extensions.DependencyInjection.dll"
-                      KeyPath="yes" />
+            <Component Id="C.Microsoft.Extensions.DependencyInjection.dll" Shared="no" Permanent="no">
+                <File Id="___var.Product_Source_Folder_Microsoft.Extensions.DependencyInjection.dll" Source="$(var.Product_Source_Folder)Microsoft.Extensions.DependencyInjection.dll" KeyPath="yes" />
             </Component>
 
-            <Component Id ="C.Microsoft.Extensions.FileProviders.Abstractions.dll"
-                       Guid="*"
-                       Shared="no"
-                       Permanent="no">
-                <File Source="$(var.Product_Source_Folder)Microsoft.Extensions.FileProviders.Abstractions.dll"
-                      KeyPath="yes" />
+            <Component Id="C.Microsoft.Extensions.FileProviders.Abstractions.dll" Shared="no" Permanent="no">
+                <File Id="___var.Product_Source_Folder_Microsoft.Extensions.FileProviders.Abstractions.dll" Source="$(var.Product_Source_Folder)Microsoft.Extensions.FileProviders.Abstractions.dll" KeyPath="yes" />
             </Component>
 
-            <Component Id ="C.Microsoft.Extensions.FileProviders.Physical.dll"
-                       Guid="*"
-                       Shared="no"
-                       Permanent="no">
-                <File Source="$(var.Product_Source_Folder)Microsoft.Extensions.FileProviders.Physical.dll"
-                      KeyPath="yes" />
+            <Component Id="C.Microsoft.Extensions.FileProviders.Physical.dll" Shared="no" Permanent="no">
+                <File Id="___var.Product_Source_Folder_Microsoft.Extensions.FileProviders.Physical.dll" Source="$(var.Product_Source_Folder)Microsoft.Extensions.FileProviders.Physical.dll" KeyPath="yes" />
             </Component>
 
-            <Component Id ="C.Microsoft.Extensions.FileSystemGlobbing.dll"
-                       Guid="*"
-                       Shared="no"
-                       Permanent="no">
-                <File Source="$(var.Product_Source_Folder)Microsoft.Extensions.FileSystemGlobbing.dll"
-                      KeyPath="yes" />
+            <Component Id="C.Microsoft.Extensions.FileSystemGlobbing.dll" Shared="no" Permanent="no">
+                <File Id="___var.Product_Source_Folder_Microsoft.Extensions.FileSystemGlobbing.dll" Source="$(var.Product_Source_Folder)Microsoft.Extensions.FileSystemGlobbing.dll" KeyPath="yes" />
             </Component>
 
-            <Component Id ="C.Microsoft.Extensions.Logging.Abstractions.dll"
-                       Guid="*"
-                       Shared="no"
-                       Permanent="no">
-                <File Source="$(var.Product_Source_Folder)Microsoft.Extensions.Logging.Abstractions.dll"
-                      KeyPath="yes" />
+            <Component Id="C.Microsoft.Extensions.Logging.Abstractions.dll" Shared="no" Permanent="no">
+                <File Id="___var.Product_Source_Folder_Microsoft.Extensions.Logging.Abstractions.dll" Source="$(var.Product_Source_Folder)Microsoft.Extensions.Logging.Abstractions.dll" KeyPath="yes" />
             </Component>
 
-            <Component Id ="C.Microsoft.Extensions.Options.ConfigurationExtensions.dll"
-                       Guid="*"
-                       Shared="no"
-                       Permanent="no">
-                <File Source="$(var.Product_Source_Folder)Microsoft.Extensions.Options.ConfigurationExtensions.dll"
-                      KeyPath="yes" />
+            <Component Id="C.Microsoft.Extensions.Options.ConfigurationExtensions.dll" Shared="no" Permanent="no">
+                <File Id="___var.Product_Source_Folder_Microsoft.Extensions.Options.ConfigurationExtensions.dll" Source="$(var.Product_Source_Folder)Microsoft.Extensions.Options.ConfigurationExtensions.dll" KeyPath="yes" />
             </Component>
 
-            <Component Id ="C.Microsoft.Extensions.Options.dll"
-                       Guid="*"
-                       Shared="no"
-                       Permanent="no">
-                <File Source="$(var.Product_Source_Folder)Microsoft.Extensions.Options.dll"
-                      KeyPath="yes" />
+            <Component Id="C.Microsoft.Extensions.Options.dll" Shared="no" Permanent="no">
+                <File Id="___var.Product_Source_Folder_Microsoft.Extensions.Options.dll" Source="$(var.Product_Source_Folder)Microsoft.Extensions.Options.dll" KeyPath="yes" />
             </Component>
 
-            <Component Id ="C.Microsoft.Extensions.Primitives.dll"
-                       Guid="*"
-                       Shared="no"
-                       Permanent="no">
-                <File Source="$(var.Product_Source_Folder)Microsoft.Extensions.Primitives.dll"
-                      KeyPath="yes" />
+            <Component Id="C.Microsoft.Extensions.Primitives.dll" Shared="no" Permanent="no">
+                <File Id="___var.Product_Source_Folder_Microsoft.Extensions.Primitives.dll" Source="$(var.Product_Source_Folder)Microsoft.Extensions.Primitives.dll" KeyPath="yes" />
             </Component>
 
-            <Component Id ="C.Microsoft.Xaml.Behaviors.dll"
-                       Guid="*"
-                       Shared="no"
-                       Permanent="no">
-                <File Source="$(var.Product_Source_Folder)Microsoft.Xaml.Behaviors.dll"
-                      KeyPath="yes" />
+            <Component Id="C.Microsoft.Xaml.Behaviors.dll" Shared="no" Permanent="no">
+                <File Id="___var.Product_Source_Folder_Microsoft.Xaml.Behaviors.dll" Source="$(var.Product_Source_Folder)Microsoft.Xaml.Behaviors.dll" KeyPath="yes" />
             </Component>
 
-            <Component Id ="C.Newtonsoft.Json.dll"
-                       Guid="*"
-                       Shared="no"
-                       Permanent="no">
-                <File Source="$(var.Product_Source_Folder)Newtonsoft.Json.dll"
-                      KeyPath="yes" />
+            <Component Id="C.Newtonsoft.Json.dll" Shared="no" Permanent="no">
+                <File Id="___var.Product_Source_Folder_Newtonsoft.Json.dll" Source="$(var.Product_Source_Folder)Newtonsoft.Json.dll" KeyPath="yes" />
             </Component>
 
-            <Component Id ="C.System.Buffers.dll"
-                       Guid="*"
-                       Shared="no"
-                       Permanent="no">
-                <File Source="$(var.Product_Source_Folder)System.Buffers.dll"
-                      KeyPath="yes" />
+            <Component Id="C.System.Buffers.dll" Shared="no" Permanent="no">
+                <File Id="___var.Product_Source_Folder_System.Buffers.dll" Source="$(var.Product_Source_Folder)System.Buffers.dll" KeyPath="yes" />
             </Component>
 
-            <Component Id ="C.System.Memory.dll"
-                       Guid="*"
-                       Shared="no"
-                       Permanent="no">
-                <File Source="$(var.Product_Source_Folder)System.Memory.dll"
-                      KeyPath="yes" />
+            <Component Id="C.System.Memory.dll" Shared="no" Permanent="no">
+                <File Id="___var.Product_Source_Folder_System.Memory.dll" Source="$(var.Product_Source_Folder)System.Memory.dll" KeyPath="yes" />
             </Component>
 
-            <Component Id ="C.System.Numerics.Vectors.dll"
-                       Guid="*"
-                       Shared="no"
-                       Permanent="no">
-                <File Source="$(var.Product_Source_Folder)System.Numerics.Vectors.dll"
-                      KeyPath="yes" />
+            <Component Id="C.System.Numerics.Vectors.dll" Shared="no" Permanent="no">
+                <File Id="___var.Product_Source_Folder_System.Numerics.Vectors.dll" Source="$(var.Product_Source_Folder)System.Numerics.Vectors.dll" KeyPath="yes" />
             </Component>
 
-            <Component Id ="C.System.Reactive.dll"
-                       Guid="*"
-                       Shared="no"
-                       Permanent="no">
-                <File Source="$(var.Product_Source_Folder)System.Reactive.dll"
-                      KeyPath="yes" />
+            <Component Id="C.System.Reactive.dll" Shared="no" Permanent="no">
+                <File Id="___var.Product_Source_Folder_System.Reactive.dll" Source="$(var.Product_Source_Folder)System.Reactive.dll" KeyPath="yes" />
             </Component>
 
-            <Component Id ="C.System.Runtime.CompilerServices.Unsafe.dll"
-                       Guid="*"
-                       Shared="no"
-                       Permanent="no">
-                <File Source="$(var.Product_Source_Folder)System.Runtime.CompilerServices.Unsafe.dll"
-                      KeyPath="yes" />
+            <Component Id="C.System.Runtime.CompilerServices.Unsafe.dll" Shared="no" Permanent="no">
+                <File Id="___var.Product_Source_Folder_System.Runtime.CompilerServices.Unsafe.dll" Source="$(var.Product_Source_Folder)System.Runtime.CompilerServices.Unsafe.dll" KeyPath="yes" />
             </Component>
 
-            <Component Id ="C.System.Security.AccessControl.dll"
-                       Guid="*"
-                       Shared="no"
-                       Permanent="no">
-                <File Source="$(var.Product_Source_Folder)System.Security.AccessControl.dll"
-                      KeyPath="yes" />
+            <Component Id="C.System.Security.AccessControl.dll" Shared="no" Permanent="no">
+                <File Id="___var.Product_Source_Folder_System.Security.AccessControl.dll" Source="$(var.Product_Source_Folder)System.Security.AccessControl.dll" KeyPath="yes" />
             </Component>
 
-            <Component Id ="C.System.Security.Principal.Windows.dll"
-                       Guid="*"
-                       Shared="no"
-                       Permanent="no">
-                <File Source="$(var.Product_Source_Folder)System.Security.Principal.Windows.dll"
-                      KeyPath="yes" />
+            <Component Id="C.System.Security.Principal.Windows.dll" Shared="no" Permanent="no">
+                <File Id="___var.Product_Source_Folder_System.Security.Principal.Windows.dll" Source="$(var.Product_Source_Folder)System.Security.Principal.Windows.dll" KeyPath="yes" />
             </Component>
 
-            <Component Id ="C.System.Text.Encodings.Web.dll"
-                       Guid="*"
-                       Shared="no"
-                       Permanent="no">
-                <File Source="$(var.Product_Source_Folder)System.Text.Encodings.Web.dll"
-                      KeyPath="yes" />
+            <Component Id="C.System.Text.Encodings.Web.dll" Shared="no" Permanent="no">
+                <File Id="___var.Product_Source_Folder_System.Text.Encodings.Web.dll" Source="$(var.Product_Source_Folder)System.Text.Encodings.Web.dll" KeyPath="yes" />
             </Component>
 
-            <Component Id ="C.System.Text.Json.dll"
-                       Guid="*"
-                       Shared="no"
-                       Permanent="no">
-                <File Source="$(var.Product_Source_Folder)System.Text.Json.dll"
-                      KeyPath="yes" />
+            <Component Id="C.System.Text.Json.dll" Shared="no" Permanent="no">
+                <File Id="___var.Product_Source_Folder_System.Text.Json.dll" Source="$(var.Product_Source_Folder)System.Text.Json.dll" KeyPath="yes" />
             </Component>
 
-            <Component Id ="C.System.Threading.AccessControl.dll"
-                       Guid="*"
-                       Shared="no"
-                       Permanent="no">
-                <File Source="$(var.Product_Source_Folder)System.Threading.AccessControl.dll"
-                      KeyPath="yes" />
+            <Component Id="C.System.Threading.AccessControl.dll" Shared="no" Permanent="no">
+                <File Id="___var.Product_Source_Folder_System.Threading.AccessControl.dll" Source="$(var.Product_Source_Folder)System.Threading.AccessControl.dll" KeyPath="yes" />
             </Component>            
 
-            <Component Id ="C.System.Threading.Tasks.Extensions.dll"
-                       Guid="*"
-                       Shared="no"
-                       Permanent="no">
-                <File Source="$(var.Product_Source_Folder)System.Threading.Tasks.Extensions.dll"
-                      KeyPath="yes" />
+            <Component Id="C.System.Threading.Tasks.Extensions.dll" Shared="no" Permanent="no">
+                <File Id="___var.Product_Source_Folder_System.Threading.Tasks.Extensions.dll" Source="$(var.Product_Source_Folder)System.Threading.Tasks.Extensions.dll" KeyPath="yes" />
             </Component>
 
-            <Component Id ="C.System.ValueTuple.dll"
-                       Guid="*"
-                       Shared="no"
-                       Permanent="no">
-                <File Source="$(var.Product_Source_Folder)System.ValueTuple.dll"
-                      KeyPath="yes" />
+            <Component Id="C.System.ValueTuple.dll" Shared="no" Permanent="no">
+                <File Id="___var.Product_Source_Folder_System.ValueTuple.dll" Source="$(var.Product_Source_Folder)System.ValueTuple.dll" KeyPath="yes" />
             </Component>
 
-            <Component Id ="C.SystemInfo.Core.dll"
-                       Guid="*"
-                       Shared="no"
-                       Permanent="no">
-                <File Source="$(var.Product_Source_Folder)SystemInfo.Core.dll"
-                      KeyPath="yes" />
+            <Component Id="C.SystemInfo.Core.dll" Shared="no" Permanent="no">
+                <File Id="___var.Product_Source_Folder_SystemInfo.Core.dll" Source="$(var.Product_Source_Folder)SystemInfo.Core.dll" KeyPath="yes" />
             </Component>
 
-            <Component Id ="C.SystemInfo.WPF.exe.config"
-                       Guid="*"
-                       Shared="no"
-                       Permanent="no">
-                <File Source="$(var.Product_Source_Folder)SystemInfo.WPF.exe.config"
-                      KeyPath="yes" />
+            <Component Id="C.SystemInfo.WPF.exe.config" Shared="no" Permanent="no">
+                <File Id="___var.Product_Source_Folder_SystemInfo.WPF.exe.config" Source="$(var.Product_Source_Folder)SystemInfo.WPF.exe.config" KeyPath="yes" />
             </Component>
 
-            <Component Id ="C.VectronsLibrary.DI.Abstraction.dll"
-                       Guid="*"
-                       Shared="no"
-                       Permanent="no">
-                <File Source="$(var.Product_Source_Folder)VectronsLibrary.DI.Abstraction.dll"
-                      KeyPath="yes" />
+            <Component Id="C.VectronsLibrary.DI.Abstraction.dll" Shared="no" Permanent="no">
+                <File Id="___var.Product_Source_Folder_VectronsLibrary.DI.Abstraction.dll" Source="$(var.Product_Source_Folder)VectronsLibrary.DI.Abstraction.dll" KeyPath="yes" />
             </Component>
 
-            <Component Id ="C.VectronsLibrary.DI.dll"
-                       Guid="*"
-                       Shared="no"
-                       Permanent="no">
-                <File Source="$(var.Product_Source_Folder)VectronsLibrary.DI.dll"
-                      KeyPath="yes" />
+            <Component Id="C.VectronsLibrary.DI.dll" Shared="no" Permanent="no">
+                <File Id="___var.Product_Source_Folder_VectronsLibrary.DI.dll" Source="$(var.Product_Source_Folder)VectronsLibrary.DI.dll" KeyPath="yes" />
             </Component>
 
-            <Component Id ="C.VectronsLibrary.dll"
-                       Guid="*"
-                       Shared="no"
-                       Permanent="no">
-                <File Source="$(var.Product_Source_Folder)VectronsLibrary.dll"
-                      KeyPath="yes" />
+            <Component Id="C.VectronsLibrary.dll" Shared="no" Permanent="no">
+                <File Id="___var.Product_Source_Folder_VectronsLibrary.dll" Source="$(var.Product_Source_Folder)VectronsLibrary.dll" KeyPath="yes" />
             </Component>
 
-            <Component Id ="C.VectronsLibrary.Wpf.dll"
-                       Guid="*"
-                       Shared="no"
-                       Permanent="no">
-                <File Source="$(var.Product_Source_Folder)VectronsLibrary.Wpf.dll"
-                      KeyPath="yes" />
+            <Component Id="C.VectronsLibrary.Wpf.dll" Shared="no" Permanent="no">
+                <File Id="___var.Product_Source_Folder_VectronsLibrary.Wpf.dll" Source="$(var.Product_Source_Folder)VectronsLibrary.Wpf.dll" KeyPath="yes" />
             </Component>
         </DirectoryRef>
     </Fragment>
 
     <Fragment>
         <ComponentGroup Id="CG.SystemInfo.WPF">
-            <ComponentRef Id ="C.Hardcodet.Wpf.TaskbarNotification.dll" />
-            <ComponentRef Id ="C.Microsoft.Bcl.AsyncInterfaces.dll" />
-            <ComponentRef Id ="C.Microsoft.Extensions.Configuration.Abstractions.dll" />
-            <ComponentRef Id ="C.Microsoft.Extensions.Configuration.Binder.dll" />
-            <ComponentRef Id ="C.Microsoft.Extensions.Configuration.dll" />
-            <ComponentRef Id ="C.Microsoft.Extensions.Configuration.FileExtensions.dll" />
-            <ComponentRef Id ="C.Microsoft.Extensions.Configuration.Json.dll" />
-            <ComponentRef Id ="C.Microsoft.Extensions.DependencyInjection.Abstractions.dll" />
-            <ComponentRef Id ="C.Microsoft.Extensions.DependencyInjection.dll" />
-            <ComponentRef Id ="C.Microsoft.Extensions.FileProviders.Abstractions.dll" />
-            <ComponentRef Id ="C.Microsoft.Extensions.FileProviders.Physical.dll" />
-            <ComponentRef Id ="C.Microsoft.Extensions.FileSystemGlobbing.dll" />
-            <ComponentRef Id ="C.Microsoft.Extensions.Logging.Abstractions.dll" />
-            <ComponentRef Id ="C.Microsoft.Extensions.Options.ConfigurationExtensions.dll" />
-            <ComponentRef Id ="C.Microsoft.Extensions.Options.dll" />
-            <ComponentRef Id ="C.Microsoft.Extensions.Primitives.dll" />
-            <ComponentRef Id="C.Microsoft.Xaml.Behaviors.dll"/>
-            <ComponentRef Id ="C.Newtonsoft.Json.dll" />
-            <ComponentRef Id ="C.System.Buffers.dll" />
-            <ComponentRef Id ="C.System.Memory.dll" />
-            <ComponentRef Id ="C.System.Numerics.Vectors.dll" />
-            <ComponentRef Id ="C.System.Reactive.dll" />
-            <ComponentRef Id ="C.System.Runtime.CompilerServices.Unsafe.dll" />            
-            <ComponentRef Id ="C.System.Security.AccessControl.dll" />
-            <ComponentRef Id ="C.System.Security.Principal.Windows.dll" />
-            <ComponentRef Id ="C.System.Text.Encodings.Web.dll" />
-            <ComponentRef Id ="C.System.Text.Json.dll" />
-            <ComponentRef Id ="C.System.Threading.AccessControl.dll" />            
-            <ComponentRef Id ="C.System.Threading.Tasks.Extensions.dll" />
-            <ComponentRef Id ="C.System.ValueTuple.dll" />
-            <ComponentRef Id ="C.SystemInfo.Core.dll" />
-            <ComponentRef Id ="C.SystemInfo.WPF.exe.config" />
-            <ComponentRef Id ="C.VectronsLibrary.DI.Abstraction.dll" />
-            <ComponentRef Id ="C.VectronsLibrary.DI.dll" />
-            <ComponentRef Id ="C.VectronsLibrary.dll" />
-            <ComponentRef Id ="C.VectronsLibrary.Wpf.dll" />
+            <ComponentRef Id="C.Hardcodet.Wpf.TaskbarNotification.dll" />
+            <ComponentRef Id="C.Microsoft.Bcl.AsyncInterfaces.dll" />
+            <ComponentRef Id="C.Microsoft.Extensions.Configuration.Abstractions.dll" />
+            <ComponentRef Id="C.Microsoft.Extensions.Configuration.Binder.dll" />
+            <ComponentRef Id="C.Microsoft.Extensions.Configuration.dll" />
+            <ComponentRef Id="C.Microsoft.Extensions.Configuration.FileExtensions.dll" />
+            <ComponentRef Id="C.Microsoft.Extensions.Configuration.Json.dll" />
+            <ComponentRef Id="C.Microsoft.Extensions.DependencyInjection.Abstractions.dll" />
+            <ComponentRef Id="C.Microsoft.Extensions.DependencyInjection.dll" />
+            <ComponentRef Id="C.Microsoft.Extensions.FileProviders.Abstractions.dll" />
+            <ComponentRef Id="C.Microsoft.Extensions.FileProviders.Physical.dll" />
+            <ComponentRef Id="C.Microsoft.Extensions.FileSystemGlobbing.dll" />
+            <ComponentRef Id="C.Microsoft.Extensions.Logging.Abstractions.dll" />
+            <ComponentRef Id="C.Microsoft.Extensions.Options.ConfigurationExtensions.dll" />
+            <ComponentRef Id="C.Microsoft.Extensions.Options.dll" />
+            <ComponentRef Id="C.Microsoft.Extensions.Primitives.dll" />
+            <ComponentRef Id="C.Microsoft.Xaml.Behaviors.dll" />
+            <ComponentRef Id="C.Newtonsoft.Json.dll" />
+            <ComponentRef Id="C.System.Buffers.dll" />
+            <ComponentRef Id="C.System.Memory.dll" />
+            <ComponentRef Id="C.System.Numerics.Vectors.dll" />
+            <ComponentRef Id="C.System.Reactive.dll" />
+            <ComponentRef Id="C.System.Runtime.CompilerServices.Unsafe.dll" />            
+            <ComponentRef Id="C.System.Security.AccessControl.dll" />
+            <ComponentRef Id="C.System.Security.Principal.Windows.dll" />
+            <ComponentRef Id="C.System.Text.Encodings.Web.dll" />
+            <ComponentRef Id="C.System.Text.Json.dll" />
+            <ComponentRef Id="C.System.Threading.AccessControl.dll" />            
+            <ComponentRef Id="C.System.Threading.Tasks.Extensions.dll" />
+            <ComponentRef Id="C.System.ValueTuple.dll" />
+            <ComponentRef Id="C.SystemInfo.Core.dll" />
+            <ComponentRef Id="C.SystemInfo.WPF.exe.config" />
+            <ComponentRef Id="C.VectronsLibrary.DI.Abstraction.dll" />
+            <ComponentRef Id="C.VectronsLibrary.DI.dll" />
+            <ComponentRef Id="C.VectronsLibrary.dll" />
+            <ComponentRef Id="C.VectronsLibrary.Wpf.dll" />
         </ComponentGroup>
     </Fragment>
 </Wix>

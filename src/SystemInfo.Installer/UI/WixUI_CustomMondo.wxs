@@ -1,13 +1,12 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs" xmlns:ui="http://wixtoolset.org/schemas/v4/wxs/ui">
     <?include $(sys.CURRENTDIR)\Config.wxi?>
     <Fragment>
-        <UI Id ="WixUI_CustomMondo">
-            <UIRef Id="WixUI_Mondo"/>
-            <UIRef Id="StartOnExit"/>
+        <UI Id="WixUI_CustomMondo">
+            <ui:WixUI Id="WixUI_Mondo" />
+            <UIRef Id="StartOnExit" />
 
-            <Publish Dialog="WelcomeDlg" Control="Next" Event="NewDialog" Value="SetupTypeDlg">NOT Installed AND NOT PATCH</Publish>
-            <Publish Dialog="SetupTypeDlg" Control="Back" Event="NewDialog" Value="WelcomeDlg">1</Publish>
+            <Publish Dialog="WelcomeDlg" Control="Next" Event="NewDialog" Value="SetupTypeDlg" Condition="NOT Installed AND NOT PATCH" />
+            <Publish Dialog="SetupTypeDlg" Control="Back" Event="NewDialog" Value="WelcomeDlg" />
         </UI>
 
         <UIRef Id="WixUI_Common" />
