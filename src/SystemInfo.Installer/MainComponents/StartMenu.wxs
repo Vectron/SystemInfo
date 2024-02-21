@@ -1,24 +1,11 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
     <?include $(sys.CURRENTDIR)\Config.wxi?>
     <Fragment>
-        <DirectoryRef Id="TARGETDIR">
-            <Directory Id="ProgramMenuFolder">
+            <StandardDirectory Id="ProgramMenuFolder">
                 <Directory Id="D.ProgramMenuDir" Name="$(var.Product_Name)">
-                    <Component Id="C.ProgramMenuDir" Guid="*">
-                        <Shortcut
-                            Id="S.Uninstall"
-                            Name="Uninstall $(var.Product_Name)"
-                            Target="[SystemFolder]msiexec.exe"
-                            Arguments="/x [ProductCode]"
-                            Description="Uninstalls the $(var.Product_Name) Application" />
-                        <Shortcut
-                            Id="S.MainExeProgramMenu"
-                            Name="$(var.Product_Name)"
-                            WorkingDirectory="INSTALLFOLDER"
-                            Icon="I.MainIcon.ico"
-                            IconIndex="0"
-                            Target="[INSTALLFOLDER]$(var.MainExeID)" />
+                    <Component Id="C.ProgramMenuDir">
+                        <Shortcut Id="S.Uninstall" Name="Uninstall $(var.Product_Name)" Target="[SystemFolder]msiexec.exe" Arguments="/x [ProductCode]" Description="Uninstalls the $(var.Product_Name) Application" />
+                        <Shortcut Id="S.MainExeProgramMenu" Name="$(var.Product_Name)" WorkingDirectory="INSTALLFOLDER" Icon="I.MainIcon.ico" IconIndex="0" Target="[INSTALLFOLDER]$(var.MainExeID)" />
                         
                         <RemoveFolder Id="RF.ProgramMenuDir" Directory="D.ProgramMenuDir" On="uninstall" />
                         
@@ -27,21 +14,15 @@
                         </RegistryKey>
                     </Component>
 
-                    <Directory Id="StartupFolder" Name="Startup">
+                    <StandardDirectory Id="StartupFolder">
                         <Component Id="C.StartupFolder">
                             <RegistryKey Id="RK.RegStartupShortcut" Root="HKCU" Key="SOFTWARE\[Manufacturer]\[ProductName]" ForceDeleteOnUninstall="yes">
                                 <RegistryValue Type="integer" Name="STSC" Value="1" KeyPath="yes" />
                             </RegistryKey>
-                            <Shortcut Id="S.MainExeStartup"
-                                      Name="$(var.Product_Name)"
-                                      WorkingDirectory="INSTALLFOLDER"
-                                      Icon="I.MainIcon.ico"
-                                      IconIndex="0"
-                                      Target="[INSTALLFOLDER]$(var.MainExeID)" />
+                            <Shortcut Id="S.MainExeStartup" Name="$(var.Product_Name)" WorkingDirectory="INSTALLFOLDER" Icon="I.MainIcon.ico" IconIndex="0" Target="[INSTALLFOLDER]$(var.MainExeID)" />
                         </Component>
-                    </Directory>
+                    </StandardDirectory>
                 </Directory>
-            </Directory>
-        </DirectoryRef>
-    </Fragment>
+            </StandardDirectory>
+        </Fragment>
 </Wix>
