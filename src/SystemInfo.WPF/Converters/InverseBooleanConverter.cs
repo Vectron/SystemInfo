@@ -1,4 +1,3 @@
-using System;
 using System.Windows.Data;
 
 namespace SystemInfo.WPF.Converters;

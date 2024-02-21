@@ -1,6 +1,4 @@
-using System;
 using System.Diagnostics;
-using System.Linq;
 using System.Management;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;

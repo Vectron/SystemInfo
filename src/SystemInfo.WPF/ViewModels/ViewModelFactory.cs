@@ -1,4 +1,3 @@
-using System;
 using SystemInfo.Core.ViewModels;
 using VectronsLibrary.DI;
 using VectronsLibrary.DI.Factory;

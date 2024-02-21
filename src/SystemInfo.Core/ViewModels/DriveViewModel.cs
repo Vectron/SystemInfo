@@ -1,9 +1,6 @@
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
-using System.Threading;
 using SystemInfo.Core.Controllers;
 using SystemInfo.Core.Poco;
 using VectronsLibrary;
