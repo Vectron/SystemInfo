@@ -1,6 +1,6 @@
 using SystemInfo.WPF.Settings;
 
-namespace SystemInfo.WPF.ViewModels.MainWindow;
+namespace SystemInfo.WPF.ViewModels;
 
 /// <summary>
 /// Marker for the view model of the main window.

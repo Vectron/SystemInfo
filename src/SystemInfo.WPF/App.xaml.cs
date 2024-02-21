@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using SystemInfo.Core;
 using SystemInfo.WPF.Extensions;
 using SystemInfo.WPF.Settings;
-using SystemInfo.WPF.ViewModels.MainWindow;
+using SystemInfo.WPF.ViewModels;
 using SystemInfo.WPF.ViewModels.NotifyIcon;
 using SystemInfo.WPF.Views;
 using VectronsLibrary.DI;
