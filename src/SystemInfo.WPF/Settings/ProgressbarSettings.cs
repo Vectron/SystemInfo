@@ -4,7 +4,7 @@ using VectronsLibrary;
 namespace SystemInfo.WPF.Settings;
 
 /// <summary>
-/// Settings for the progess bar.
+/// Settings for the progress bar.
 /// </summary>
 public class ProgressBarSettings : ObservableObject
 {
@@ -81,5 +81,5 @@ public class ProgressBarSettings : ObservableObject
         Height == settings.Height;
 
     /// <inheritdoc/>
-    public override int GetHashCode() => System.HashCode.Combine(BackgroundColor, ForegroundColorEnd, ForegroundColorMiddle, ForegroundColorStart, Height);
+    public override int GetHashCode() => HashCode.Combine(BackgroundColor, ForegroundColorEnd, ForegroundColorMiddle, ForegroundColorStart, Height);
 }

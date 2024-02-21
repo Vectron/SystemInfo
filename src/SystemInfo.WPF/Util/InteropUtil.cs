@@ -1,11 +1,10 @@
-using System;
 using System.Windows;
 using System.Windows.Interop;
 
 namespace SystemInfo.WPF.Util;
 
 /// <summary>
-/// Utilities for interopting with the os.
+/// Utilities for inter opting with the os.
 /// </summary>
 internal static class InteropUtil
 {

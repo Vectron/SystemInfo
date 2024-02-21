@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -97,5 +96,5 @@ public class FontSettings : ObservableObject
 
     /// <inheritdoc/>
     public override int GetHashCode()
-        => System.HashCode.Combine(Color, Family, Size, Stretch, Style, Weight);
+        => HashCode.Combine(Color, Family, Size, Stretch, Style, Weight);
 }

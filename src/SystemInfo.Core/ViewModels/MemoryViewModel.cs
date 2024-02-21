@@ -1,4 +1,3 @@
-using System;
 using System.Reactive.Linq;
 using SystemInfo.Core.Controllers;
 using SystemInfo.Core.Poco;
