@@ -20,9 +20,12 @@ public class DriveSpaceController : IDriveSpaceController
                 {
                     return new DriveSpaceData(d.Name, (ulong)d.TotalSize, (ulong)d.AvailableFreeSpace);
                 }
-                catch (Exception)
+                catch (Exception ex)
+                    when (ex is UnauthorizedAccessException
+                    or DriveNotFoundException
+                    or IOException)
                 {
-                    return null;
+                    return new DriveSpaceData(d.Name, 0ul, 0ul);
                 }
             })
             .Where(x => x != null)
