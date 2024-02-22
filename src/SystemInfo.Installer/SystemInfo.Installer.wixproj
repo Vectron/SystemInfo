@@ -8,6 +8,7 @@
       MainExecutable=SystemInfo.WPF.exe;
       MainIcon=..\SystemInfo.WPF\Resources\route.ico;
       UpgradeGuid=3D278560-187E-4111-88D8-07FF39ADC4BB;
+      StartOnBootLevel=1;
     </DefineConstants>
   </PropertyGroup>
   
