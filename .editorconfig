@@ -29,7 +29,7 @@ trim_trailing_whitespace = true
 indent_style = tab
 
 # Visual Studio XML Project Files
-[*.{csproj,vbproj,vcxproj.filters,proj,projitems,shproj}]
+[*.{csproj,vbproj,vcxproj.filters,proj,projitems,shproj,wixproj}]
 indent_size = 2
 
 # XML Configuration Files
@@ -63,6 +63,10 @@ end_of_line = lf
 # Makefiles
 [Makefile]
 indent_style = tab
+
+# WIX files
+[*.{wxi,wxl,wxs,wixobj}]
+indent_size = 2
 
 ##########################################
 # Visual Studio Spell Checker

@@ -1,0 +1,24 @@
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs"
+     xmlns:netfx="http://wixtoolset.org/schemas/v4/wxs/netfx">
+
+  <?ifndef DotNetVersion ?>
+  <?warning 'DotNetVersion' is not set, disabling version check ?>
+  <?endif?>
+
+  <Fragment>
+    <?ifdef DotNetVersion?>
+    <netfx:DotNetCompatibilityCheck
+        Property="DOTNETRUNTIMECHECK"
+        RollForward="major"
+        RuntimeType="core"
+        Platform="x64"
+        Version="$(DotNetVersion)" />
+
+    <Launch Message="!(loc.NetVersionError)" Condition="Installed OR (DOTNETRUNTIMECHECK = 0)" />
+    <?else?>
+    <?define DotNetVersion="0.0.0"?>
+    <?endif?>
+
+    <Property Id="CheckDotNetVersion" Value="$(DotNetVersion)" />
+  </Fragment>
+</Wix>

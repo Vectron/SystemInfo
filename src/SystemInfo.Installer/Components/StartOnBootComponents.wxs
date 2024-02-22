@@ -1,0 +1,9 @@
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Fragment>
+    <ComponentGroup Id="StartOnBootComponents"  Directory="StartupFolder">
+      <Component>
+        <RegistryValue Root="HKCU" Key="Software\Microsoft\Windows\CurrentVersion\Run" Name="SystemInfo" Type="string" Value="[#MainExecutable]" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+</Wix>
