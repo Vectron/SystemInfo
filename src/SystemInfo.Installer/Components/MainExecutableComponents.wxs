@@ -1,0 +1,25 @@
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+
+  <?ifndef MainExecutable ?>
+  <?error 'MainExecutable' must be defined ?>
+  <?endif?>
+
+  <?ifndef MainIcon ?>
+  <?error 'MainIcon' must be defined ?>
+  <?endif?>
+
+  <Fragment>
+    <Icon Id="MainIcon" SourceFile="$(MainIcon)" />
+    <Property Id="ARPPRODUCTICON" Value="MainIcon" />
+
+    <ComponentGroup Id="MainExecutableComponents" Directory="APPLICATIONFOLDER">
+      <Component>
+        <File Id="MainExecutable" Source="$(MainExecutable)" />
+      </Component>
+
+      <Component>
+        <RegistryValue Root="HKMU" Key="SOFTWARE\[Manufacturer]\[ProductName]" Name="INSTALLFOLDER" Type="string" Value="[APPLICATIONFOLDER]" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+</Wix>

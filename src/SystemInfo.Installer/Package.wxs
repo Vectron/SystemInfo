@@ -1,0 +1,45 @@
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs"
+     xmlns:ui="http://wixtoolset.org/schemas/v4/wxs/ui">
+  <?ifndef Manufacturer ?>
+  <?error 'Manufacturer' must be defined ?>
+  <?endif?>
+
+  <?ifndef ProductName ?>
+  <?error 'ProductName' must be defined ?>
+  <?endif?>
+
+  <?ifndef Version?>
+  <?warning 'Version' not defined using MainExecutable assembly version ?>
+  <?define Version="!(bind.FileVersion.MainExecutable)" ?>
+  <?endif?>
+
+  <?ifndef UpgradeGuid ?>
+  <?error 'UpgradeGuid' must be defined ?>
+  <?endif?>
+
+  <?ifndef Description?>
+  <?warning 'Description' not defined using default ?>
+  <?define Description="!(loc.DefaultDescription)" ?>
+  <?endif?>
+
+  <Package
+    Name="$(ProductName)"
+    Version="$(Version)"
+    Manufacturer="$(Manufacturer)"
+    UpgradeCode="$(UpgradeGuid)">
+    <MajorUpgrade DowngradeErrorMessage="!(loc.DowngradeError)" />
+
+    <SummaryInformation
+      Keywords="Installer"
+      Description="$(Description)"
+      Manufacturer="!(bind.property.Manufacturer)" />
+
+    <MediaTemplate EmbedCab="yes" />
+
+    <PropertyRef Id="CheckDotNetVersion" />
+
+    <FeatureRef Id="Main" />
+
+    <ui:WixUI Id="MainUI" InstallDirectory="APPLICATIONFOLDER" />
+  </Package>
+</Wix>

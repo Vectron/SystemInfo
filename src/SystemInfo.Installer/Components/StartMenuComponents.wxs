@@ -1,0 +1,17 @@
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Fragment>
+    <ComponentGroup Id="StartMenuComponents" Directory="StartMenuApplicationFolder">
+      <Component>
+        <Shortcut
+          Name="!(bind.property.ProductName)"
+          Advertise="false"
+          Icon="MainIcon"
+          Target="[#MainExecutable]" />
+
+        <RegistryValue Root="HKCU" Key="SOFTWARE\[Manufacturer]\[ProductName]" Name="PMSC" Type="integer" Value="1" />
+
+        <RemoveFolder On="uninstall" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+</Wix>

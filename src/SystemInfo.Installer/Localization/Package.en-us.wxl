@@ -1,0 +1,7 @@
+<!--This file contains the declaration of all the localizable strings.-->
+<WixLocalization xmlns="http://wixtoolset.org/schemas/v4/wxl" Culture="en-US">
+  <String Id="DowngradeError" Value="A newer version of !(bind.property.ProductName) is already installed." />
+  <String Id="LaunchOnExit" Value="Launch !(bind.property.ProductName)." />
+  <String Id="NetVersionError" Value="You must install .NET !(bind.property.CheckDotNetVersion) or newer. (https://dotnet.microsoft.com/download)" />
+  <String Id="DefaultDescription" Value="!(bind.property.Manufacturer)'s !(bind.property.ProductName) !(bind.property.ProductVersion) Installer" />
+</WixLocalization>

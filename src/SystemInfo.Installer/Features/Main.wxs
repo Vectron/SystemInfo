@@ -1,0 +1,51 @@
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <?ifndef StartMenuShortcutLevel?>
+  <?define StartMenuShortcutLevel="1" ?>
+  <?endif?>
+
+  <?ifndef DesktopShortcutLevel?>
+  <?define DesktopShortcutLevel="2" ?>
+  <?endif?>
+
+  <?ifndef StartOnBootLevel?>
+  <?define StartOnBootLevel="2" ?>
+  <?endif?>
+
+  <Fragment>
+    <Feature
+      Id="Main"
+      Title="!(bind.property.ProductName)"
+      Display="expand"
+      Level="1"
+      ConfigurableDirectory="APPLICATIONFOLDER"
+      AllowAdvertise="no"
+      AllowAbsent="no">
+      <ComponentGroupRef Id="MainExecutableComponents" />
+      <ComponentGroupRef Id="ApplicationComponents" />
+
+      <Feature
+        Id="StartMenuShortcutOption"
+        Title="Start menu entry"
+        Level="$(StartMenuShortcutLevel)"
+        AllowAdvertise="no">
+        <ComponentGroupRef Id="StartMenuComponents" />
+      </Feature>
+
+      <Feature
+        Id="DesktopShortcutOption"
+        Title="Desktop shortcut"
+        Level="$(DesktopShortcutLevel)"
+        AllowAdvertise="no">
+        <ComponentGroupRef Id="DesktopShortcutComponents" />
+      </Feature>
+
+      <Feature
+        Id="StartOnBootOption"
+        Title="Launch on system start"
+        Level="$(StartOnBootLevel)"
+        AllowAdvertise="no">
+        <ComponentGroupRef Id="StartOnBootComponents" />
+      </Feature>
+    </Feature>
+  </Fragment>
+</Wix>

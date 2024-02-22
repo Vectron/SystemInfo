@@ -1,20 +1,41 @@
 <Project Sdk="WixToolset.Sdk/4.0.4">
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <DefineConstants>Debug</DefineConstants>
+  <PropertyGroup>
+    <SuppressIces>ICE69</SuppressIces>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DefineConstants>
+      Manufacturer=Vectron;
+      ProductName=SystemInfo;
+      MainExecutable=SystemInfo.WPF.exe;
+      MainIcon=..\SystemInfo.WPF\Resources\route.ico;
+      UpgradeGuid=3D278560-187E-4111-88D8-07FF39ADC4BB;
+    </DefineConstants>
   </PropertyGroup>
+  
   <ItemGroup>
-    <Content Include="Config.wxi" />
     <Content Include="Resources\Banner.bmp" />
     <Content Include="Resources\Dialog.bmp" />
+    <None Include="filter.xslt" />
   </ItemGroup>
+  
   <ItemGroup>
-    <PackageReference Include="WixToolset.Util.wixext" Version="4.0.4" />
+    <PackageReference Include="WixToolset.Heat" Version="4.0.4" />
     <PackageReference Include="WixToolset.UI.wixext" Version="4.0.4" />
+    <PackageReference Include="WixToolset.Util.wixext" Version="4.0.4" />
     <PackageReference Include="WixToolset.NetFx.wixext" Version="4.0.4" />
   </ItemGroup>
+  
   <ItemGroup>
-    <Folder Include="MainComponents" />
-    <Folder Include="UI" />
-    <Folder Include="Resources" />
+    <HarvestDirectory Include="$(IntermediateOutputPath)publish\SystemInfo.WPF">
+      <ComponentGroupName>ApplicationComponents</ComponentGroupName>
+      <DirectoryRefId>APPLICATIONFOLDER</DirectoryRefId>
+      <SuppressRootDirectory>true</SuppressRootDirectory>
+      <SuppressRegistry>true</SuppressRegistry>
+      <Transforms>filter.xslt</Transforms>
+    </HarvestDirectory>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\SystemInfo.Core\SystemInfo.Core.csproj" />
+    <ProjectReference Include="..\SystemInfo.WPF\SystemInfo.WPF.csproj" Publish="true" />
   </ItemGroup>
 </Project>
