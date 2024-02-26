@@ -1,6 +1,6 @@
 using System.IO;
 using System.Reflection;
-using VectronsLibrary.DI;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace SystemInfo.WPF.Settings;
 
@@ -37,7 +37,7 @@ public static class SettingsHelper
 
         if (string.IsNullOrEmpty(appDataFolder))
         {
-            return Helper.AssemblyDirectory;
+            return AssemblyTypeLoader.AssemblyDirectory;
         }
 
         var fullPath = appDataFolder;

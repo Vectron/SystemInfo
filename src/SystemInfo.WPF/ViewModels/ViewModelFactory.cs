@@ -1,6 +1,6 @@
 using SystemInfo.Core.ViewModels;
-using VectronsLibrary.DI;
-using VectronsLibrary.DI.Factory;
+using Vectron.Extensions.DependencyInjection;
+using Vectron.Extensions.DependencyInjection.Factory;
 
 namespace SystemInfo.WPF.ViewModels;
 
