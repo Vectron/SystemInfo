@@ -1,6 +1,6 @@
 <Project>
   <PropertyGroup>
-    <TargetFrameworks>net8.0</TargetFrameworks>
+    <TargetFramework>net8.0</TargetFramework>
     <Deterministic>true</Deterministic>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -53,7 +53,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="$(SolutionDir)\LICENSE.txt" Pack="true" PackagePath="" />
-    <None Include="$(SolutionDir)\README.md" Pack="true" PackagePath="" />
+    <None Include="$(RepositoryRootDirectory)\LICENSE.txt" Pack="true" PackagePath="" />
+    <None Include="$(RepositoryRootDirectory)\README.md" Pack="true" PackagePath="" />
   </ItemGroup>
 </Project>
