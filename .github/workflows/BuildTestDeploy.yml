@@ -40,19 +40,6 @@ jobs:
       dotnet_version: 8.0.x
       solution_file: SystemInfo.sln
 
-  call-deploy:
-    needs: call-build-test
-    permissions:
-      packages: write
-    uses: Vectron/GithubWorkflows/.github/workflows/DeployNugetGithub.yml@main
-    with:
-      os: ubuntu-latest
-      dotnet_version: 8.0.x
-      solution_file: SystemInfo.sln
-    secrets:
-      NUGET_KEY: ${{ secrets.NUGET_KEY }}
-      
-
   call-release:
     needs: call-build-test
     permissions:
