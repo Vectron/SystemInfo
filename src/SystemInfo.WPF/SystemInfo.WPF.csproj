@@ -1,38 +1,38 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetPlatformIdentifier>windows</TargetPlatformIdentifier>
-    <UseWPF>true</UseWPF>
-    <OutputType>WinExe</OutputType>
-    <ApplicationIcon>Resources\route.ico</ApplicationIcon>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetPlatformIdentifier>windows</TargetPlatformIdentifier>
+        <UseWPF>true</UseWPF>
+        <OutputType>WinExe</OutputType>
+        <ApplicationIcon>Resources\route.ico</ApplicationIcon>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    </PropertyGroup>
 
-  <PropertyGroup>
-    <Description>System Info wpf project.</Description>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-  </PropertyGroup>
+    <PropertyGroup>
+        <Description>System info wpf project.</Description>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="H.NotifyIcon.Wpf" Version="2.0.124" />
-    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="8.0.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="Vectron.Extensions.DependencyInjection" Version="2.0.2" />
-    <PackageReference Include="VectronsLibrary.Wpf" Version="3.0.12" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="H.NotifyIcon.Wpf" Version="2.0.124" />
+        <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="8.0.0" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+        <PackageReference Include="Vectron.Extensions.DependencyInjection" Version="2.0.2" />
+        <PackageReference Include="VectronsLibrary.Wpf" Version="3.0.12" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\SystemInfo.Core\SystemInfo.Core.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\SystemInfo.Core\SystemInfo.Core.csproj" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <None Remove="Resources\route.ico" />
-    <Resource Include="Resources\route.ico" />
-  </ItemGroup>
+    <ItemGroup>
+        <None Remove="Resources\route.ico" />
+        <Resource Include="Resources\route.ico" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <Page Update="Resources\NotifyIconResources.xaml">
-      <Generator>XamlIntelliSenseFileGenerator</Generator>
-    </Page>
-  </ItemGroup>
+    <ItemGroup>
+        <Page Update="Resources\NotifyIconResources.xaml">
+            <Generator>XamlIntelliSenseFileGenerator</Generator>
+        </Page>
+    </ItemGroup>
 </Project>

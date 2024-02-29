@@ -1,13 +1,13 @@
-<Project Sdk="Microsoft.NET.SDK">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetPlatformIdentifier>windows</TargetPlatformIdentifier>
     <OutputType>Library</OutputType>
   </PropertyGroup>
 
   <PropertyGroup>
-    <Description>System Info core files.</Description>
+    <Description>System info core files.</Description>
   </PropertyGroup>
-  
+
   <ItemGroup>
     <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="8.0.0" />
     <PackageReference Include="System.Management" Version="7.0.2" />
