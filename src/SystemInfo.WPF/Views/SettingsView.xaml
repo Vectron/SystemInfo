@@ -199,14 +199,15 @@
                 MinWidth="70"
                 MinHeight="25"
                 Margin="5"
-                Click="Button_Click"
                 Command="{Binding Ok}"
+                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
                 Content="OK" />
             <Button
                 MinWidth="70"
                 MinHeight="25"
                 Margin="5"
-                Click="Button_Click"
+                Command="{Binding Cancel}"
+                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
                 Content="Cancel" />
         </StackPanel>
         <ContentControl

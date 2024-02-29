@@ -2,6 +2,7 @@ using System.Windows;
 using System.Windows.Input;
 using Microsoft.Extensions.Options;
 using SystemInfo.WPF.Settings;
+using SystemInfo.WPF.Views;
 using VectronsLibrary;
 using VectronsLibrary.Wpf;
 using VectronsLibrary.Wpf.Dialogs;
@@ -31,6 +32,15 @@ public class SettingsViewModel : ObservableObject, ISettingsViewModel
         mainWindowViewModel.WindowSettings = new WindowSettings();
         CopyWindowSettings(WindowSettings, NewSettings);
     }
+
+    /// <summary>
+    /// Gets an <see cref="ICommand"/> to close the window.
+    /// </summary>
+    public static ICommand Cancel
+        => new RelayCommand<SettingsView>(window =>
+        {
+            window?.Close();
+        });
 
     /// <summary>
     /// Gets an <see cref="ICommand"/> to change fonts.
@@ -85,10 +95,11 @@ public class SettingsViewModel : ObservableObject, ISettingsViewModel
     /// Gets an <see cref="ICommand"/> to apply the settings.
     /// </summary>
     public ICommand Ok
-        => new RelayCommand(_ =>
+        => new RelayCommand<SettingsView>(window =>
         {
             CopyWindowSettings(NewSettings, WindowSettings);
             settingsSaver.SaveConfiguration();
+            window?.Close();
         });
 
     /// <summary>

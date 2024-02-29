@@ -11,6 +11,4 @@ public partial class SettingsView : Window
     /// Initializes a new instance of the <see cref="SettingsView"/> class.
     /// </summary>
     public SettingsView() => InitializeComponent();
-
-    private void Button_Click(object sender, RoutedEventArgs e) => Close();
 }
