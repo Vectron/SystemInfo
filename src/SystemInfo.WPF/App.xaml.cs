@@ -1,5 +1,5 @@
 using System.Windows;
-using Hardcodet.Wpf.TaskbarNotification;
+using H.NotifyIcon;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SystemInfo.Core;
@@ -67,6 +67,8 @@ public partial class App : Application, IDisposable
 
         notifyIcon = (TaskbarIcon)FindResource("NotifyIcon");
         notifyIcon.DataContext = serviceProvider.GetRequiredService<INotifyIconViewModel>();
+        notifyIcon.ForceCreate();
+
         window = serviceProvider.GetView<MainWindow, IMainWindowViewModel>();
         window.Show();
     }
