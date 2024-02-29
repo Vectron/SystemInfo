@@ -34,6 +34,7 @@ jobs:
     strategy:
       matrix:
         os: [ windows-latest ]
+      fail-fast: true
     uses: Vectron/GithubWorkflows/.github/workflows/BuildAndTest.yml@main
     with:
       os: ${{ matrix.os }}
