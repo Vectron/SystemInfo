@@ -33,7 +33,7 @@ jobs:
   call-build-test:
     strategy:
       matrix:
-        os: [ windows-latest ]
+        os: [ ubuntu-latest ]
       fail-fast: true
     uses: Vectron/GithubWorkflows/.github/workflows/BuildAndTest.yml@main
     with:
@@ -48,7 +48,7 @@ jobs:
       contents: write
     uses: Vectron/GithubWorkflows/.github/workflows/CreateReleaseWixInstaller.yml@main
     with:
-      os: windows-latest
+      os: ubuntu-latest
       dotnet_version: 8.0.x
       solution_file: SystemInfo.sln
       installer_project: src\SystemInfo.Installer\SystemInfo.Installer.wixproj
