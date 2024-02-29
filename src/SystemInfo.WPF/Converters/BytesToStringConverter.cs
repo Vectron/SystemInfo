@@ -1,5 +1,6 @@
 using System.Globalization;
 using System.Windows.Data;
+using VectronsLibrary;
 
 namespace SystemInfo.WPF.Converters;
 
@@ -19,10 +20,10 @@ internal sealed class BytesToStringConverter : IValueConverter
 
         if (parameter != null && parameter.GetType() == typeof(int))
         {
-            return VectronsLibrary.Utils.FormatBytes((ulong)value, (int)parameter);
+            return ByteFormatter.Format((ulong)value, (ByteFormatter.Start)parameter, CultureInfo.CurrentCulture);
         }
 
-        return VectronsLibrary.Utils.FormatBytes((ulong)value);
+        return ByteFormatter.Format((ulong)value, CultureInfo.CurrentCulture);
     }
 
     /// <inheritdoc/>
