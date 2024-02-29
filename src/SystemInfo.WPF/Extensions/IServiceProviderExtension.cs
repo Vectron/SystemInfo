@@ -1,3 +1,4 @@
+using System.Reflection;
 using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
@@ -10,17 +11,32 @@ namespace SystemInfo.WPF.Extensions;
 /// </summary>
 public static class IServiceProviderExtension
 {
+    private static readonly MethodInfo? GetOptionsMethodInfo = typeof(IServiceProviderExtension)
+        .GetMethod(nameof(GetOption), 1, [typeof(IServiceProvider)]);
+
+    /// <summary>
+    /// Get an option from the <see cref="IServiceProvider"/>.
+    /// </summary>
+    /// <typeparam name="T">The type to get the option for.</typeparam>
+    /// <param name="serviceDescriptors">The <see cref="IServiceProvider"/>.</param>
+    /// <returns>The constructed option type.</returns>
+    public static T GetOption<T>(this IServiceProvider serviceDescriptors)
+        where T : class
+    {
+        var test = serviceDescriptors.GetRequiredService<IOptions<T>>();
+        return test.Value;
+    }
+
     /// <summary>
     /// Get an option from the <see cref="IServiceProvider"/>.
     /// </summary>
     /// <param name="serviceDescriptors">The <see cref="IServiceProvider"/>.</param>
     /// <param name="optionsType">The option type to retrieve.</param>
     /// <returns>The constructed option type.</returns>
-    public static object GetOptions(this IServiceProvider serviceDescriptors, Type optionsType)
+    public static object? GetOptions(this IServiceProvider serviceDescriptors, Type optionsType)
     {
-        var genericType = typeof(IOptions<>).MakeGenericType([optionsType]);
-        dynamic test = serviceDescriptors.GetRequiredService(genericType);
-        return test.Value;
+        var genericMethod = GetOptionsMethodInfo?.MakeGenericMethod(optionsType);
+        return genericMethod?.Invoke(obj: null, [serviceDescriptors]);
     }
 
     /// <summary>

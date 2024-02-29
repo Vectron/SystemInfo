@@ -33,9 +33,16 @@ public class SettingsSaver(IServiceProvider serviceProvider, IServiceCollection 
         {
             var genericType = x.ServiceType.GenericTypeArguments[0];
             var filledSettings = serviceProvider.GetOptions(genericType);
-            var json = JsonConvert
+            var json = string.Empty;
+            if (filledSettings == null)
+            {
+                return (genericType.Name, json);
+            }
+
+            json = JsonConvert
                 .SerializeObject(filledSettings, SerializerSettings)
                 .Replace(Environment.NewLine, Environment.NewLine + "  ", StringComparison.Ordinal);
+
             return (genericType.Name, json);
         })
         .Where(x => x.json.Length > 2);
